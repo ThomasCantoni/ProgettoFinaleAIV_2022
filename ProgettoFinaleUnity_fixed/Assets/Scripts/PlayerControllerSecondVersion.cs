@@ -115,6 +115,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             Vector3.up);
 
     }
+    public void ChangeSensitivity(float value)
+    {
+        AimSensitivity = value;
+    }
     public void OnMovement(Vector2 dir)
     {
         //the direction i am going towards
@@ -237,15 +241,14 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         }
         if (isAiming)
+        //if the player is aiming
         {
-            //if the player is aiming
-            Vector3 cameraForward = CameraReference.forward;
+
             //root motion is now disabled
             characterController.Move(MovementVector*Time.deltaTime);
           
-            cameraForward.y = 0;
-            contextualQuaternion = Quaternion.LookRotation(cameraForward,Vector3.up);
-            transform.rotation = contextualQuaternion;
+           
+            transform.rotation = cameraQuatForMovement;
 
         }
 
