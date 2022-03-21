@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
-using UnityEngine.Animations;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
@@ -59,10 +59,15 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     float gravityValue = -9.81f;
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
-    float vertical = 0;
+    float aimRigWeight;
+
+    [SerializeField] private Transform point;
+    [SerializeField] private Rig rigAim;
+
+    [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
 
 
-   
+
     private void Awake()
     {
         controls = new Controls();
@@ -135,10 +140,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             Vector3.up);
 
     }
-    public void ChangeSensitivity(float value)
-    {
-        AimSensitivity = value;
-    }
+    
     public void OnMovement(Vector2 dir)
     {
         //the direction i am going towards
@@ -194,7 +196,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             return;
         
         MoveRelativeToCameraRotation();
-       
+        rigAim.weight = Mathf.Lerp(rigAim.weight, aimRigWeight, 0.9f);
     }
     void FixedUpdate()
     {
@@ -369,5 +371,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     void ShotReleased(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetBool("Shot", false);
+    }
+    void Aim()
+    {
+        
     }
 }
