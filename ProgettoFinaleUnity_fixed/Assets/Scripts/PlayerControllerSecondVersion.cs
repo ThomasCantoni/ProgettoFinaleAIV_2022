@@ -20,6 +20,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
     }
     int AnimatorVelocityHash = 0,AnimatorSpeedHash=0;
+    public float AimSensitivity
+    {
+        get
+        {
+            return aimSensitivity;
+        }
+        set
+        {
+            aimSensitivity = value;
+        }
+    }
 
     public GameObject Gun;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
@@ -28,7 +39,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public GameObject Player;
     public Transform modelToMove;
     public Transform CameraReference;
-    public float AimSensitivity = 1f;
+    private float aimSensitivity = 1f;
     //public float Speed = 2.5f;
     public float jumpHeight = 5f;
     public Canvas PauseCanvas;
