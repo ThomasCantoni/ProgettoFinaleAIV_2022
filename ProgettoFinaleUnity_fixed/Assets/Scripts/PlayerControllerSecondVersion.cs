@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine.Animations;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
+   
     private float PlayerSpeedModifier = 1f;
     private bool isGamePaused = false;
     public float PlayerSpeed 
