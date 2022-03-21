@@ -36,8 +36,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     Vector3 playerVel;
     Vector2 cameraRotationVec2FromMouse;
     Vector3 MovementVector;
-    Vector2 dir;
-    
+    Vector2 direction;
+    Quaternion cameraQuatForMovement;
     Controls controls;
     bool isGrounded;
     bool jumpPressed = false;
@@ -106,13 +106,19 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         cameraRotationVec2FromMouse.y += lookValue.x * AimSensitivity * Time.deltaTime;
         cameraRotationVec2FromMouse.x = Mathf.Clamp(cameraRotationVec2FromMouse.x, -80f,80f) ;
         CameraReference.transform.rotation = Quaternion.Euler(cameraRotationVec2FromMouse.x, cameraRotationVec2FromMouse.y, 0);
-        
+
+        //optimized quaternion fetching so i store it in memory only when i rotate the camera instead of every frame (moved here from update)
+        Vector3 camForward = CameraReference.forward;
+        //fetching the quaternion of the now rotated camera, to rotate the movement vector
+        cameraQuatForMovement = Quaternion.LookRotation(
+            new Vector3(camForward.x, 0, camForward.z),
+            Vector3.up);
 
     }
-    public void OnMovement(Vector2 direction)
+    public void OnMovement(Vector2 dir)
     {
         //the direction i am going towards
-        dir = direction;
+        direction = dir;
         
 
         //Vector3 camForward = CameraReference.forward;
@@ -155,7 +161,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public void OnMovementCanceled(InputAction.CallbackContext context)
     {
         MovementVector = Vector3.zero;
-        dir = Vector2.zero;
+        direction = Vector2.zero;
     }
     // Update is called once per frame
     void Update()
@@ -206,17 +212,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     //}
     void MoveRelativeToCameraRotation()
     {
-        Vector3 camForward = CameraReference.forward;
-        //fetching the quaternion of the now rotated camera, to rotate the movement vector
-        Quaternion q = Quaternion.LookRotation(
-            new Vector3(camForward.x, 0, camForward.z),
-            Vector3.up);
+        //Vector3 camForward = CameraReference.forward;
+        ////fetching the quaternion of the now rotated camera, to rotate the movement vector
+        //Quaternion q = Quaternion.LookRotation(
+        //    new Vector3(camForward.x, 0, camForward.z),
+        //    Vector3.up);
 
         //rotating the direction vector according to camera 
-        Vector3 cooking = q * new Vector3(dir.x, 0, dir.y);
+        Vector3 fromAbsoluteToRelative = cameraQuatForMovement * new Vector3(direction.x, 0, direction.y);
 
-        // applying rot to vector
-        MovementVector = cooking;
+        // applying rot to vector, it is now relative to camera
+        MovementVector = fromAbsoluteToRelative;
 
         float magnitude = MovementVector.magnitude;
           Anim.SetFloat(AnimatorVelocityHash, magnitude);
@@ -224,8 +230,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         Quaternion contextualQuaternion;
         if (magnitude > 0.05f )
         {
-            Debug.DrawLine(CameraReference.transform.position, CameraReference.transform.position+ MovementVector,Color.red);
-          contextualQuaternion = Quaternion.LookRotation(MovementVector, Vector3.up);
+            
+           contextualQuaternion = Quaternion.LookRotation(MovementVector, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation,contextualQuaternion,0.1f);
 
 
