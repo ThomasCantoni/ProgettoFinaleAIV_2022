@@ -7,6 +7,7 @@ using Cinemachine;
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
     private float PlayerSpeedModifier = 1f;
+    private bool isGamePaused = false;
     public float PlayerSpeed 
     {
         get
@@ -95,21 +96,27 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void PauseGame(InputAction.CallbackContext ctxt)
     {
-        if(!PauseCanvas.gameObject.activeInHierarchy)
+        
+        if(!isGamePaused)
         {
+            isGamePaused = true;
             this.PlayerSpeed = 0;
-            PauseCanvas.gameObject.SetActive(true);
+            PauseCanvas.gameObject.SetActive(isGamePaused);
         }
         else
         {
+            isGamePaused = false;
+
             PlayerSpeed = 1f;
-            PauseCanvas.gameObject.SetActive(false);
+            PauseCanvas.gameObject.SetActive(isGamePaused);
 
         }
     }
     
     void OnCameraRotate(InputAction.CallbackContext context)
     {
+        if (isGamePaused)
+            return;
         Vector2 lookValue = context.ReadValue<Vector2>();
         
        // lookValue.y = Mathf.Clamp(lookValue.y, -70f,70f);
@@ -181,14 +188,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isGamePaused)
+            return;
         
         MoveRelativeToCameraRotation();
        
     }
     void FixedUpdate()
     {
-       isGrounded = IsGroundedTest();
+        if (isGamePaused)
+            return;
+        isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
        // ApplyGravity();
