@@ -56,15 +56,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     bool isGrounded;
     bool jumpPressed = false;
     bool isAiming = false;
+   
     float gravityValue = -9.81f;
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
     float aimRigWeight;
 
-    [SerializeField] private Transform point;
     [SerializeField] private Rig rigAim;
-
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
+    [SerializeField] private Transform point;
+
 
 
 
@@ -97,8 +98,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             controls.Player.GunAway.canceled += GunAwayReleased;
             controls.Player.Shot.performed += ShotPressed;
             controls.Player.Shot.canceled += ShotReleased;
-        controls.Player.Pause.performed+= PauseGame;
-       
+            controls.Player.Pause.performed+= PauseGame;
+            
         
     }
     void PauseGame(InputAction.CallbackContext ctxt)
