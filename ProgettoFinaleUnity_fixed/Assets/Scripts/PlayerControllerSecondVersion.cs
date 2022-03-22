@@ -372,19 +372,22 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     void ShotPressed(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetBool("Shot", true);
-
-    }
-    void ShotReleased(InputAction.CallbackContext context)
-    {
-        GetComponent<Animator>().SetBool("Shot", false);
         Vector3 mouseWorldPosition = Vector3.zero;
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.ScreenPointToRay(screenCenterPoint);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask))
+        Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask);
+        
+        if(hit.collider.gameObject.layer == 7) // if the object i hit is an enemy
         {
-            mouseWorldPosition = hit.point;
+           // hit.collider.gameObject.getcomponent<enemyscript>.add damage
         }
+        
+    }
+    void ShotReleased(InputAction.CallbackContext context)
+    {
+        GetComponent<Animator>().SetBool("Shot", false);
+        
     }
    
 }
