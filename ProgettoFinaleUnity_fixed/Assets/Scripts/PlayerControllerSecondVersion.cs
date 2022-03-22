@@ -37,6 +37,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
     public GameObject Gun;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
+    public Camera Camera;
     public CharacterController characterController;
     public Animator Anim;
     public GameObject Player;
@@ -60,7 +61,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     float gravityValue = -9.81f;
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
-    float aimRigWeight;
+    float aimRigWeight=0f;
 
     [SerializeField] private Rig rigAim;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
@@ -197,12 +198,14 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             return;
         
         MoveRelativeToCameraRotation();
-        rigAim.weight = Mathf.Lerp(rigAim.weight, aimRigWeight, 0.9f);
+        rigAim.weight = Mathf.Lerp(rigAim.weight, aimRigWeight,0.3f);
     }
     void FixedUpdate()
     {
         if (isGamePaused)
             return;
+        point.position = CameraReference.position + CameraReference.forward;
+
         isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
@@ -346,6 +349,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         AimCamera.Priority = 30;
         Anim.applyRootMotion = false;
         isAiming = true;
+        aimRigWeight = 0.85f;
         GetComponent<Animator>().SetBool("isDrawingTheGun", isAiming);
     }
     void GunAwayPressed(InputAction.CallbackContext context)
@@ -356,7 +360,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         ThirdPersonCamera.Priority = 30;
         AimCamera.Priority = 0;
         Anim.applyRootMotion = true;
-
+        aimRigWeight = 0f;
         GetComponent<Animator>().SetBool("isDrawingTheGun", false);
 
     }
@@ -368,13 +372,19 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     void ShotPressed(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetBool("Shot", true);
+
     }
     void ShotReleased(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetBool("Shot", false);
+        Vector3 mouseWorldPosition = Vector3.zero;
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.ScreenPointToRay(screenCenterPoint);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask))
+        {
+            mouseWorldPosition = hit.point;
+        }
     }
-    void Aim()
-    {
-        
-    }
+   
 }
