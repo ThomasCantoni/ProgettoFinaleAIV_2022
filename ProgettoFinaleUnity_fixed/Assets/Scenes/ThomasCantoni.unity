@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: 150073570}
   - component: {fileID: 150073571}
   m_Layer: 0
-  m_Name: Rig Movement
+  m_Name: Rig LookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5778,6 +5778,7 @@ MonoBehaviour:
   Rig: {fileID: 1486042988}
   restingGun: {fileID: 87854785}
   shootingGun: {fileID: 0}
+  LookAtConstraintRIG: {fileID: 150073571}
   TargetIKShooting: {fileID: 1287510806}
   target: 0
 --- !u!1 &1287510805
@@ -5804,7 +5805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287510805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.111, y: 0, z: 0.799}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 858138965}
@@ -6421,7 +6422,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Weight: 0
-  m_Effectors: []
+  m_Effectors:
+  - m_Transform: {fileID: 87854784}
+    m_Style:
+      shape: {fileID: 4300000, guid: c6793350c150f456688e39a81f97364a, type: 2}
+      color: {r: 1, g: 0.15150453, b: 0, a: 1}
+      size: 1
+      position: {x: 1.08, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
 --- !u!4 &1488929129 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3664539948120854917, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
