@@ -40,6 +40,7 @@ public class InverseKinematicsTest : MonoBehaviour
         {
             GunEquipped = false;
             GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("PutAwayGun", true);
+            GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("GunEquipped", false);
 
 
 

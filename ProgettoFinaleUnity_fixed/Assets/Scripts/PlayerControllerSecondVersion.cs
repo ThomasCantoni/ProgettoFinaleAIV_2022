@@ -138,7 +138,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     void OnZoomCancel(InputAction.CallbackContext context)
     {
         isAiming = false;
-        Anim.SetBool("IsAiming", true);
+        Anim.SetBool("IsAiming", false);
 
         ThirdPersonCamera.Priority = 30;
         AimCamera.Priority = 0;
