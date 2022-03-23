@@ -102,8 +102,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             //controls.Player.Gun.performed += GunPressed;
             //controls.Player.GunAway.performed += GunAwayPressed;
             //controls.Player.GunAway.canceled += GunAwayReleased;
-            controls.Player.Shot.performed += ShotPressed;
-            controls.Player.Shot.canceled += ShotReleased;
+            //controls.Player.Shot.performed += ShotPressed;
+           // controls.Player.Shot.canceled += ShotReleased;
             controls.Player.Pause.performed+= PauseGame;
 
         AimSensitivity = 5f;

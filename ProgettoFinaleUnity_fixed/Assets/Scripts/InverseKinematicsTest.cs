@@ -9,13 +9,14 @@ public class InverseKinematicsTest : MonoBehaviour
    
     public bool GunEquipped = false;
     public Rig Rig;
-    public TwoBoneIKConstraint bones;
+    public TwoBoneIKConstraint restingGun,shootingGun;
     public Transform TargetIKShooting;
     public float target=0f;
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<PlayerControllerSecondVersion>().controls.Player.Shot.performed+= ManageShooting;
+        
+        GetComponent<PlayerControllerSecondVersion>().controls.Player.Shot.performed += ManageShooting;
         GetComponent<PlayerControllerSecondVersion>().controls.Player.EquipWeapon.performed += EquipGun;
 
     }
@@ -24,12 +25,16 @@ public class InverseKinematicsTest : MonoBehaviour
         
         if(GunEquipped)
         {
-            bones.data.target = TargetIKShooting;
+            restingGun.data.target.transform.position = TargetIKShooting.position;
+            
+            
             Shoot();
         }
         else
         {
             GunEquipped = true;
+            GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("GunEquipped", true);
+
             target = 1f;
             
         }
