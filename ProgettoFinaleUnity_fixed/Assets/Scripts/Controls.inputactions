@@ -6,7 +6,7 @@
             "id": "3c16f3cd-03a5-43e1-881a-c9f931bd8253",
             "actions": [
                 {
-                    "name": "Aim",
+                    "name": "RotateCamera",
                     "type": "PassThrough",
                     "id": "4d5e2496-1243-4618-b127-7e61f2e1d219",
                     "expectedControlType": "Vector2",
@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EquipWeapon",
+                    "type": "Button",
+                    "id": "118b804c-9405-4532-8875-6bcafbbce690",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Button",
+                    "id": "ffed979f-e2a6-4172-a363-ffcc28e2fa49",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -86,7 +104,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Aim",
+                    "action": "RotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -208,6 +226,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe700f24-36dc-4566-b234-875ee8797d53",
+                    "path": "<Keyboard>/f",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e74fff2-6594-4280-938c-ad4cdb196394",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

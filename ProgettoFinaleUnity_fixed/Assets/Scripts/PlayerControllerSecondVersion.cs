@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.UI;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         set
         {
             aimSensitivity = value;
+            PauseCanvas.transform.GetComponentInChildren<Slider>().value = value;
         }
     }
 
@@ -53,10 +55,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     Vector3 MovementVector;
     Vector2 direction;
     Quaternion cameraQuatForMovement;
-    Controls controls;
+    public Controls controls;
     bool isGrounded;
     bool jumpPressed = false;
-    bool isAiming = false;
+    public bool isAiming = false;
    
     float gravityValue = -9.81f;
     float JumpRayCastCd = 0f;
@@ -76,11 +78,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void OnEnable()
     {
-        
+            
             Anim.SetLayerWeight(1, 1);
             characterController = Player.GetComponent<CharacterController>();
-            controls.Player.Enable();
-            controls.Player.Aim.performed += OnCameraRotate;
             AnimatorVelocityHash = Animator.StringToHash("Velocity");
             AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
             //AnimatorVelocityHash = Animator.StringToHash("MoveX");
@@ -88,20 +88,25 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
             //setting up the events for the input
+            controls.Player.Enable();
+            controls.Player.RotateCamera.performed += OnCameraRotate;
+            controls.Player.Zoom.performed += OnZoom;
+            controls.Player.Zoom.canceled += OnZoomCancel;
+            
             controls.Player.Movement.performed += cntxt => OnMovement(cntxt.ReadValue<Vector2>());
             controls.Player.Movement.canceled += OnMovementCanceled;
             controls.Player.Sprint.performed += ShiftPressed;
             controls.Player.Sprint.canceled += ShiftReleased;
             controls.Player.Jump.started += SpacePressed;
             controls.Player.Jump.canceled += SpaceReleased;
-            controls.Player.Gun.performed += GunPressed;
-            controls.Player.GunAway.performed += GunAwayPressed;
-            controls.Player.GunAway.canceled += GunAwayReleased;
+            //controls.Player.Gun.performed += GunPressed;
+            //controls.Player.GunAway.performed += GunAwayPressed;
+            //controls.Player.GunAway.canceled += GunAwayReleased;
             controls.Player.Shot.performed += ShotPressed;
             controls.Player.Shot.canceled += ShotReleased;
             controls.Player.Pause.performed+= PauseGame;
-            
-        
+
+        AimSensitivity = 5f;
     }
     void PauseGame(InputAction.CallbackContext ctxt)
     {
@@ -121,7 +126,27 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         }
     }
-    
+    void OnZoom(InputAction.CallbackContext context)
+    {
+        isAiming = true;
+        Anim.SetBool("IsAiming", true);
+        ThirdPersonCamera.Priority = 0;
+        AimCamera.Priority = 30;
+        Anim.applyRootMotion = false;
+        aimRigWeight = 0.85f;
+    }
+    void OnZoomCancel(InputAction.CallbackContext context)
+    {
+        isAiming = false;
+        Anim.SetBool("IsAiming", true);
+
+        ThirdPersonCamera.Priority = 30;
+        AimCamera.Priority = 0;
+        
+       
+        Anim.applyRootMotion = true;
+        aimRigWeight = 0f;
+    }
     void OnCameraRotate(InputAction.CallbackContext context)
     {
         if (isGamePaused)
