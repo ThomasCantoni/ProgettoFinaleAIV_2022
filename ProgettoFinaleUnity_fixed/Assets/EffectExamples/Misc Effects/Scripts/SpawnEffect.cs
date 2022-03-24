@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnEffect : MonoBehaviour {
+public class SpawnEffect : MonoBehaviour
+{
 
     public float spawnEffectTime = 2;
     public float pause = 1;
@@ -14,11 +15,11 @@ public class SpawnEffect : MonoBehaviour {
 
     int shaderProperty;
 
-	void Start ()
+    void Start()
     {
         shaderProperty = Shader.PropertyToID("_cutoff");
         _renderer = GetComponent<Renderer>();
-        ps = GetComponentInChildren <ParticleSystem>();
+        ps = GetComponentInChildren<ParticleSystem>();
 
         var main = ps.main;
         main.duration = spawnEffectTime;
@@ -26,8 +27,8 @@ public class SpawnEffect : MonoBehaviour {
         ps.Play();
 
     }
-	
-	void Update ()
+
+    void Update()
     {
         if (timer < spawnEffectTime + pause)
         {
@@ -40,7 +41,7 @@ public class SpawnEffect : MonoBehaviour {
         }
 
 
-        _renderer.material.SetFloat(shaderProperty, fadeIn.Evaluate( Mathf.InverseLerp(0, spawnEffectTime, timer)));
-        
+        _renderer.material.SetFloat(shaderProperty, fadeIn.Evaluate(Mathf.InverseLerp(0, spawnEffectTime, timer)));
+
     }
 }

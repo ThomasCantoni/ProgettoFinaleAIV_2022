@@ -98,6 +98,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+
+                },
+                {
+                    ""name"": ""EquipWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""118b804c-9405-4532-8875-6bcafbbce690"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+
                 }
             ],
             ""bindings"": [
@@ -232,6 +243,18 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe700f24-36dc-4566-b234-875ee8797d53"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +271,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_GunAway = m_Player.FindAction("GunAway", throwIfNotFound: true);
         m_Player_Shot = m_Player.FindAction("Shot", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+
+        m_Player_EquipWeapon = m_Player.FindAction("EquipWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +340,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_GunAway;
     private readonly InputAction m_Player_Shot;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_EquipWeapon;
+
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -327,6 +354,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @GunAway => m_Wrapper.m_Player_GunAway;
         public InputAction @Shot => m_Wrapper.m_Player_Shot;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @EquipWeapon => m_Wrapper.m_Player_EquipWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +388,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @EquipWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon;
+                @EquipWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon;
+                @EquipWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -388,6 +419,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @EquipWeapon.started += instance.OnEquipWeapon;
+                @EquipWeapon.performed += instance.OnEquipWeapon;
+                @EquipWeapon.canceled += instance.OnEquipWeapon;
             }
         }
     }
@@ -402,5 +436,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnGunAway(InputAction.CallbackContext context);
         void OnShot(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnEquipWeapon(InputAction.CallbackContext context);
     }
 }
