@@ -63,11 +63,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     float gravityValue = -9.81f;
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
-    float aimRigWeight=0f;
 
-    [SerializeField] private Rig rigAim;
-    [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
-    [SerializeField] private Transform point;
+    
 
 
 
@@ -133,7 +130,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         ThirdPersonCamera.Priority = 0;
         AimCamera.Priority = 30;
         Anim.applyRootMotion = false;
-        aimRigWeight = 0.85f;
+        
     }
     void OnZoomCancel(InputAction.CallbackContext context)
     {
@@ -145,7 +142,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         
        
         Anim.applyRootMotion = true;
-        aimRigWeight = 0f;
+        
     }
     void OnCameraRotate(InputAction.CallbackContext context)
     {
@@ -223,13 +220,11 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             return;
         
         MoveRelativeToCameraRotation();
-        rigAim.weight = Mathf.Lerp(rigAim.weight, aimRigWeight,0.3f);
     }
     void FixedUpdate()
     {
         if (isGamePaused)
             return;
-        point.position = CameraReference.position + CameraReference.forward;
 
         isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
@@ -367,28 +362,28 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         GetComponent<Animator>().SetBool("Jump", false);
     }
 
-    void GunPressed(InputAction.CallbackContext context)
-    {
-        Gun.SetActive(true);
-        ThirdPersonCamera.Priority = 0;
-        AimCamera.Priority = 30;
-        Anim.applyRootMotion = false;
-        isAiming = true;
-        aimRigWeight = 0.85f;
-        GetComponent<Animator>().SetBool("isDrawingTheGun", isAiming);
-    }
-    void GunAwayPressed(InputAction.CallbackContext context)
-    {
-        Gun.SetActive(false);
-        GetComponent<Animator>().SetBool("isGunPutAway", true);
-        isAiming = false;
-        ThirdPersonCamera.Priority = 30;
-        AimCamera.Priority = 0;
-        Anim.applyRootMotion = true;
-        aimRigWeight = 0f;
-        GetComponent<Animator>().SetBool("isDrawingTheGun", false);
+    //void GunPressed(InputAction.CallbackContext context)
+    //{
+    //    Gun.SetActive(true);
+    //    ThirdPersonCamera.Priority = 0;
+    //    AimCamera.Priority = 30;
+    //    Anim.applyRootMotion = false;
+    //    isAiming = true;
+    //    aimRigWeight = 0.85f;
+    //    GetComponent<Animator>().SetBool("isDrawingTheGun", isAiming);
+    //}
+    //void GunAwayPressed(InputAction.CallbackContext context)
+    //{
+    //    Gun.SetActive(false);
+    //    GetComponent<Animator>().SetBool("isGunPutAway", true);
+    //    isAiming = false;
+    //    ThirdPersonCamera.Priority = 30;
+    //    AimCamera.Priority = 0;
+    //    Anim.applyRootMotion = true;
+    //    aimRigWeight = 0f;
+    //    GetComponent<Animator>().SetBool("isDrawingTheGun", false);
 
-    }
+    //}
     void GunAwayReleased(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetBool("isGunPutAway", false);
@@ -396,17 +391,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void ShotPressed(InputAction.CallbackContext context)
     {
-        GetComponent<Animator>().SetBool("Shot", true);
-        Vector3 mouseWorldPosition = Vector3.zero;
-        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = Camera.ScreenPointToRay(screenCenterPoint);
+        //GetComponent<Animator>().SetBool("Shot", true);
+        //Vector3 mouseWorldPosition = Vector3.zero;
+        //Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        //Ray ray = Camera.ScreenPointToRay(screenCenterPoint);
 
-        Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask);
+        ////Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask);
         
-        if(hit.collider.gameObject.layer == 7) // if the object i hit is an enemy
-        {
-           // hit.collider.gameObject.getcomponent<enemyscript>.add damage
-        }
+        //if(hit.collider.gameObject.layer == 7) // if the object i hit is an enemy
+        //{
+        //   // hit.collider.gameObject.getcomponent<enemyscript>.add damage
+        //}
         
     }
     void ShotReleased(InputAction.CallbackContext context)
