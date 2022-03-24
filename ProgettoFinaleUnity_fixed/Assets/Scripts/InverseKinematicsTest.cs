@@ -11,9 +11,9 @@ public class InverseKinematicsTest : MonoBehaviour
     [SerializeField] public Rig zoomLookAtRig;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform point;
-    public Rig RestingGunRig,ShootingGunRig;
+    public Rig RestingGunRig;
     public Rig LookAtConstraintRIG;
-    public TwoBoneIKConstraint restingGun,shootingGun;
+    public TwoBoneIKConstraint restingGun;
     public Transform TargetIKShooting;
     private Transform CameraReference;
     public float restingTarget = 0f, shootingTarget = 0f, returnToRestCooldown = 1.2f;
@@ -120,7 +120,7 @@ public class InverseKinematicsTest : MonoBehaviour
         angleRadians *= 180f / 3.14f;
         //angleRadians = Mathf.Abs(angleRadians);
         Debug.Log(angleRadians);
-        if (angleRadians < -55f)
+        if (angleRadians < -50f)
         {
             LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0f, 0.1f);
             //shootingGun.data.target.position = 
