@@ -6,7 +6,7 @@ using UnityEngine.Animations.Rigging;
 
 public class InverseKinematicsTest : MonoBehaviour
 {
-   
+    public PlayerControllerSecondVersion PCSV;
     public bool GunEquipped = false,Shooting=false;
     [SerializeField] public Rig zoomLookAtRig;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
@@ -16,12 +16,15 @@ public class InverseKinematicsTest : MonoBehaviour
     public TwoBoneIKConstraint restingGun;
     public Transform TargetIKShooting;
     private Transform CameraReference;
-    public float restingTarget = 0f, shootingTarget = 0f, returnToRestCooldown = 1.2f;
+    public float restingTarget = 0f, returnToRestCooldown = 1.2f;
     public float zoomLookAtTarget = 0f;
+    public bool ShootingAvailable = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        LookAtConstraintRIG.weight = 0f;
+        PCSV = GetComponent<PlayerControllerSecondVersion>();
         CameraReference = GetComponent<PlayerControllerSecondVersion>().CameraReference;
         GetComponent<PlayerControllerSecondVersion>().controls.Player.Shot.performed += ManageShooting; 
         GetComponent<PlayerControllerSecondVersion>().controls.Player.EquipWeapon.performed += EquipGun;
@@ -34,25 +37,32 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void SetIKWeights(InputAction.CallbackContext ctx)
     {
-        zoomLookAtTarget = 1f;
-        
+        zoomLookAtRig.weight = 1f;
+
+
     }
     void CancelIKWeights(InputAction.CallbackContext ctx)
     {
-        zoomLookAtTarget = 0f;
+
+       zoomLookAtRig.weight = 0f;
     }
     void ManageShooting(InputAction.CallbackContext ctx)
     {
         
         if(GunEquipped)
         {
-            GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("Shot", true);
-            Shooting = true;
+            if(ShootingAvailable)
+            {
+                GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("Shot", true);
+                Shooting = true;
             
-            restingTarget = 0f;
+                restingTarget = 0f;
             
             
-            Shoot();
+                Shoot();
+
+            }
+            
         }
         else
         {
@@ -87,6 +97,12 @@ public class InverseKinematicsTest : MonoBehaviour
     private void Update()
     {
 
+        //point.position = CameraReference.position + CameraReference.forward*3f;
+        //if(PCSV.isAiming)
+        //{
+        //zoomLookAtRig.weight = Mathf.Lerp(zoomLookAtRig.weight, zoomLookAtTarget, 0.3f);    
+            
+        //}
         if (!Shooting)
         {
             RestingGunRig.weight = Mathf.Lerp(RestingGunRig.weight, restingTarget, 0.2f);
@@ -95,13 +111,12 @@ public class InverseKinematicsTest : MonoBehaviour
         }
         else
         {
+            
             RestingGunRig.weight = 0f;
             returnToRestCooldown -= Time.deltaTime;
+            zoomLookAtTarget = 1f;
             
-            //ShootingGunRig.weight = 0f;
         }
-        point.position = CameraReference.position + CameraReference.forward*3f;
-        zoomLookAtRig.weight = Mathf.Lerp(zoomLookAtRig.weight, zoomLookAtTarget, 0.3f);
         
         if (returnToRestCooldown <= 0f)
         {
@@ -119,20 +134,32 @@ public class InverseKinematicsTest : MonoBehaviour
         float angleRadians = Vector3.Dot(this.transform.forward, CameraReference.forward);
         angleRadians *= 180f / 3.14f;
         //angleRadians = Mathf.Abs(angleRadians);
-        Debug.Log(angleRadians);
+        //Debug.Log(angleRadians);
         if (angleRadians < -50f)
         {
+            ShootingAvailable = false;
             LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0f, 0.1f);
-            //shootingGun.data.target.position = 
         }
         else
         {
+            ShootingAvailable = true;
+
             LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0.75f, 0.1f);
 
         }
     }
     void Shoot()
     {
+        PCSV.Anim.SetBool("Shot", true);
+        
+        Vector2 screenCenterPoint = new Vector2(Screen.width *0.5f, Screen.height *0.5f);
+        Ray ray = PCSV.Camera.ScreenPointToRay(screenCenterPoint);
+         
+        Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask);
 
+        if (hit.collider.gameObject.layer == 7) // if the object i hit is an enemy
+        {
+            // hit.collider.gameObject.getcomponent<enemyscript>.add damage
+        }
     }
 }
