@@ -9,13 +9,13 @@ public class CameraThirdPerson : MonoBehaviour
     Vector2 previousMousePos = Vector2.zero;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        CameraReference.rotation *= Quaternion.AngleAxis(Input.mousePosition.x,Vector3.up);
+
+        CameraReference.rotation *= Quaternion.AngleAxis(Input.mousePosition.x, Vector3.up);
     }
 }

@@ -8,8 +8,8 @@ public class BodyController : MonoBehaviour
     public Camera Camera;
     public GameObject BodyToMove;
     CharacterController toMove;
-    Vector3 forceToAdd=Vector3.zero,fixedForward = Vector3.zero;
-    float strafe=0,vertical=0,forward= 0;
+    Vector3 forceToAdd = Vector3.zero, fixedForward = Vector3.zero;
+    float strafe = 0, vertical = 0, forward = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +20,13 @@ public class BodyController : MonoBehaviour
     void Update()
     {
         forceToAdd = new Vector3();
-        
+
         strafe = Input.GetAxis("Horizontal");
         forward = Input.GetAxis("Vertical");
-        
-        if(!toMove.isGrounded)
+
+        if (!toMove.isGrounded)
         {
-            vertical += Physics.gravity.y*Time.deltaTime;
+            vertical += Physics.gravity.y * Time.deltaTime;
 
         }
         else
@@ -41,15 +41,15 @@ public class BodyController : MonoBehaviour
         fixedForward = forceToAdd;
         fixedForward.y = 0;
 
-       
+
     }
     private void FixedUpdate()
     {
-        toMove.Move(forceToAdd*Time.deltaTime*Speed);
-        if(fixedForward.magnitude >0)
+        toMove.Move(forceToAdd * Time.deltaTime * Speed);
+        if (fixedForward.magnitude > 0)
         {
-            
-            toMove.transform.forward = Vector3.Lerp (toMove.transform.forward,fixedForward,0.6f);
+
+            toMove.transform.forward = Vector3.Lerp(toMove.transform.forward, fixedForward, 0.6f);
 
         }
         //toMove.attachedRigidbody.AddForce(forceToAdd, ForceMode.Impulse);
