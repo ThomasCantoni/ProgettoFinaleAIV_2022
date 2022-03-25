@@ -169,7 +169,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         //the direction i am going towards
         direction = dir;
-        
+        Anim.SetFloat("MoveX", direction.x);
+        Anim.SetFloat("MoveZ", direction.y);
+
 
         //Vector3 camForward = CameraReference.forward;
         ////fetching the quaternion of the now rotated camera, to rotate the movement vector
@@ -212,6 +214,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         MovementVector = Vector3.zero;
         direction = Vector2.zero;
+        Anim.SetFloat("MoveX", direction.x);
+        Anim.SetFloat("MoveZ", direction.y);
     }
     // Update is called once per frame
     void Update()

@@ -38,13 +38,14 @@ public class InverseKinematicsTest : MonoBehaviour
     void SetIKWeights(InputAction.CallbackContext ctx)
     {
         zoomLookAtRig.weight = 1f;
-
+        restingTarget = 0f;
 
     }
     void CancelIKWeights(InputAction.CallbackContext ctx)
     {
-
        zoomLookAtRig.weight = 0f;
+        if(GunEquipped)
+        restingTarget = 1f;
     }
     void ManageShooting(InputAction.CallbackContext ctx)
     {
@@ -80,8 +81,10 @@ public class InverseKinematicsTest : MonoBehaviour
             GunEquipped = false;
             restingTarget = 0f;
             returnToRestCooldown = 1.2f;
-            GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("PutAwayGun", true);
-            GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("GunEquipped", false);
+            PCSV.Anim.SetBool("GunEquipped", false);
+            PCSV.Anim.SetBool("Shot", false);
+            PCSV.Anim.SetBool("PutAwayGun", true);
+
             Shooting = false;
 
 
@@ -155,9 +158,9 @@ public class InverseKinematicsTest : MonoBehaviour
         Vector2 screenCenterPoint = new Vector2(Screen.width *0.5f, Screen.height *0.5f);
         Ray ray = PCSV.Camera.ScreenPointToRay(screenCenterPoint);
          
-        Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask);
+        
 
-        if (hit.collider.gameObject.layer == 7) // if the object i hit is an enemy
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask)  && hit.collider.gameObject.layer == 7) // if the object i hit is an enemy
         {
             // hit.collider.gameObject.getcomponent<enemyscript>.add damage
         }
