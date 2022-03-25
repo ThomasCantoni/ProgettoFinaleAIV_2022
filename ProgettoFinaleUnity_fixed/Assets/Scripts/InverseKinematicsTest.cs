@@ -7,6 +7,7 @@ using UnityEngine.Animations.Rigging;
 public class InverseKinematicsTest : MonoBehaviour
 {
     public PlayerControllerSecondVersion PCSV;
+    public GameObject Gun;
     public bool GunEquipped = false,Shooting=false;
     [SerializeField] public Rig zoomLookAtRig;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
@@ -16,7 +17,8 @@ public class InverseKinematicsTest : MonoBehaviour
     public TwoBoneIKConstraint restingGun;
     public Transform TargetIKShooting;
     private Transform CameraReference;
-    public float restingTarget = 0f, returnToRestCooldown = 1.2f;
+    public float restingTarget = 0f, returnToRestCooldown = 1.5f;
+    private float returnToRestCooldownReset = 1.5f;
     public float zoomLookAtTarget = 0f;
     public bool ShootingAvailable = false;
 
@@ -37,13 +39,17 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void SetIKWeights(InputAction.CallbackContext ctx)
     {
-        zoomLookAtRig.weight = 1f;
+        
+        zoomLookAtTarget = 1f;
         restingTarget = 0f;
-
+        Debug.Log("AIMING ACTIVE");
     }
     void CancelIKWeights(InputAction.CallbackContext ctx)
     {
-       zoomLookAtRig.weight = 0f;
+        Debug.Log("AIMING CANCELED");
+
+        zoomLookAtTarget = 0f;
+         
         if(GunEquipped)
         restingTarget = 1f;
     }
@@ -68,6 +74,7 @@ public class InverseKinematicsTest : MonoBehaviour
         else
         {
             GunEquipped = true;
+            Gun.SetActive(true);
             GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("GunEquipped", true);
 
             restingTarget = 1f;
@@ -80,11 +87,11 @@ public class InverseKinematicsTest : MonoBehaviour
         {
             GunEquipped = false;
             restingTarget = 0f;
-            returnToRestCooldown = 1.2f;
+            returnToRestCooldown = returnToRestCooldownReset;
             PCSV.Anim.SetBool("GunEquipped", false);
             PCSV.Anim.SetBool("Shot", false);
             PCSV.Anim.SetBool("PutAwayGun", true);
-
+            Gun.SetActive(false);
             Shooting = false;
 
 
@@ -93,19 +100,24 @@ public class InverseKinematicsTest : MonoBehaviour
         else
         {
             GunEquipped = true;
+           
+            Gun.SetActive(true);
             GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("GunEquipped", true);
             restingTarget = 1f;
+            zoomLookAtTarget = 1f;
         }
     }
     private void Update()
     {
-
+        if(PCSV.isGamePaused)
+        {
+            return;
+        }
         //point.position = CameraReference.position + CameraReference.forward*3f;
-        //if(PCSV.isAiming)
-        //{
-        //zoomLookAtRig.weight = Mathf.Lerp(zoomLookAtRig.weight, zoomLookAtTarget, 0.3f);    
-            
-        //}
+       
+        zoomLookAtRig.weight = zoomLookAtTarget;    
+        
+        
         if (!Shooting)
         {
             RestingGunRig.weight = Mathf.Lerp(RestingGunRig.weight, restingTarget, 0.2f);
@@ -123,7 +135,8 @@ public class InverseKinematicsTest : MonoBehaviour
         
         if (returnToRestCooldown <= 0f)
         {
-            returnToRestCooldown = 1.2f;
+            returnToRestCooldown = returnToRestCooldownReset;
+
             GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("Shot", false);
 
             restingTarget = 1f;
@@ -134,11 +147,11 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void CheckLookAtAngle()
     {
-        float angleRadians = Vector3.Dot(this.transform.forward, CameraReference.forward);
+        float angleRadians =Mathf.Acos( Vector3.Dot(this.transform.forward, CameraReference.forward));
         angleRadians *= 180f / 3.14f;
         //angleRadians = Mathf.Abs(angleRadians);
-        //Debug.Log(angleRadians);
-        if (angleRadians < -50f)
+        
+        if (angleRadians >110f)
         {
             ShootingAvailable = false;
             LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0f, 0.1f);

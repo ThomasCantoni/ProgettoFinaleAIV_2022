@@ -10,7 +10,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 {
    
     private float PlayerSpeedModifier = 1f;
-    private bool isGamePaused = false;
+    public bool isGamePaused = false;
     public float PlayerSpeed 
     {
         get
@@ -37,7 +37,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
     }
 
-    public GameObject Gun;
+    
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
     public Camera Camera;
     public CharacterController characterController;
@@ -153,7 +153,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
        // lookValue.y = Mathf.Clamp(lookValue.y, -70f,70f);
         cameraRotationVec2FromMouse.x -= lookValue.y * AimSensitivity * Time.deltaTime;
         cameraRotationVec2FromMouse.y += lookValue.x * AimSensitivity * Time.deltaTime;
-        cameraRotationVec2FromMouse.x = Mathf.Clamp(cameraRotationVec2FromMouse.x, -80f,80f) ;
+        cameraRotationVec2FromMouse.x = Mathf.Clamp(cameraRotationVec2FromMouse.x, -50f,80f) ;
         CameraReference.transform.rotation = Quaternion.Euler(cameraRotationVec2FromMouse.x, cameraRotationVec2FromMouse.y, 0);
 
         //optimized quaternion fetching so i store it in memory only when i rotate the camera instead of every frame (moved here from update)

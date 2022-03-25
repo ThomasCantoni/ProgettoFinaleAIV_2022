@@ -3542,6 +3542,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3664539948120854725, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
   m_PrefabInstance: {fileID: 3664539948234844313}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &882459318 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3664539948772023643, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
+  m_PrefabInstance: {fileID: 3664539948234844313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &893579645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5762,6 +5767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PCSV: {fileID: 3664539948234844314}
+  Gun: {fileID: 882459318}
   GunEquipped: 0
   Shooting: 0
   zoomLookAtRig: {fileID: 693517919}
@@ -8978,6 +8984,26 @@ PrefabInstance:
     - target: {fileID: 3664539948525904241, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664539948772023643, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664539948772442491, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.1091025
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664539948772442491, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.030593
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664539948772442491, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.29504976
+      objectReference: {fileID: 0}
+    - target: {fileID: 3664539948772442491, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.22731201
       objectReference: {fileID: 0}
     - target: {fileID: 3770306204178828835, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
       propertyPath: m_LocalPosition.x

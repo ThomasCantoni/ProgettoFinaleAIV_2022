@@ -7,7 +7,7 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EllenLowerBodyAvatarMask
-  m_Mask: 00000000000000000000000001000000010000000000000000000000000000000000000001000000010000000000000000000000
+  m_Mask: 01000000000000000000000001000000010000000000000000000000000000000000000001000000010000000000000000000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
@@ -16,7 +16,7 @@ AvatarMask:
   - m_Path: Ellen_Skeleton
     m_Weight: 0
   - m_Path: Ellen_Skeleton/Ellen_Root
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips
     m_Weight: 0
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Left_UpperLeg
@@ -26,9 +26,9 @@ AvatarMask:
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Left_UpperLeg/Ellen_Left_LowerLeg/Ellen_Left_Foot
     m_Weight: 1
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Left_UpperLeg/Ellen_Left_LowerLeg/Ellen_Left_Foot/Ellen_Left_Toes
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Left_UpperLeg/Ellen_Left_LowerLeg/Ellen_Left_Foot/Ellen_Left_Toes/Ellen_Left_ToeEnd
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Right_UpperLeg
     m_Weight: 1
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Right_UpperLeg/Ellen_Right_LowerLeg
@@ -36,9 +36,9 @@ AvatarMask:
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Right_UpperLeg/Ellen_Right_LowerLeg/Ellen_Right_Foot
     m_Weight: 1
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Right_UpperLeg/Ellen_Right_LowerLeg/Ellen_Right_Foot/Ellen_Right_Toes
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Right_UpperLeg/Ellen_Right_LowerLeg/Ellen_Right_Foot/Ellen_Right_Toes/Ellen_Right_ToeEnd
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Spine
     m_Weight: 0
   - m_Path: Ellen_Skeleton/Ellen_Root/Ellen_Hips/Ellen_Spine/Ellen_Chest
