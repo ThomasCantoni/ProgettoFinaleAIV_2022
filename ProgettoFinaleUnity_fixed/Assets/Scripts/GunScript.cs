@@ -13,7 +13,8 @@ public class GunScript : MonoBehaviour
     }
     public void ReceiveShotImpactPos(Vector3 impactPos)
     {
-        Vector3 towardsImpactPoint = gunMuzzle.position - impactPos;
+        Vector3 towardsImpactPoint = impactPos-gunMuzzle.position;
+        
     }
     // Update is called once per frame
     void Update()
