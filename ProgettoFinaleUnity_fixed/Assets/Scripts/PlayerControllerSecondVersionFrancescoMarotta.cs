@@ -78,7 +78,7 @@ public class PlayerControllerSecondVersionFrancescoMarotta : MonoBehaviour
         Anim.SetLayerWeight(1, 1);
         characterController = Player.GetComponent<CharacterController>();
         controls.Player.Enable();
-        controls.Player.Aim.performed += OnCameraRotate;
+        controls.Player.RotateCamera.performed += OnCameraRotate;
         AnimatorVelocityHash = Animator.StringToHash("Velocity");
         MoveXHash = Animator.StringToHash("MoveX");
         MoveZHash = Animator.StringToHash("MoveZ");
