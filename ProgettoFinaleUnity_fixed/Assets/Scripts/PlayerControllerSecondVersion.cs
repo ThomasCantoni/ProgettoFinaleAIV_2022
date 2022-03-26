@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.UI;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
    
     private float PlayerSpeedModifier = 1f;
-    private bool isGamePaused = false;
+    public bool isGamePaused = false;
     public float PlayerSpeed 
     {
         get
@@ -32,11 +33,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         set
         {
             aimSensitivity = value;
+            PauseCanvas.transform.GetComponentInChildren<Slider>().value = value;
         }
     }
 
-    public GameObject Gun;
+    
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
+    public Camera Camera;
     public CharacterController characterController;
     public Animator Anim;
     public GameObject Player;
@@ -52,19 +55,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     Vector3 MovementVector;
     Vector2 direction;
     Quaternion cameraQuatForMovement;
-    Controls controls;
+    public Controls controls;
     bool isGrounded;
     bool jumpPressed = false;
-    bool isAiming = false;
+    public bool isAiming = false;
    
     float gravityValue = -9.81f;
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
-    float aimRigWeight;
 
-    [SerializeField] private Rig rigAim;
-    [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
-    [SerializeField] private Transform point;
+    
 
 
 
@@ -76,11 +76,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
     void OnEnable()
     {
-        
+            
             Anim.SetLayerWeight(1, 1);
             characterController = Player.GetComponent<CharacterController>();
-            controls.Player.Enable();
-            controls.Player.Aim.performed += OnCameraRotate;
             AnimatorVelocityHash = Animator.StringToHash("Velocity");
             AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
             //AnimatorVelocityHash = Animator.StringToHash("MoveX");
@@ -88,20 +86,25 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
             //setting up the events for the input
+            controls.Player.Enable();
+            controls.Player.RotateCamera.performed += OnCameraRotate;
+            controls.Player.Zoom.performed += OnZoom;
+            controls.Player.Zoom.canceled += OnZoomCancel;
+            
             controls.Player.Movement.performed += cntxt => OnMovement(cntxt.ReadValue<Vector2>());
             controls.Player.Movement.canceled += OnMovementCanceled;
             controls.Player.Sprint.performed += ShiftPressed;
             controls.Player.Sprint.canceled += ShiftReleased;
             controls.Player.Jump.started += SpacePressed;
             controls.Player.Jump.canceled += SpaceReleased;
-            controls.Player.Gun.performed += GunPressed;
-            controls.Player.GunAway.performed += GunAwayPressed;
-            controls.Player.GunAway.canceled += GunAwayReleased;
-            controls.Player.Shot.performed += ShotPressed;
-            controls.Player.Shot.canceled += ShotReleased;
+            //controls.Player.Gun.performed += GunPressed;
+            //controls.Player.GunAway.performed += GunAwayPressed;
+            //controls.Player.GunAway.canceled += GunAwayReleased;
+            //controls.Player.Shot.performed += ShotPressed;
+           // controls.Player.Shot.canceled += ShotReleased;
             controls.Player.Pause.performed+= PauseGame;
-            
-        
+
+        AimSensitivity = 5f;
     }
     void PauseGame(InputAction.CallbackContext ctxt)
     {
@@ -121,7 +124,27 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         }
     }
-    
+    void OnZoom(InputAction.CallbackContext context)
+    {
+        isAiming = true;
+        Anim.SetBool("IsAiming", true);
+        ThirdPersonCamera.Priority = 0;
+        AimCamera.Priority = 30;
+        Anim.applyRootMotion = false;
+        
+    }
+    void OnZoomCancel(InputAction.CallbackContext context)
+    {
+        isAiming = false;
+        Anim.SetBool("IsAiming", false);
+
+        ThirdPersonCamera.Priority = 30;
+        AimCamera.Priority = 0;
+        
+       
+        Anim.applyRootMotion = true;
+        
+    }
     void OnCameraRotate(InputAction.CallbackContext context)
     {
         if (isGamePaused)
@@ -131,7 +154,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
        // lookValue.y = Mathf.Clamp(lookValue.y, -70f,70f);
         cameraRotationVec2FromMouse.x -= lookValue.y * AimSensitivity * Time.deltaTime;
         cameraRotationVec2FromMouse.y += lookValue.x * AimSensitivity * Time.deltaTime;
-        cameraRotationVec2FromMouse.x = Mathf.Clamp(cameraRotationVec2FromMouse.x, -80f,80f) ;
+        cameraRotationVec2FromMouse.x = Mathf.Clamp(cameraRotationVec2FromMouse.x, -50f,80f) ;
         CameraReference.transform.rotation = Quaternion.Euler(cameraRotationVec2FromMouse.x, cameraRotationVec2FromMouse.y, 0);
 
         //optimized quaternion fetching so i store it in memory only when i rotate the camera instead of every frame (moved here from update)
@@ -147,7 +170,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         //the direction i am going towards
         direction = dir;
-        
+        Anim.SetFloat("MoveX", direction.x);
+        Anim.SetFloat("MoveZ", direction.y);
+
 
         //Vector3 camForward = CameraReference.forward;
         ////fetching the quaternion of the now rotated camera, to rotate the movement vector
@@ -190,6 +215,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         MovementVector = Vector3.zero;
         direction = Vector2.zero;
+        Anim.SetFloat("MoveX", direction.x);
+        Anim.SetFloat("MoveZ", direction.y);
     }
     // Update is called once per frame
     void Update()
@@ -198,12 +225,12 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             return;
         
         MoveRelativeToCameraRotation();
-        rigAim.weight = Mathf.Lerp(rigAim.weight, aimRigWeight, 0.9f);
     }
     void FixedUpdate()
     {
         if (isGamePaused)
             return;
+
         isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
@@ -340,27 +367,28 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         GetComponent<Animator>().SetBool("Jump", false);
     }
 
-    void GunPressed(InputAction.CallbackContext context)
-    {
-        Gun.SetActive(true);
-        ThirdPersonCamera.Priority = 0;
-        AimCamera.Priority = 30;
-        Anim.applyRootMotion = false;
-        isAiming = true;
-        GetComponent<Animator>().SetBool("isDrawingTheGun", isAiming);
-    }
-    void GunAwayPressed(InputAction.CallbackContext context)
-    {
-        Gun.SetActive(false);
-        GetComponent<Animator>().SetBool("isGunPutAway", true);
-        isAiming = false;
-        ThirdPersonCamera.Priority = 30;
-        AimCamera.Priority = 0;
-        Anim.applyRootMotion = true;
+    //void GunPressed(InputAction.CallbackContext context)
+    //{
+    //    Gun.SetActive(true);
+    //    ThirdPersonCamera.Priority = 0;
+    //    AimCamera.Priority = 30;
+    //    Anim.applyRootMotion = false;
+    //    isAiming = true;
+    //    aimRigWeight = 0.85f;
+    //    GetComponent<Animator>().SetBool("isDrawingTheGun", isAiming);
+    //}
+    //void GunAwayPressed(InputAction.CallbackContext context)
+    //{
+    //    Gun.SetActive(false);
+    //    GetComponent<Animator>().SetBool("isGunPutAway", true);
+    //    isAiming = false;
+    //    ThirdPersonCamera.Priority = 30;
+    //    AimCamera.Priority = 0;
+    //    Anim.applyRootMotion = true;
+    //    aimRigWeight = 0f;
+    //    GetComponent<Animator>().SetBool("isDrawingTheGun", false);
 
-        GetComponent<Animator>().SetBool("isDrawingTheGun", false);
-
-    }
+    //}
     void GunAwayReleased(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetBool("isGunPutAway", false);
@@ -368,14 +396,23 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void ShotPressed(InputAction.CallbackContext context)
     {
-        GetComponent<Animator>().SetBool("Shot", true);
+        //GetComponent<Animator>().SetBool("Shot", true);
+        //Vector3 mouseWorldPosition = Vector3.zero;
+        //Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        //Ray ray = Camera.ScreenPointToRay(screenCenterPoint);
+
+        ////Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask);
+        
+        //if(hit.collider.gameObject.layer == 7) // if the object i hit is an enemy
+        //{
+        //   // hit.collider.gameObject.getcomponent<enemyscript>.add damage
+        //}
+        
     }
     void ShotReleased(InputAction.CallbackContext context)
     {
         GetComponent<Animator>().SetBool("Shot", false);
-    }
-    void Aim()
-    {
         
     }
+   
 }
