@@ -116,6 +116,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""BulletTimeInput"",
+                    ""type"": ""Button"",
+                    ""id"": ""2807ae63-24d8-4e67-8213-14bd70f16eab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -272,6 +281,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a6342c5-9cbb-4fa2-a0e8-63ef8289889e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BulletTimeInput"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -290,6 +310,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_EquipWeapon = m_Player.FindAction("EquipWeapon", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_BulletTimeInput = m_Player.FindAction("BulletTimeInput", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +380,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_EquipWeapon;
     private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_BulletTimeInput;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -373,6 +395,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @EquipWeapon => m_Wrapper.m_Player_EquipWeapon;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        public InputAction @BulletTimeInput => m_Wrapper.m_Player_BulletTimeInput;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -412,6 +435,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Zoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @BulletTimeInput.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBulletTimeInput;
+                @BulletTimeInput.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBulletTimeInput;
+                @BulletTimeInput.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBulletTimeInput;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -446,6 +472,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @BulletTimeInput.started += instance.OnBulletTimeInput;
+                @BulletTimeInput.performed += instance.OnBulletTimeInput;
+                @BulletTimeInput.canceled += instance.OnBulletTimeInput;
             }
         }
     }
@@ -462,5 +491,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnEquipWeapon(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnBulletTimeInput(InputAction.CallbackContext context);
     }
 }
