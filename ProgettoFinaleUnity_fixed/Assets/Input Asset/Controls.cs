@@ -98,6 +98,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+
                 },
                 {
                     ""name"": ""EquipWeapon"",
@@ -107,6 +108,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+
                 }
             ],
             ""bindings"": [
@@ -241,6 +243,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+
                 },
                 {
                     ""name"": """",
@@ -268,6 +271,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_GunAway = m_Player.FindAction("GunAway", throwIfNotFound: true);
         m_Player_Shot = m_Player.FindAction("Shot", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+
         m_Player_EquipWeapon = m_Player.FindAction("EquipWeapon", throwIfNotFound: true);
     }
 
@@ -337,6 +341,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shot;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_EquipWeapon;
+
     public struct PlayerActions
     {
         private @Controls m_Wrapper;

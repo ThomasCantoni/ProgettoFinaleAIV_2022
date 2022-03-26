@@ -4,17 +4,18 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Water_Simple_01_Mat
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 0}
   m_ShaderKeywords: _ALPHABLEND_ON _DETAIL_MULX2 _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2000
   stringTagMap:
-    RenderType: Transparent
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -106,7 +107,7 @@ Material:
     - _DepthBlur: 4
     - _DetailNormalMapScale: 0.25
     - _Distortion: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EdgeBlend: 0.372
     - _ExtraEmission: 0
     - _FlowIntensity: 0.05
@@ -139,7 +140,7 @@ Material:
     - _Specular: 0.3760684
     - _SpecularHighlights: 1
     - _Speed: 0.01
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _Turbulence: 0.111
     - _UVSec: 0
     - _Visibility: 0
@@ -147,7 +148,7 @@ Material:
     - _WaveFrequency: 1
     - _WaveHeight: 0.0002
     - _WaveLength: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.05829476, g: 0.09433961, b: 0.05829476, a: 0.7607843}
     - _ColorA: {r: 1, g: 1, b: 1, a: 1}
@@ -162,3 +163,4 @@ Material:
     - _ShoreColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.021387678, g: 0.022058845, b: 0.00989404, a: 1}
     - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

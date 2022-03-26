@@ -6,7 +6,9 @@
             "id": "3c16f3cd-03a5-43e1-881a-c9f931bd8253",
             "actions": [
                 {
+
                     "name": "RotateCamera",
+
                     "type": "PassThrough",
                     "id": "4d5e2496-1243-4618-b127-7e61f2e1d219",
                     "expectedControlType": "Vector2",
@@ -71,11 +73,14 @@
                 {
                     "name": "Pause",
                     "type": "Button",
+
                     "id": "4ae07c48-79d3-49dd-8d0c-34522cfeafc8",
+
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+
                 },
                 {
                     "name": "EquipWeapon",
@@ -94,6 +99,7 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+
                 }
             ],
             "bindings": [
@@ -104,7 +110,9 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+
                     "action": "RotateCamera",
+
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -220,7 +228,9 @@
                 },
                 {
                     "name": "",
+
                     "id": "ef9948dd-393f-4636-b593-c905063c283c",
+
                     "path": "<Keyboard>/escape",
                     "interactions": "Press",
                     "processors": "",
@@ -228,6 +238,7 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+
                 },
                 {
                     "name": "",
@@ -250,6 +261,7 @@
                     "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
+
                 }
             ]
         }

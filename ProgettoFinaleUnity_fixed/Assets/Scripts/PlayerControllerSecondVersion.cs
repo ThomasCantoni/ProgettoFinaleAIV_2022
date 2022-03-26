@@ -73,6 +73,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         controls = new Controls();
     }
+
     void OnEnable()
     {
             
