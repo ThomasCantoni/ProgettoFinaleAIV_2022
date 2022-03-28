@@ -16,10 +16,12 @@ public abstract class ChomperSM : StateMachine
     public Transform ObjToChase;
 
     public Material[] Debug_Materials;
+    public Animator anim;
 
     void Awake()
     {
         OnAwake();
+        anim = anim.GetComponent<Animator>();
     }
 
     void OnTriggerEnter(Collider c)

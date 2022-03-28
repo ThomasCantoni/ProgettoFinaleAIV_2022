@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public abstract class Enemy_Patrol : BaseState
 {
     protected NavMeshAgent agent;
+    
 
     protected ChomperSM sm;
     public Enemy_Patrol(string name, ChomperSM stateMachine) : base(name, stateMachine)
@@ -17,6 +18,7 @@ public abstract class Enemy_Patrol : BaseState
     public override void OnEnter()
     {
         sm.OnSphereTriggerEnter += OnDetection;
+        
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         sm.gameObject.GetComponentInChildren<MeshRenderer>().material = sm.Debug_Materials[0];
     }
@@ -24,6 +26,7 @@ public abstract class Enemy_Patrol : BaseState
     public override void OnExit()
     {
         sm.OnSphereTriggerEnter -= OnDetection;
+        
     }
 
     public virtual void OnDetection(GameObject sender, Collider c, string message, bool fromEvent)
