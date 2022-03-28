@@ -43,7 +43,11 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void SetIKWeights(InputAction.CallbackContext ctx)
     {
-
+        Debug.Log("ZOOM CONSTRAINT ON");
+        if (TimeManager.IsGamePaused)
+        {
+            return;
+        }
         zoomLookAtRig.weight = 1f;
         if(GunEquipped)
        restingTarget = 0f;
@@ -51,7 +55,12 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void CancelIKWeights(InputAction.CallbackContext ctx)
     {
-        
+        Debug.Log("ZOOM CONSTRAINT OFF");
+
+        if (TimeManager.IsGamePaused)
+        {
+            return;
+        }
 
         zoomLookAtRig.weight = 0f;
          
@@ -60,8 +69,11 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void ManageShooting(InputAction.CallbackContext ctx)
     {
-        
-        if(GunEquipped)
+        if (TimeManager.IsGamePaused)
+        {
+            return;
+        }
+        if (GunEquipped)
         {
             
             if(ShootingAvailable && ShootingAvailableAngle)
@@ -90,7 +102,11 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void EquipGun(InputAction.CallbackContext ctx)
     {
-        if(GunEquipped)
+        if (TimeManager.IsGamePaused)
+        {
+            return;
+        }
+        if (GunEquipped)
         {
             GunEquipped = false;
             zoomLookAtTarget = 0;
@@ -119,13 +135,11 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     private void Update()
     {
-        if(PCSV.isGamePaused)
+        if(TimeManager.IsGamePaused)
         {
             return;
         }
-        Debug.Log(Shooting + "SHOOTING SHOOTING");
-        Debug.Log(ShootingAvailable + " " + ShootingAvailableAngle);
-        Debug.Log(shootCooldown);
+       
 
 
         if (!Shooting)
