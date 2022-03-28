@@ -10,40 +10,56 @@ public static class TimeManager
     public static float PlayerCurrentSpeed = 1f;
     public static float EnemyCurrentSpeed = 1f;
 
-    public static float PlayerBulletTimeSpeed = 0.75f;
+    public static float PlayerBulletTimeSpeed = 1f;
     public static float EnemyBulletTimeSpeed = 0.3f;
+
+    public delegate void Notifier();
+
+    //enemy script will subscribe to this delegate with a 
+    public static Notifier EnemyNotifier;
     
     public static void EnableBulletTime(InputAction.CallbackContext ctx)
     {
-        PlayerCurrentSpeed = PlayerBulletTimeSpeed;
-        EnemyCurrentSpeed = EnemyBulletTimeSpeed;
+        Debug.Log("BT ACTIVE");
+        if(IsBulletTimeActive)
+        {
+            DisableBulletTime();
+            return;
+        }
+        
+        Time.timeScale = 0.5f;
+        //PlayerCurrentSpeed = PlayerBulletTimeSpeed;
+        //EnemyCurrentSpeed = EnemyBulletTimeSpeed;
         IsBulletTimeActive = true;
+        //EnemyNotifier.Invoke();
     }
     public static void DisableBulletTime()
     {
-        PlayerCurrentSpeed = 1f;
-        EnemyCurrentSpeed = 1f;
+        Debug.Log("BT INACTIVE");
+        Time.timeScale = 1f;
+        //PlayerCurrentSpeed = 1f;
         IsBulletTimeActive = false;
+
     }
     public static void EnablePause()
     {
+        Time.timeScale = 0f;
         IsGamePaused = true;
-        PlayerCurrentSpeed = 0f;
-        EnemyCurrentSpeed = 0f;
+        
     }
     public static void DisablePause()
     {
         if (IsBulletTimeActive)
         {
-            PlayerCurrentSpeed = PlayerBulletTimeSpeed;
-            EnemyCurrentSpeed = EnemyBulletTimeSpeed;
+            Time.timeScale = 0.5f;
+            
             
 
         }
         else
         {
-            PlayerCurrentSpeed = 1f;
-            EnemyCurrentSpeed = 1f;
+            Time.timeScale = 1f;
+            
         }
         IsGamePaused = false;
     }

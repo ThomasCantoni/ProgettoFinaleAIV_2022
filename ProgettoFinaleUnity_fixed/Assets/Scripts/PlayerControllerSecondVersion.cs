@@ -16,7 +16,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         get
         {
             
-            return Time.deltaTime * TimeManager.PlayerCurrentSpeed;
+            return Time.unscaledDeltaTime * TimeManager.PlayerCurrentSpeed;
         }
         
     }
@@ -101,9 +101,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
            // controls.Player.Shot.canceled += ShotReleased;
             controls.Player.Pause.performed+= PauseGame;
             controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
-
+            
 
         AimSensitivity = 5f;
+    }
+    public void PlayerActivateBT(InputAction.CallbackContext ctxt)
+    {
+
     }
     void PauseGame(InputAction.CallbackContext ctxt)
     {
@@ -209,15 +213,15 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             
         
         MoveRelativeToCameraRotation();
+        isGrounded = IsGroundedTest();
+        Anim.SetBool("isGrounded", isGrounded);
+        GravityAndJumpUpdate();
     }
     void FixedUpdate()
     {
         if (TimeManager.IsGamePaused)
             return;
 
-        isGrounded = IsGroundedTest();
-        Anim.SetBool("isGrounded", isGrounded);
-        GravityAndJumpUpdate();
        // ApplyGravity();
     }
     public bool IsGroundedTest()
@@ -318,7 +322,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             
         }
         
-        playerVel.y += gravityValue * Time.deltaTime*1.5f;
+        playerVel.y += gravityValue * Time.unscaledDeltaTime*Time.timeScale *1.5f;
         characterController.Move(playerVel * PlayerSpeed);
     }
     void SpacePressed(InputAction.CallbackContext context)
