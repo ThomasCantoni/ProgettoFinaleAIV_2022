@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChomperSM : StateMachine
+public abstract class ChomperSM : StateMachine
 {
-    public delegate void OnSphereTriggerDelecate(GameObject sender, Collider collider, string message);
+    public delegate void OnSphereTriggerDelecate(GameObject sender, Collider collider, string message, bool fromEvent);
     public event OnSphereTriggerDelecate OnSphereTriggerEnter;
 
     [HideInInspector]
@@ -17,23 +17,18 @@ public class ChomperSM : StateMachine
 
     public Material[] Debug_Materials;
 
-    public List<Transform> patrolPoints;
-    public float TimeBetweenPatrolPoints = 2f;
-    public bool Loop;
-
     void Awake()
     {
-        patrolState = new Enemy_Patrol(this);
-        chaseState = new Enemy_Chase(this);
-    }
-
-    protected override BaseState GetInitialState()
-    {
-        return patrolState;
+        OnAwake();
     }
 
     void OnTriggerEnter(Collider c)
     {
-        OnSphereTriggerEnter?.Invoke(this.gameObject, c, "Collision with: " + c.name);
+        OnSphereTriggerEnter?.Invoke(this.gameObject, c, "Collision with: " + c.name, true);
+    }
+
+    protected virtual void OnAwake()
+    {
+        chaseState = new Enemy_Chase(this);
     }
 }
