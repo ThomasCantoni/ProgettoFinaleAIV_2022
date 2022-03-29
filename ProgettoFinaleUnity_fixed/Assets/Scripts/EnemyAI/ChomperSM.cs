@@ -24,9 +24,14 @@ public abstract class ChomperSM : StateMachine
         anim = anim.GetComponent<Animator>();
     }
 
-    void OnTriggerEnter(Collider c)
+    void OnTriggerStay(Collider c)
     {
         OnSphereTriggerEnter?.Invoke(this.gameObject, c, "Collision with: " + c.name, true);
+    }
+
+    public void OnSphereTrigger(Collider c)
+    {
+        OnSphereTriggerEnter?.Invoke(this.gameObject, c, "Hitted by bullet", true);
     }
 
     protected virtual void OnAwake()
