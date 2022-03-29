@@ -5754,7 +5754,6 @@ GameObject:
   - component: {fileID: 1569194177}
   - component: {fileID: 1569194176}
   - component: {fileID: 1569194175}
-  - component: {fileID: 1569194174}
   - component: {fileID: 1569194173}
   m_Layer: 0
   m_Name: EnemySmall3
@@ -5782,26 +5781,6 @@ MonoBehaviour:
   anim: {fileID: 535951161}
   Leader: {fileID: 1543943200}
   ID: 2
---- !u!114 &1569194174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569194172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11f682859382c5a4bb499036f127ec88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjToChase: {fileID: 0}
-  Debug_Materials: []
-  anim: {fileID: 0}
-  Followers: []
-  FollowerDestinations: []
-  patrolPoints: []
-  TimeBetweenPatrolPoints: 1
-  Loop: 0
 --- !u!135 &1569194175
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5864,7 +5843,6 @@ GameObject:
   - component: {fileID: 1584214591}
   - component: {fileID: 1584214593}
   - component: {fileID: 1584214594}
-  - component: {fileID: 1584214595}
   - component: {fileID: 1584214592}
   m_Layer: 0
   m_Name: EnemySmall1
@@ -5943,26 +5921,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1584214595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584214590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11f682859382c5a4bb499036f127ec88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjToChase: {fileID: 0}
-  Debug_Materials: []
-  anim: {fileID: 0}
-  Followers: []
-  FollowerDestinations: []
-  patrolPoints: []
-  TimeBetweenPatrolPoints: 1
-  Loop: 0
 --- !u!1 &1584849240
 GameObject:
   m_ObjectHideFlags: 0
@@ -6274,7 +6232,6 @@ GameObject:
   - component: {fileID: 1630527161}
   - component: {fileID: 1630527160}
   - component: {fileID: 1630527159}
-  - component: {fileID: 1630527158}
   - component: {fileID: 1630527157}
   m_Layer: 0
   m_Name: EnemySmall2
@@ -6302,26 +6259,6 @@ MonoBehaviour:
   anim: {fileID: 1529802775}
   Leader: {fileID: 1543943200}
   ID: 1
---- !u!114 &1630527158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630527156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11f682859382c5a4bb499036f127ec88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjToChase: {fileID: 0}
-  Debug_Materials: []
-  anim: {fileID: 0}
-  Followers: []
-  FollowerDestinations: []
-  patrolPoints: []
-  TimeBetweenPatrolPoints: 1
-  Loop: 0
 --- !u!135 &1630527159
 SphereCollider:
   m_ObjectHideFlags: 0
