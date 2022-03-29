@@ -46,7 +46,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     //public float Speed = 2.5f;
     public float jumpHeight = 5f;
     public Canvas PauseCanvas;
-    
+    public LayerMask SphereCastLayers;
     Vector3 playerVel;
     Vector2 cameraRotationVec2FromMouse;
     Vector3 MovementVector;
@@ -208,21 +208,73 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     void Update()
     {
         if (TimeManager.IsGamePaused)
+        {
+
             return;
-        
-            
-        
+        }
+        //if (jumpPressed && isGrounded)
+        //{ // i am grounded and i want to jump
+        //    JumpRayCastCd = 1f;
+        //    jumpPressed = false;
+        //    playerVel.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        //    Anim.SetBool("Jump", true);
+        //    Anim.applyRootMotion = false;
+        //    jumpCooldown = 0.3f;
+
+        //}
+
+        //playerVel.y += gravityValue * Time.unscaledDeltaTime * Time.timeScale * 1.5f;
+        //characterController.Move(playerVel * PlayerSpeed);
+
+
         MoveRelativeToCameraRotation();
         isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
     }
+    bool test = false;
     void FixedUpdate()
     {
+           
         if (TimeManager.IsGamePaused)
+        {
             return;
 
+        }
+        
        // ApplyGravity();
+    }
+    void GravityAndJumpUpdate()
+    {
+        //groundedPlayer = characterController.isGrounded;
+        if (isGrounded)
+        {
+            playerVel = Vector3.zero;
+            jumpCooldown -= Time.deltaTime;
+            jumpCooldown = Mathf.Clamp(jumpCooldown, 0f, 1f);
+            //Anim.SetBool("isGrounded", true);
+            if(!isAiming)
+            Anim.applyRootMotion = true;
+        }
+        else
+        { //i am jumping
+            playerVel.x = MovementVector.x*2.5f;
+            playerVel.z = MovementVector.z*2.5f;
+        }
+
+        if (jumpPressed && isGrounded)
+        { // i am grounded and i want to jump
+            JumpRayCastCd = 1f;
+            jumpPressed = false;
+            playerVel.y += Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
+            Anim.SetBool("Jump", true);
+            Anim.applyRootMotion = false;
+            jumpCooldown = 0.3f;
+
+        }
+
+        playerVel.y += gravityValue *Time.unscaledDeltaTime;
+        characterController.Move(playerVel * PlayerSpeed);
     }
     public bool IsGroundedTest()
     {
@@ -233,8 +285,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
         else
         {
-            Ray groundedTest = new Ray(this.transform.position, Vector3.up * -0.5f);
-            return Physics.Raycast(groundedTest, 0.1f);
+            Ray groundedTest = new Ray(this.transform.position+Vector3.up*0.7f, Vector3.up * -0.5f);
+            Debug.DrawRay(this.transform.position + Vector3.up ,Vector3.down,Color.red,1f);
+            return Physics.SphereCast(groundedTest, 0.7f, 0.1f, SphereCastLayers);
+            
 
         }
         
@@ -293,38 +347,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     
     
-    void GravityAndJumpUpdate()
-    {
-        //groundedPlayer = characterController.isGrounded;
-        if (isGrounded)
-        {
-            playerVel = Vector3.zero;
-            jumpCooldown -= Time.deltaTime;
-            jumpCooldown = Mathf.Clamp(jumpCooldown, 0f, 1f);
-            //Anim.SetBool("isGrounded", true);
-            if(!isAiming)
-            Anim.applyRootMotion = true;
-        }
-        else
-        { //i am jumping
-            playerVel.x = MovementVector.x*2.5f;
-            playerVel.z = MovementVector.z*2.5f;
-        }
-        
-       if (jumpPressed && isGrounded)
-        { // i am grounded and i want to jump
-            JumpRayCastCd = 1f;
-            jumpPressed = false;
-            playerVel.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            Anim.SetBool("Jump", true);
-            Anim.applyRootMotion = false;
-            jumpCooldown = 0.3f;
-            
-        }
-        
-        playerVel.y += gravityValue * Time.unscaledDeltaTime*Time.timeScale *1.5f;
-        characterController.Move(playerVel * PlayerSpeed);
-    }
     void SpacePressed(InputAction.CallbackContext context)
     {
         if(jumpCooldown <=0)

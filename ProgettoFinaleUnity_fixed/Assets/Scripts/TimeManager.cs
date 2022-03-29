@@ -44,6 +44,7 @@ public static class TimeManager
     public static void EnablePause()
     {
         Time.timeScale = 0f;
+        
         IsGamePaused = true;
         
     }
