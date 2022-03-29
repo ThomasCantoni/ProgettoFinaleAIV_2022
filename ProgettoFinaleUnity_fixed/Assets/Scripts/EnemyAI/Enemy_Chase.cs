@@ -32,7 +32,7 @@ public class Enemy_Chase : BaseState
     {
         agent.destination = sm.ObjToChase.position;
         timer += Time.deltaTime;
-        if (timer >= 5f)
+        if (timer >= 10f)
             sm.ChangeState(sm.patrolState);
     }
 
