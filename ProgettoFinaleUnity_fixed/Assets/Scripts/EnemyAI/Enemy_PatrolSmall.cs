@@ -26,12 +26,14 @@ public class Enemy_PatrolSmall : Enemy_Patrol
         base.OnDetection(sender, c, message, fromEvent);
         if (fromEvent)
         {
-            smSmall.Leader.patrolState.OnDetection(sender, c, message, false);
+            if (smSmall.Leader.gameObject.activeSelf)
+                smSmall.Leader.patrolState.OnDetection(sender, c, message, false);
             for (int i = 0; i < smSmall.Leader.Followers.Count; i++)
             {
                 if (i == smSmall.ID)
                     continue;
-                smSmall.Leader.Followers[i].patrolState.OnDetection(sender, c, message, false);
+                if (smSmall.Leader.Followers[i].gameObject.activeSelf)
+                    smSmall.Leader.Followers[i].patrolState.OnDetection(sender, c, message, false);
             }
         }
         sm.ChangeState(sm.chaseState);

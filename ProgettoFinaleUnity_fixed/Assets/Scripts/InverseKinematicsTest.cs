@@ -209,10 +209,11 @@ public class InverseKinematicsTest : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask)) // if the object i hit is an enemy
         {
-            
+
             // hit.collider.gameObject.getcomponent<enemyscript>.add damage
-            Gun.GetComponent<GunScript>().ReceiveShotImpactPos(hit.point);
-            point.position = hit.point;
+            //Gun.GetComponent<GunScript>().ReceiveShotImpactPos(hit.point);
+            //point.position = hit.point;
+            hit.collider.GetComponent<IHittable>()?.OnHit(GetComponent<Collider>());
         }
         else
         {

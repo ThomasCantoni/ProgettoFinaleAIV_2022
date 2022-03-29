@@ -73,7 +73,8 @@ public class Enemy_PatrolBig : Enemy_Patrol
         {
             foreach (var follower in smBig.Followers)
             {
-                follower.patrolState.OnDetection(sender, c, message, false);
+                if (follower.gameObject.activeSelf)
+                    follower.patrolState.OnDetection(sender, c, message, false);
             }
         }
         sm.ChangeState(sm.chaseState);
