@@ -202,18 +202,17 @@ public class InverseKinematicsTest : MonoBehaviour
     {
        
         PCSV.Anim.SetBool("Shot", true);
-        
         Vector2 screenCenterPoint = new Vector2(Screen.width *0.5f, Screen.height *0.5f);
         Ray ray = PCSV.Camera.ScreenPointToRay(screenCenterPoint);
-
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask)) // if the object i hit is an enemy
         {
 
             // hit.collider.gameObject.getcomponent<enemyscript>.add damage
-            //Gun.GetComponent<GunScript>().ReceiveShotImpactPos(hit.point);
+            Gun.GetComponent<GunScript>().ReceiveShotImpactPos(hit.point,hit.normal);
             //point.position = hit.point;
             hit.collider.GetComponent<IHittable>()?.OnHit(GetComponent<Collider>());
+            
         }
         else
         {
