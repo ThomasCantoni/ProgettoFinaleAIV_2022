@@ -8,8 +8,6 @@ public class InverseKinematicsTest : MonoBehaviour
 {
     public PlayerControllerSecondVersion PCSV;
     public GameObject Gun;
-    public GameObject BulletImpact;
-    public ParticleSystem Ps;
     public bool GunEquipped = false,Shooting=false;
     [SerializeField] public Rig zoomLookAtRig;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
@@ -149,7 +147,6 @@ public class InverseKinematicsTest : MonoBehaviour
             RestingGunRig.weight = Mathf.Lerp(RestingGunRig.weight, restingTarget, 0.2f);
             PCSV.Anim.SetBool("GunResting", true);
             //ShootingGunRig.weight = Mathf.Lerp(ShootingGunRig.weight, shootingTarget, 0.3f);
-            Ps.Stop();
 
         }
         else
@@ -205,20 +202,17 @@ public class InverseKinematicsTest : MonoBehaviour
     {
        
         PCSV.Anim.SetBool("Shot", true);
-        
         Vector2 screenCenterPoint = new Vector2(Screen.width *0.5f, Screen.height *0.5f);
         Ray ray = PCSV.Camera.ScreenPointToRay(screenCenterPoint);
-        Ps.Play();
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask)) // if the object i hit is an enemy
         {
 
             // hit.collider.gameObject.getcomponent<enemyscript>.add damage
-            //Gun.GetComponent<GunScript>().ReceiveShotImpactPos(hit.point);
+            Gun.GetComponent<GunScript>().ReceiveShotImpactPos(hit.point,hit.normal);
             //point.position = hit.point;
             hit.collider.GetComponent<IHittable>()?.OnHit(GetComponent<Collider>());
-            GameObject impactGO = Instantiate(BulletImpact, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactGO, 2f);
+            
         }
         else
         {
