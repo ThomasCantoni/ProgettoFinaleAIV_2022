@@ -8,6 +8,8 @@ public class InverseKinematicsTest : MonoBehaviour
 {
     public PlayerControllerSecondVersion PCSV;
     public GameObject Gun;
+    public GameObject BulletImpact;
+    //public ParticleSystem Ps;
     public bool GunEquipped = false,Shooting=false;
     [SerializeField] public Rig zoomLookAtRig;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
@@ -214,6 +216,8 @@ public class InverseKinematicsTest : MonoBehaviour
             //Gun.GetComponent<GunScript>().ReceiveShotImpactPos(hit.point);
             //point.position = hit.point;
             hit.collider.GetComponent<IHittable>()?.OnHit(GetComponent<Collider>());
+            GameObject impactGO = Instantiate(BulletImpact, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactGO, 2f);
         }
         else
         {
