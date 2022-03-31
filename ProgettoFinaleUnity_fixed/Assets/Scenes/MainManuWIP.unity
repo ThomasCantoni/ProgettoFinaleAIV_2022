@@ -417,9 +417,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1689482808}
+      - m_Target: {fileID: 1141700180}
         m_TargetAssemblyTypeName: MainMenuManager, Scripts
-        m_MethodName: EnableMainCanvas
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1267,6 +1267,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1141700184}
+        m_TargetAssemblyTypeName: UISaveOptions, Scripts
+        m_MethodName: set_AimSens
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &903879178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,6 +1751,7 @@ GameObject:
   - component: {fileID: 1141700181}
   - component: {fileID: 1141700183}
   - component: {fileID: 1141700182}
+  - component: {fileID: 1141700184}
   m_Layer: 5
   m_Name: OptionsBox
   m_TagString: Untagged
@@ -1812,6 +1825,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141700180}
   m_CullTransparentMesh: 1
+--- !u!114 &1141700184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141700180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ae14918632fc64f9c41fb189ea2dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1416240191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3147,6 +3172,18 @@ MonoBehaviour:
       - m_Target: {fileID: 776510895}
         m_TargetAssemblyTypeName: FloatToString, Assembly-CSharp
         m_MethodName: FloatToStr
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1141700184}
+        m_TargetAssemblyTypeName: UISaveOptions, Scripts
+        m_MethodName: set_Fov
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

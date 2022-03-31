@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
-   
-  
+
+    public PlayerData PlayerData;
     public bool isGamePaused = false;
     public float PlayerSpeed 
     {
@@ -21,6 +21,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         
     }
     int AnimatorVelocityHash = 0,AnimatorSpeedHash=0;
+    public float FOV 
+    { get
+        {
+            return Camera.fieldOfView;
+        }
+        set
+        {
+            Camera.fieldOfView = value;
+
+        }
+    }
     public float AimSensitivity
     {
         get
@@ -77,8 +88,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     private void Awake()
     {
         controls = new Controls();
-    }
 
+    }
+    void SetPrefs()
+    {
+        AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
+        FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
+    }
     void OnEnable()
     {
             
