@@ -10,7 +10,7 @@ public static class TimeManager
     public static float PlayerCurrentSpeed = 1f;
     public static float EnemyCurrentSpeed = 1f;
 
-    public static float PlayerBulletTimeSpeed = 1f;
+    public static float PlayerBulletTimeSpeed = 0.6f;
     public static float EnemyBulletTimeSpeed = 0.3f;
 
     public delegate void Notifier();
@@ -28,7 +28,7 @@ public static class TimeManager
         }
         
         Time.timeScale = 0.5f;
-        //PlayerCurrentSpeed = PlayerBulletTimeSpeed;
+        PlayerCurrentSpeed = PlayerBulletTimeSpeed;
         //EnemyCurrentSpeed = EnemyBulletTimeSpeed;
         IsBulletTimeActive = true;
         //EnemyNotifier.Invoke();
@@ -37,14 +37,14 @@ public static class TimeManager
     {
         Debug.Log("BT INACTIVE");
         Time.timeScale = 1f;
-        //PlayerCurrentSpeed = 1f;
+        PlayerCurrentSpeed = 1f;
         IsBulletTimeActive = false;
 
     }
     public static void EnablePause()
     {
         Time.timeScale = 0f;
-        
+        PlayerCurrentSpeed = 0f;
         IsGamePaused = true;
         
     }
@@ -53,14 +53,16 @@ public static class TimeManager
         if (IsBulletTimeActive)
         {
             Time.timeScale = 0.5f;
-            
-            
+         PlayerCurrentSpeed = PlayerBulletTimeSpeed;
+
+
 
         }
         else
         {
             Time.timeScale = 1f;
-            
+         PlayerCurrentSpeed = 1f;
+
         }
         IsGamePaused = false;
     }
