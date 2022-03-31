@@ -12,30 +12,22 @@ public class Chomper : MonoBehaviour, IHittable
     public Animator anim;
     public NavMeshAgent agent;
 
-    float timer = 0f;
+    float timer = 1.35f;
     public virtual void OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
         Health--;
-    }
-
-    void rip()
-    {
-        //Destroy(transform.parent.gameObject);
         if (Health <= 0)
         {
             agent.speed = 0;
             timer += Time.deltaTime;
             anim.SetTrigger("rip");
-            if (Health <= 0 && timer >= 1.35f)
-            {
-                gameObject.SetActive(false);
-            }
+            StartCoroutine(animDie(timer));
         }
-        
     }
-    private void Update()
+    public IEnumerator animDie(float timer)
     {
-        rip();
+        yield return new WaitForSeconds(timer);
+        this.gameObject.SetActive(false);
     }
 }
