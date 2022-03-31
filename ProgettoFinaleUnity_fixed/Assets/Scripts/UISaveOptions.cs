@@ -22,4 +22,8 @@ public class UISaveOptions : MonoBehaviour
         OnEnable();
 
     }
+    public void OnDisable()
+    {
+        OnEnable();
+    }
 }
