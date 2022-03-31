@@ -10,7 +10,7 @@ public class Enemy_Chase : BaseState
     float timer = 0;
     private float speed = 2f;
     private float acceleration = 2f;
-
+    
     ChomperSM sm;
     public Enemy_Chase(ChomperSM stateMachine) : base("Enemy_Patrol", stateMachine)
     {
