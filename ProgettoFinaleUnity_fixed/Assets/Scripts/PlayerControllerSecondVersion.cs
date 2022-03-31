@@ -33,8 +33,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             PauseCanvas.transform.GetComponentInChildren<Slider>().value = value;
         }
     }
+    public float GravityScaled 
+    {
+        get
+        {
+            return gravityValue * PlayerSpeed;
+        }
+        
+    }
 
-    
+
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
     public Camera Camera;
     public CharacterController characterController;
@@ -101,7 +109,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
            // controls.Player.Shot.canceled += ShotReleased;
             controls.Player.Pause.performed+= PauseGame;
             controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
-            
+        controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;;
+
+
 
         AimSensitivity = 5f;
     }
@@ -122,7 +132,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         else
         {
             TimeManager.DisablePause();
-            Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
+            Anim.SetFloat(AnimatorSpeedHash,TimeManager.PlayerCurrentSpeed);
 
             PauseCanvas.gameObject.SetActive(false);
         }
@@ -233,17 +243,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         GravityAndJumpUpdate();
     }
     bool test = false;
-    void FixedUpdate()
-    {
+    //void FixedUpdate()
+    //{
            
-        if (TimeManager.IsGamePaused)
-        {
-            return;
+    //    if (TimeManager.IsGamePaused)
+    //    {
+    //        return;
 
-        }
+    //    }
         
-       // ApplyGravity();
-    }
+    //   // ApplyGravity();
+    //}
     void GravityAndJumpUpdate()
     {
         //groundedPlayer = characterController.isGrounded;
@@ -264,16 +274,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         if (jumpPressed && isGrounded)
         { // i am grounded and i want to jump
-            JumpRayCastCd = 1f;
+            JumpRayCastCd = 0.2f;
             jumpPressed = false;
-            playerVel.y += Mathf.Sqrt(jumpHeight * -1.0f * gravityValue);
+            playerVel.y += Mathf.Sqrt(jumpHeight  * gravityValue * -1f);
             Anim.SetBool("Jump", true);
             Anim.applyRootMotion = false;
             jumpCooldown = 0.3f;
 
         }
 
-        playerVel.y += gravityValue *Time.unscaledDeltaTime;
+        playerVel.y += GravityScaled;
         characterController.Move(playerVel * PlayerSpeed);
     }
     public bool IsGroundedTest()
@@ -294,7 +304,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         
 
     }
-    
+    public void ManageBulletTimePlayerSide(InputAction.CallbackContext ctx)
+    {
+        
+        Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
+        
+        
+    }
     void MoveRelativeToCameraRotation()
     {
         //rotating the direction vector according to camera 
