@@ -295,11 +295,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
         else
         {
-            Ray groundedTest = new Ray(this.transform.position+Vector3.up*0.7f, Vector3.up * -0.5f);
-            Debug.DrawRay(this.transform.position + Vector3.up ,Vector3.down,Color.red,1f);
-            return Physics.SphereCast(groundedTest, 0.7f, 0.1f, SphereCastLayers);
-            
-
+            Ray groundedTest = new Ray(this.transform.position+Vector3.up * 0.3f, Vector3.up * -0.5f);
+            return Physics.SphereCast(groundedTest, 0.3f, 0.5f, SphereCastLayers);
         }
         
 
