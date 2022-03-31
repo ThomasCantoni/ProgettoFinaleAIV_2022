@@ -417,9 +417,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1141700180}
-        m_TargetAssemblyTypeName: MainMenuManager, Scripts
-        m_MethodName: 
+      - m_Target: {fileID: 1141700184}
+        m_TargetAssemblyTypeName: UISaveOptions, Scripts
+        m_MethodName: SaveOptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -797,6 +797,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1689482808}
         m_TargetAssemblyTypeName: MainMenuManager, Scripts
         m_MethodName: EnableMainCanvas
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1141700184}
+        m_TargetAssemblyTypeName: UISaveOptions, Scripts
+        m_MethodName: Back
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1837,6 +1849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ae14918632fc64f9c41fb189ea2dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AimSensiSlider: {fileID: 877564104}
+  FOVSlider: {fileID: 1715801962}
 --- !u!1 &1416240191
 GameObject:
   m_ObjectHideFlags: 0

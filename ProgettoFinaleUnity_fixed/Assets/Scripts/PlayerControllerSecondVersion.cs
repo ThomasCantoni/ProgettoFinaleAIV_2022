@@ -24,11 +24,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public float FOV 
     { get
         {
-            return Camera.fieldOfView;
+            return ThirdPersonCamera.m_Lens.FieldOfView;
         }
         set
         {
-            Camera.fieldOfView = value;
+            ThirdPersonCamera.m_Lens.FieldOfView= value;
+            AimCamera.m_Lens.FieldOfView = value;
+
 
         }
     }
@@ -88,7 +90,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     private void Awake()
     {
         controls = new Controls();
-
+        SetPrefs();
     }
     void SetPrefs()
     {
@@ -129,7 +131,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
 
-        AimSensitivity = 5f;
+        
     }
     public void PlayerActivateBT(InputAction.CallbackContext ctxt)
     {

@@ -17,7 +17,7 @@ public static class SaveManager
     {
         PlayerPrefs.SetFloat(AimSensitivity, sens);
         PlayerPrefs.SetFloat(FOV, fov);
-
+        PlayerPrefs.Save();
     }
     public static void SavePlayer(PlayerData toSave)
     {
