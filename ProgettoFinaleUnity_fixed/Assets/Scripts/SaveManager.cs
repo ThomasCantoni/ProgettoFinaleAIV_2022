@@ -11,7 +11,7 @@ public static class SaveManager
     public static string FOV = "FOV";
 
     public static PlayerData LastSave;
-   
+    
     
     public static void SaveOptions(float sens,float fov)
     {
@@ -24,5 +24,18 @@ public static class SaveManager
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = File.Create(Application.persistentDataPath + "/playerData.dat");
         bf.Serialize(fs, toSave);
+        fs.Close();
+    }
+    public static PlayerData LoadPlayer(string path)
+    {
+        if(!File.Exists(path))
+        {
+            return null;
+        }
+        FileStream fs = File.Open(path,FileMode.Open);
+        BinaryFormatter bf = new BinaryFormatter();
+        LastSave = (PlayerData)bf.Deserialize(fs);
+        fs.Close();
+        return LastSave;
     }
 }

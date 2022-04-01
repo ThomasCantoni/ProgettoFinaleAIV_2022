@@ -91,6 +91,22 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         controls = new Controls();
         SetPrefs();
+        LoadData();
+    }
+    void LoadData()
+    {
+        if(SaveManager.LastSave == null)
+        {
+            Debug.LogError("COULD NOT LOAD SAVEFILE");
+            return;
+        }
+        this.PlayerData = SaveManager.LastSave;
+        if(PlayerData.IsNewGame )
+        {
+            return;
+        }
+        this.transform.position = new Vector3(PlayerData.playerPosX, PlayerData.playerPosY,PlayerData.playerPosZ) ;
+        this.GetComponent<EllenHealthScript>().HP_Value = PlayerData.PlayerHp;
     }
     void SetPrefs()
     {

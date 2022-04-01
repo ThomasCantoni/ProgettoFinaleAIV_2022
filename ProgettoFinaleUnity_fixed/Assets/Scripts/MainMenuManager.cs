@@ -9,10 +9,14 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartNewGame()
     {
+        SaveManager.LastSave = new PlayerData();
         SceneManager.LoadScene(1, LoadSceneMode.Single);
+
     }
     public void LoadGame()
     {
+        SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat");
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
 
     }
     public void EnableOptions()
