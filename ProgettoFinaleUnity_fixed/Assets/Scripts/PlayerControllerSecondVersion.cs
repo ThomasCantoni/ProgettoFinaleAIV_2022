@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
-   
-  
+
+    public PlayerData PlayerData;
     public bool isGamePaused = false;
     public float PlayerSpeed 
     {
@@ -21,6 +21,19 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         
     }
     int AnimatorVelocityHash = 0,AnimatorSpeedHash=0;
+    public float FOV 
+    { get
+        {
+            return ThirdPersonCamera.m_Lens.FieldOfView;
+        }
+        set
+        {
+            ThirdPersonCamera.m_Lens.FieldOfView= value;
+            AimCamera.m_Lens.FieldOfView = value;
+
+
+        }
+    }
     public float AimSensitivity
     {
         get
@@ -77,8 +90,29 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     private void Awake()
     {
         controls = new Controls();
+        SetPrefs();
+        LoadData();
     }
-
+    void LoadData()
+    {
+        if(SaveManager.LastSave == null)
+        {
+            Debug.LogError("COULD NOT LOAD SAVEFILE");
+            return;
+        }
+        this.PlayerData = SaveManager.LastSave;
+        if(PlayerData.IsNewGame )
+        {
+            return;
+        }
+        this.transform.position = new Vector3(PlayerData.playerPosX, PlayerData.playerPosY,PlayerData.playerPosZ) ;
+        this.GetComponent<EllenHealthScript>().HP_Value = PlayerData.PlayerHp;
+    }
+    void SetPrefs()
+    {
+        AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
+        FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
+    }
     void OnEnable()
     {
             
@@ -113,7 +147,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
 
-        AimSensitivity = 5f;
+        
     }
     public void PlayerActivateBT(InputAction.CallbackContext ctxt)
     {
