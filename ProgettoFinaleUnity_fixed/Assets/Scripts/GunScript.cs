@@ -18,5 +18,6 @@ public class GunScript : MonoBehaviour
         Ps.Play();
         GameObject impactGO = Instantiate(BulletImpact, impactPos, Quaternion.LookRotation(dir));
         Destroy(impactGO, 2f);
+        
     }
 }

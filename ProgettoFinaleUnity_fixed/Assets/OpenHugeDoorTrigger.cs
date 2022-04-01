@@ -5,7 +5,6 @@ using UnityEngine;
 public class OpenHugeDoorTrigger : MonoBehaviour
 {
     public Animator Anim;
-    //public MeshCollider mesh;
 
     private void OnTriggerStay(Collider collision)
     {

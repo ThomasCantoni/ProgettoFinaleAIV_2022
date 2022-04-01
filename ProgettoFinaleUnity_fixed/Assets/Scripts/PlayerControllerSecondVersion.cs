@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
-   
-  
     public bool isGamePaused = false;
     public float PlayerSpeed 
     {
@@ -41,17 +39,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
         
     }
-
-
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
     public Camera Camera;
     public CharacterController characterController;
     public Animator Anim;
     public GameObject Player;
-   // public Transform modelToMove;
     public Transform CameraReference;
     private float aimSensitivity = 1f;
-    //public float Speed = 2.5f;
     public float jumpHeight = 5f;
     public Canvas PauseCanvas;
     public LayerMask SphereCastLayers;
@@ -64,16 +58,11 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     bool isGrounded;
     bool jumpPressed = false;
     public bool isAiming = false;
-   
     float gravityValue = -9.81f;
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
     Vector2 accum = Vector2.zero;
     
-
-
-
-
     private void Awake()
     {
         controls = new Controls();
@@ -81,16 +70,11 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
     void OnEnable()
     {
-            
             Anim.SetLayerWeight(1, 1);
             characterController = Player.GetComponent<CharacterController>();
             AnimatorVelocityHash = Animator.StringToHash("Velocity");
             AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
-            //AnimatorVelocityHash = Animator.StringToHash("MoveX");
-            //AnimatorVelocityHash = Animator.StringToHash("MoveZ");
 
-
-            //setting up the events for the input
             controls.Player.Enable();
             controls.Player.RotateCamera.performed += OnCameraRotate;
             controls.Player.Zoom.performed += OnZoom;
@@ -102,23 +86,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             controls.Player.Sprint.canceled += ShiftReleased;
             controls.Player.Jump.started += SpacePressed;
             controls.Player.Jump.canceled += SpaceReleased;
-            //controls.Player.Gun.performed += GunPressed;
-            //controls.Player.GunAway.performed += GunAwayPressed;
-            //controls.Player.GunAway.canceled += GunAwayReleased;
-            //controls.Player.Shot.performed += ShotPressed;
-           // controls.Player.Shot.canceled += ShotReleased;
             controls.Player.Pause.performed+= PauseGame;
             controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
-        controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;;
+            controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;;
 
-
-
-        AimSensitivity = 5f;
+            AimSensitivity = 5f;
     }
-    public void PlayerActivateBT(InputAction.CallbackContext ctxt)
-    {
-
-    }
+    
     void PauseGame(InputAction.CallbackContext ctxt)
     {
         
@@ -148,7 +122,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         ThirdPersonCamera.Priority = 0;
         AimCamera.Priority = 30;
         Anim.applyRootMotion = false;
-        
     }
     void OnZoomCancel(InputAction.CallbackContext context)
     {
@@ -158,63 +131,34 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
         isAiming = false;
         Anim.SetBool("IsAiming", false);
-
         ThirdPersonCamera.Priority = 30;
         AimCamera.Priority = 0;
-        
-       
         Anim.applyRootMotion = true;
-        
     }
     void OnCameraRotate(InputAction.CallbackContext context)
     {
         if (TimeManager.IsGamePaused)
             return;
         Vector2 lookValue = context.ReadValue<Vector2>();
-        
-       // lookValue.y = Mathf.Clamp(lookValue.y, -70f,70f);
         cameraRotationVec2FromMouse.x -= lookValue.y * AimSensitivity * Time.deltaTime;
         cameraRotationVec2FromMouse.y += lookValue.x * AimSensitivity * Time.deltaTime;
         cameraRotationVec2FromMouse.x = Mathf.Clamp(cameraRotationVec2FromMouse.x, -50f,80f) ;
         CameraReference.transform.rotation = Quaternion.Euler(cameraRotationVec2FromMouse.x, cameraRotationVec2FromMouse.y, 0);
-
-        //optimized quaternion fetching so i store it in memory only when i rotate the camera instead of every frame (moved here from update)
         Vector3 camForward = CameraReference.forward;
-        //fetching the quaternion of the now rotated camera, to rotate the movement vector
         cameraQuatForMovement = Quaternion.LookRotation(
             new Vector3(camForward.x, 0, camForward.z),
             Vector3.up);
-
     }
     
     public void OnMovement(Vector2 dir)
     {
-        //the direction i am going towards
         direction = dir;
-       
-        #region Useless but preserve
-
-
-        //Vector3 camForward = CameraReference.forward;
-        ////fetching the quaternion of the now rotated camera, to rotate the movement vector
-        //Quaternion q = Quaternion.LookRotation(
-        //    new Vector3(camForward.x, 0, camForward.z),
-        //    Vector3.up);
-
-        ////rotating the direction vector according to camera 
-        //Vector3 cooking = q * new Vector3(dir.x, 0, dir.y);
-
-        //// applying rot to vector
-        //MovementVector = cooking;
-        #endregion
     }
     public void OnMovementCanceled(InputAction.CallbackContext context)
     {
         MovementVector = Vector3.zero;
         direction = Vector2.zero;
-        
     }
-    // Update is called once per frame
     void Update()
     {
         if (TimeManager.IsGamePaused)
@@ -222,67 +166,36 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
             return;
         }
-        //if (jumpPressed && isGrounded)
-        //{ // i am grounded and i want to jump
-        //    JumpRayCastCd = 1f;
-        //    jumpPressed = false;
-        //    playerVel.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        //    Anim.SetBool("Jump", true);
-        //    Anim.applyRootMotion = false;
-        //    jumpCooldown = 0.3f;
-
-        //}
-
-        //playerVel.y += gravityValue * Time.unscaledDeltaTime * Time.timeScale * 1.5f;
-        //characterController.Move(playerVel * PlayerSpeed);
-
-
         MoveRelativeToCameraRotation();
         isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
     }
-    bool test = false;
-    //void FixedUpdate()
-    //{
-           
-    //    if (TimeManager.IsGamePaused)
-    //    {
-    //        return;
-
-    //    }
-        
-    //   // ApplyGravity();
-    //}
     void GravityAndJumpUpdate()
     {
-        //groundedPlayer = characterController.isGrounded;
         if (isGrounded)
         {
             playerVel = Vector3.zero;
             jumpCooldown -= Time.deltaTime;
             jumpCooldown = Mathf.Clamp(jumpCooldown, 0f, 1f);
-            //Anim.SetBool("isGrounded", true);
             if(!isAiming)
             Anim.applyRootMotion = true;
         }
         else
-        { //i am jumping
+        { 
             playerVel.x = MovementVector.x*2.5f;
             playerVel.z = MovementVector.z*2.5f;
         }
 
         if (jumpPressed && isGrounded)
-        { // i am grounded and i want to jump
+        { 
             JumpRayCastCd = 0.2f;
             jumpPressed = false;
             playerVel.y += Mathf.Sqrt(jumpHeight  * gravityValue * -1f);
             Anim.SetBool("Jump", true);
             Anim.applyRootMotion = false;
             jumpCooldown = 0.3f;
-
         }
-
         playerVel.y += GravityScaled;
         characterController.Move(playerVel * PlayerSpeed);
     }
@@ -298,27 +211,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             Ray groundedTest = new Ray(this.transform.position+Vector3.up * 0.3f, Vector3.up * -0.5f);
             return Physics.SphereCast(groundedTest, 0.3f, 0.5f, SphereCastLayers);
         }
-        
-
     }
     public void ManageBulletTimePlayerSide(InputAction.CallbackContext ctx)
     {
-        
         Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
-        
-        
     }
     void MoveRelativeToCameraRotation()
     {
-        //rotating the direction vector according to camera 
         Vector3 fromAbsoluteToRelative = cameraQuatForMovement * new Vector3(direction.x, 0, direction.y);
-
-        // applying rot to vector, it is now relative to camera
         MovementVector = fromAbsoluteToRelative;
-
         float magnitude = MovementVector.magnitude;
           Anim.SetFloat(AnimatorVelocityHash, magnitude);
-
         Quaternion contextualQuaternion;
         if (magnitude > 0.05f )
         {
@@ -326,16 +229,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation,contextualQuaternion,0.1f);
         }
         if (isAiming)
-        //if the player is aiming
         {
-            //root motion is now disabled
             characterController.Move(MovementVector*PlayerSpeed);
             transform.rotation = cameraQuatForMovement;
             if(magnitude > 0.05f)
             {
                 accum.y = Mathf.Lerp(accum.y, direction.y, 0.3f);
                 accum.x = Mathf.Lerp(accum.x, direction.x, 0.3f);
-
             }
             else
             {
@@ -345,8 +245,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             Anim.SetFloat("MoveZ", accum.y);
             Anim.SetFloat("MoveX", accum.x);
         }
-
-
     }
     
     void ShiftPressed(InputAction.CallbackContext context)
@@ -358,8 +256,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         Anim.SetBool("Shift", false);
     }
-    
-    
     void SpacePressed(InputAction.CallbackContext context)
     {
         if(jumpCooldown <=0)
@@ -370,5 +266,4 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         jumpPressed = false;
         GetComponent<Animator>().SetBool("Jump", false);
     }
-   
 }
