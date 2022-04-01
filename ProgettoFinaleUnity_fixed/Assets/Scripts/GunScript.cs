@@ -9,7 +9,7 @@ public class GunScript : MonoBehaviour
     public ParticleSystem Ps;
     public GameObject BulletImpact;
     public Transform gunMuzzle;
-    // Start is called before the first frame update
+   
     
     public void ReceiveShotImpactPos(Vector3 impactPos,Vector3 dir)
     {
