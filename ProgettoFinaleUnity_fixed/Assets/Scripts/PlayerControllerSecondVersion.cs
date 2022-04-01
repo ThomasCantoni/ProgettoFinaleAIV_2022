@@ -407,7 +407,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     
     void SpacePressed(InputAction.CallbackContext context)
     {
-        if(jumpCooldown <=0)
+        if(jumpCooldown <=0 && isGrounded)
         jumpPressed = true;
     }
     void SpaceReleased(InputAction.CallbackContext context)
