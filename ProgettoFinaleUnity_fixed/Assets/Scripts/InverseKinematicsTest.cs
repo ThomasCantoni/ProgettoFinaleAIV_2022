@@ -43,8 +43,8 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void SetIKWeights(InputAction.CallbackContext ctx)
     {
-        Debug.Log("ZOOM CONSTRAINT ON");
-        if (TimeManager.IsGamePaused)
+
+        if (TimeManager.IsGamePaused || !GunEquipped)
         {
             return;
         }
@@ -55,7 +55,7 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void CancelIKWeights(InputAction.CallbackContext ctx)
     {
-        Debug.Log("ZOOM CONSTRAINT OFF");
+        
 
         if (TimeManager.IsGamePaused)
         {
@@ -102,7 +102,7 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void EquipGun(InputAction.CallbackContext ctx)
     {
-        if (TimeManager.IsGamePaused)
+        if (TimeManager.IsGamePaused || PCSV.isAiming)
         {
             return;
         }
@@ -119,7 +119,7 @@ public class InverseKinematicsTest : MonoBehaviour
 
             Gun.SetActive(false);
             Shooting = false;
-
+            shootCooldown = 0;
 
            
         }
@@ -194,7 +194,7 @@ public class InverseKinematicsTest : MonoBehaviour
         {
             ShootingAvailableAngle = true;
 
-            LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0.75f, 0.1f);
+            LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0.65f, 0.1f);
 
         }
     }

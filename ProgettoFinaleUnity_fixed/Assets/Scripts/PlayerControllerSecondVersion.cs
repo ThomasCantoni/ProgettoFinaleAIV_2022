@@ -10,6 +10,14 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 {
 
     public PlayerData PlayerData;
+    public bool GunEquipped
+    {
+        get
+        {
+            return this.GetComponent<InverseKinematicsTest>().GunEquipped;
+        }
+
+    }
     public bool isGamePaused = false;
     public float PlayerSpeed 
     {
@@ -169,7 +177,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void OnZoom(InputAction.CallbackContext context)
     {
-        if(TimeManager.IsGamePaused)
+        if(TimeManager.IsGamePaused || !GunEquipped)
         {
             return;
         }
@@ -385,7 +393,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     
     void SpacePressed(InputAction.CallbackContext context)
     {
-        if(jumpCooldown <=0)
+        if(jumpCooldown <=0 && isGrounded)
         jumpPressed = true;
     }
     void SpaceReleased(InputAction.CallbackContext context)
