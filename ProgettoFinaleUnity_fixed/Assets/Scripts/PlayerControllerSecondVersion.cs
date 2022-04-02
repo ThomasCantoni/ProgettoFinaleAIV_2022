@@ -55,7 +55,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         
     }
 
-
+    public EllenActionPoints EllenAp;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
     public Camera Camera;
     public CharacterController characterController;
@@ -90,6 +90,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     private void Awake()
     {
         controls = new Controls();
+        EllenAp = GetComponent<EllenActionPoints>();
         SetPrefs();
         LoadData();
     }
@@ -129,21 +130,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             controls.Player.RotateCamera.performed += OnCameraRotate;
             controls.Player.Zoom.performed += OnZoom;
             controls.Player.Zoom.canceled += OnZoomCancel;
-            
             controls.Player.Movement.performed += cntxt => OnMovement(cntxt.ReadValue<Vector2>());
             controls.Player.Movement.canceled += OnMovementCanceled;
             controls.Player.Sprint.performed += ShiftPressed;
             controls.Player.Sprint.canceled += ShiftReleased;
             controls.Player.Jump.started += SpacePressed;
             controls.Player.Jump.canceled += SpaceReleased;
-            //controls.Player.Gun.performed += GunPressed;
-            //controls.Player.GunAway.performed += GunAwayPressed;
-            //controls.Player.GunAway.canceled += GunAwayReleased;
-            //controls.Player.Shot.performed += ShotPressed;
-           // controls.Player.Shot.canceled += ShotReleased;
             controls.Player.Pause.performed+= PauseGame;
-            controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
-        controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;;
+            //controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
+            controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;
+            
 
 
 
@@ -253,41 +249,20 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         if (TimeManager.IsGamePaused)
         {
-
             return;
         }
-        //if (jumpPressed && isGrounded)
-        //{ // i am grounded and i want to jump
-        //    JumpRayCastCd = 1f;
-        //    jumpPressed = false;
-        //    playerVel.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        //    Anim.SetBool("Jump", true);
-        //    Anim.applyRootMotion = false;
-        //    jumpCooldown = 0.3f;
-
-        //}
-
-        //playerVel.y += gravityValue * Time.unscaledDeltaTime * Time.timeScale * 1.5f;
-        //characterController.Move(playerVel * PlayerSpeed);
-
+        if (EllenAp.AP_Value <= 0f && EllenAp.isActive)
+        {
+            TimeManager.DisableBulletTime();
+            EllenAp.Disable();
+            Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
+        }
 
         MoveRelativeToCameraRotation();
         isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
     }
-    bool test = false;
-    //void FixedUpdate()
-    //{
-           
-    //    if (TimeManager.IsGamePaused)
-    //    {
-    //        return;
-
-    //    }
-        
-    //   // ApplyGravity();
-    //}
     void GravityAndJumpUpdate()
     {
         //groundedPlayer = characterController.isGrounded;
@@ -340,10 +315,21 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     public void ManageBulletTimePlayerSide(InputAction.CallbackContext ctx)
     {
-        
+        if (EllenAp.Cooldown > 0f)
+        {
+            return;
+        }
+        TimeManager.EnableBulletTime();
+        if (TimeManager.IsBulletTimeActive)
+        {
+            EllenAp.Activate();
+
+        }
+        else
+        {
+            EllenAp.Disable();
+        }
         Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
-        
-        
     }
     void MoveRelativeToCameraRotation()
     {
