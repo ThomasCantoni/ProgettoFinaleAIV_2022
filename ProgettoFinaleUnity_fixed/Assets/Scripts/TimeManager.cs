@@ -18,7 +18,7 @@ public static class TimeManager
     //enemy script will subscribe to this delegate with a 
     public static Notifier EnemyNotifier;
     
-    public static void EnableBulletTime(InputAction.CallbackContext ctx)
+    public static void EnableBulletTime()
     {
         Debug.Log("BT ACTIVE");
         if(IsBulletTimeActive)
