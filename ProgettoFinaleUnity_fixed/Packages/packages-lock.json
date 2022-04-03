@@ -1,21 +1,23 @@
 {
   "dependencies": {
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.animation.rigging": {
-
       "version": "1.2.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.burst": "1.4.1",
         "com.unity.test-framework": "1.1.24"
-
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-
       "version": "1.4.1",
-
       "depth": 1,
       "source": "registry",
       "dependencies": {
