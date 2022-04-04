@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class ExitGameUI : MonoBehaviour
 {
    public void CloseGame()
@@ -11,6 +13,7 @@ public class ExitGameUI : MonoBehaviour
     }
     public void BackToMenu()
     {
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        TimeManager.DisablePause();
+        SceneManager.LoadScene("Scenes/MainMenuWIP", LoadSceneMode.Single);
     }
 }

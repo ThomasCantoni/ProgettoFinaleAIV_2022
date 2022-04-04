@@ -94,10 +94,15 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
 
-
-    private void Awake()
+    private void GetStuff()
     {
+       
+    }
+    private void OnEnable()
+    {
+        
         controls = new Controls();
+        Anim = GetComponent<Animator>();
         EllenAp = GetComponent<EllenActionPoints>();
         SetPrefs();
         LoadData();
@@ -122,10 +127,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
     }
-    void OnEnable()
+    void Start()
     {
-            
-            Anim.SetLayerWeight(1, 1);
+        
+           Anim.SetLayerWeight(1, 1);
             characterController = Player.GetComponent<CharacterController>();
             AnimatorVelocityHash = Animator.StringToHash("Velocity");
             AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
@@ -159,10 +164,15 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void PauseGame(InputAction.CallbackContext ctxt)
     {
+            if(Anim == null)
+            {
+                Anim = GetComponent<Animator>();
+            }
         
         if(TimeManager.IsGamePaused == false)
         {
             TimeManager.EnablePause();
+            Debug.Log(Anim);
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
 
             PauseCanvas.gameObject.SetActive(true);
@@ -170,10 +180,12 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         else
         {
             TimeManager.DisablePause();
+            Debug.Log(Anim);
             Anim.SetFloat(AnimatorSpeedHash,TimeManager.PlayerCurrentSpeed);
 
             PauseCanvas.gameObject.SetActive(false);
         }
+
     }
     void OnZoom(InputAction.CallbackContext context)
     {
@@ -401,5 +413,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         jumpPressed = false;
         GetComponent<Animator>().SetBool("Jump", false);
     }
-   
+
+    
 }
