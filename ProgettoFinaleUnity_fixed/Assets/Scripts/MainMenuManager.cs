@@ -5,18 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public GameObject MainCanvas, OptionsCanvas;
+    public GameObject MainCanvas, OptionsCanvas,LoadingImage;
 
     public void StartNewGame()
     {
         SaveManager.LastSave = new PlayerData();
-        SceneManager.LoadScene("Scenes/Vertical Slice", LoadSceneMode.Single);
+        LevelManager.Instance.LoadScene("Scenes/Vertical Slice");
+        MainCanvas.SetActive(false);
+        OptionsCanvas.SetActive(false);
+        LoadingImage.SetActive(true);
+       
+       
+
+        //SceneManager.LoadScene("Scenes/Vertical Slice", LoadSceneMode.Single);
+        
 
     }
     public void LoadGame()
     {
         SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat");
-        SceneManager.LoadScene("Scenes/Vertical Slice", LoadSceneMode.Single);
+        LevelManager.Instance.LoadScene("Scenes/Vertical Slice");
+        MainCanvas.SetActive(false);
+        OptionsCanvas.SetActive(false);
+        LoadingImage.SetActive(true);
+       
+
 
     }
     public void EnableOptions()

@@ -185,7 +185,7 @@ public class InverseKinematicsTest : MonoBehaviour
         angleRadians *= 180f / 3.14f;
         //angleRadians = Mathf.Abs(angleRadians);
         
-        if (angleRadians >110f)
+        if (angleRadians >105f)
         {
             ShootingAvailableAngle = false;
             LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0f, 0.1f);
@@ -194,7 +194,7 @@ public class InverseKinematicsTest : MonoBehaviour
         {
             ShootingAvailableAngle = true;
 
-            LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0.65f, 0.1f);
+            LookAtConstraintRIG.weight = Mathf.Lerp(LookAtConstraintRIG.weight, 0.9f, 0.1f);
 
         }
     }
