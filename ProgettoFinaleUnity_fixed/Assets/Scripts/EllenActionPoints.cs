@@ -37,11 +37,11 @@ public class EllenActionPoints : MonoBehaviour
         {
             if (Cooldown <= 0)
             {
-                AP_Value += Ap_Increment * Time.unscaledDeltaTime;
+                AP_Value += Ap_Increment * Time.deltaTime;
             }
             else
             {
-                Cooldown -= Time.unscaledDeltaTime;
+                Cooldown -= Time.deltaTime;
                 Cooldown = Mathf.Clamp(Cooldown, 0f, CooldownReset);
                 IconFill.fillAmount = (CooldownReset - Cooldown) / CooldownReset;
             }

@@ -121,6 +121,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
         this.transform.position = new Vector3(PlayerData.playerPosX, PlayerData.playerPosY,PlayerData.playerPosZ) ;
         this.GetComponent<EllenHealthScript>().HP_Value = PlayerData.PlayerHp;
+        EllenAp.AP_Value = PlayerData.PlayerAp;
     }
     void SetPrefs()
     {
