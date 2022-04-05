@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class Enemy_Attack : BaseState
 {
     NavMeshAgent agent;
-    private float timer = 0.75f;
+    private float timer = 0.1f;
     private bool hasAttacked = false;
     private float speed = 2f;
     private float acceleration = 2f;
@@ -22,8 +22,7 @@ public class Enemy_Attack : BaseState
     {
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         hasAttacked = false;
-        //agent.destination = sm.ObjToChase.position;
-        //sm.anim.SetTrigger("Attack");
+        agent.destination = sm.ObjToChase.position;
         sm.AttackCollider.enabled = true;
         sm.DetectCollider.enabled = false;
 
@@ -47,7 +46,7 @@ public class Enemy_Attack : BaseState
     protected virtual void Attack()
     {
         Debug.Log("ATTACK");
-        //sm.anim.SetTrigger("Attack");
+        sm.anim.SetTrigger("Attack");
     }
 
     protected virtual void OnAttackSuccess(GameObject sender, Collider collider, string message, bool fromEvent)
@@ -60,7 +59,6 @@ public class Enemy_Attack : BaseState
     {
         sm.anim.SetBool("Run", false);
         agent.speed = speed;
-
         sm.OnShpereTriggerEnter -= OnAttackSuccess;
     }
 }

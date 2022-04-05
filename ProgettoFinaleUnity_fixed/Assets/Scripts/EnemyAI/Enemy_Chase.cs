@@ -33,11 +33,14 @@ public class Enemy_Chase : BaseState
         {
             sm.ChangeState(sm.attackState);
         }
+
     }
 
     public override void OnExit()
     {
         //METTERE IDLE
+        //sm.anim.SetBool("Idle", true);
+
         sm.anim.SetBool("Run", false);
         agent.speed = speed;
     }
