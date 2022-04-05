@@ -7,8 +7,8 @@ public class EllenActionPoints : MonoBehaviour
 {
     public Image Ap_Image;
     public Image IconFill;
-    private float Ap_Value = 100f;
-    private float maxAp = 7f;
+    private float Ap_Value = 7f;
+    public float MaxAp = 7f;
     private float Ap_Decrement = 1f;
     private float Ap_Increment = 0.5f;
     public bool isActive = false;
@@ -23,10 +23,11 @@ public class EllenActionPoints : MonoBehaviour
         }
         set
         {
-            Ap_Value = Mathf.Clamp(value, 0, maxAp) ;
+            Ap_Value = Mathf.Clamp(value, 0, MaxAp) ;
             Ap_Image.GetComponent<Slider>().value = Ap_Value;
         }
     }
+    
     private void Update()
     {
         if (isActive)

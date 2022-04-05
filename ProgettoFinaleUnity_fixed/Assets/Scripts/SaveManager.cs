@@ -24,6 +24,8 @@ public static class SaveManager
         BinaryFormatter bf = new BinaryFormatter();
         FileStream fs = File.Create(Application.persistentDataPath + "/playerData.dat");
         bf.Serialize(fs, toSave);
+        LastSave = toSave;
+       
         fs.Close();
     }
     public static PlayerData LoadPlayer(string path)
