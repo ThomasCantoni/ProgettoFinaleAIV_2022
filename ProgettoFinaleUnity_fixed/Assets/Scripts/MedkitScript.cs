@@ -30,6 +30,10 @@ public class MedkitScript : MonoBehaviour
                 HPOT.HealPerSecond = DataToApply.HealPerSecond;
                 HPOT.SecondsActive = DataToApply.SecondsActive;
             }
+            if(clipToPlay == null)
+            {
+                Destroy(this.gameObject);
+            }
             for(int i=0;i<transform.childCount;i++)
             {
                 transform.GetChild(i).gameObject.SetActive(false);
