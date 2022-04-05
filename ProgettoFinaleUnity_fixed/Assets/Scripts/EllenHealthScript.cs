@@ -31,6 +31,7 @@ public class EllenHealthScript : MonoBehaviour
             return;
         }
         HP_Value -= amount;
+
         if (hp_Value <= 0)
         {
             
@@ -44,6 +45,7 @@ public class EllenHealthScript : MonoBehaviour
             this.GetComponent<RigBuilder>().enabled = false;
             
         }
+
     }
     public void HealPlayer(float amount)
     {
