@@ -9,7 +9,7 @@ public class EllenHealthScript : MonoBehaviour
 {
     public Image HP_Image;
     public Animator anim;
-    private float hp_Value = 1f;
+    private float hp_Value = 100f;
     private float maxHp = 100f;
     public float HP_Value 
     { 
