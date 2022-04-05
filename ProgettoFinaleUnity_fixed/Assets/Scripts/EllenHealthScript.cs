@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Animations.Rigging;
+using Cinemachine;
 
 public class EllenHealthScript : MonoBehaviour
 {
     public Image HP_Image;
-    private float hp_Value = 100f;
+    public Animator anim;
+    private float hp_Value = 1f;
     private float maxHp = 100f;
     public float HP_Value 
     { 
@@ -23,7 +26,24 @@ public class EllenHealthScript : MonoBehaviour
 
     public void DamagePlayer(float amount)
     {
+        if (hp_Value <= 0)
+        {
+            return;
+        }
         HP_Value -= amount;
+        if (hp_Value <= 0)
+        {
+            
+            anim.SetBool("isDeath", true);
+            anim.SetTrigger("EllenDeath");
+            PlayerControllerSecondVersion PCSV = GetComponent<PlayerControllerSecondVersion>();
+            PCSV.controls.asset.Disable();
+            this.gameObject.AddComponent<CameraOut>();
+            this.gameObject.GetComponent<CameraOut>().cam = PCSV.ThirdPersonCamera;
+            this.GetComponent<InverseKinematicsTest>().enabled = false;
+            this.GetComponent<RigBuilder>().enabled = false;
+            
+        }
     }
     public void HealPlayer(float amount)
     {
