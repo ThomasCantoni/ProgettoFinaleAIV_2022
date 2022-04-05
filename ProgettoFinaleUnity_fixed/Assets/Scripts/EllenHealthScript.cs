@@ -24,6 +24,7 @@ public class EllenHealthScript : MonoBehaviour
     public void DamagePlayer(float amount)
     {
         HP_Value -= amount;
+        
     }
     public void HealPlayer(float amount)
     {

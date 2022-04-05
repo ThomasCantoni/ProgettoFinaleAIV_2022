@@ -110,6 +110,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void LoadData()
     {
+       
         if(SaveManager.LastSave == null)
         {
             Debug.LogError("COULD NOT LOAD SAVEFILE");
