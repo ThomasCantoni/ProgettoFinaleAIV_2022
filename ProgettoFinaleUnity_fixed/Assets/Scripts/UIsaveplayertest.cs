@@ -10,6 +10,7 @@ public class UIsaveplayertest : MonoBehaviour
     {
 
        toSave = new PlayerData(PCSV);
-        SaveManager.SavePlayer(toSave);
+       SaveManager.SavePlayer(toSave);
+        PCSV.PlayerData = toSave;
     }
 }

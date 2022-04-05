@@ -100,12 +100,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     private void OnEnable()
     {
-        
         controls = new Controls();
         Anim = GetComponent<Animator>();
         EllenAp = GetComponent<EllenActionPoints>();
         SetPrefs();
+        characterController.enabled = false;
         LoadData();
+        characterController.enabled = true;
     }
     void LoadData()
     {
