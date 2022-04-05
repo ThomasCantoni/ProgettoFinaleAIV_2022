@@ -15,6 +15,10 @@ public class EllenActionPoints : MonoBehaviour
     public float Cooldown = 0;
     private float CooldownReset = 3f;
 
+    private void Start()
+    {
+        Cooldown = 0f;
+    }
     public float AP_Value 
     { 
         get
@@ -56,6 +60,5 @@ public class EllenActionPoints : MonoBehaviour
     {
         Cooldown = CooldownReset;
         isActive = false;
-
     }
 }
