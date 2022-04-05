@@ -8,6 +8,7 @@ public class Enemy_Chase : BaseState
 {
     NavMeshAgent agent;
     private float speed = 2f;
+    private float timer = 0f;
     private float acceleration = 2f;
     
     ChomperSM sm;
@@ -18,18 +19,21 @@ public class Enemy_Chase : BaseState
 
     public override void OnEnter()
     {
+        timer = 0f;
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         agent.destination = sm.ObjToChase.position;
         sm.anim.SetBool("Run", true);
-        //sm.anim.SetTrigger("Attack");
         agent.speed = speed * acceleration;
         sm.gameObject.GetComponentInChildren<MeshRenderer>().material = sm.Debug_Materials[1];
     }
 
     public override void UpdateLogic()
     {
+        
+
         agent.destination = sm.ObjToChase.position;
-        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance)
+        timer += Time.deltaTime;
+        if (timer >= sm.AttackCooldown && Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance)
         {
             sm.ChangeState(sm.attackState);
         }
@@ -39,9 +43,9 @@ public class Enemy_Chase : BaseState
     public override void OnExit()
     {
         //METTERE IDLE
-        //sm.anim.SetBool("Idle", true);
-
+        sm.anim.SetBool("Idle", true);
         sm.anim.SetBool("Run", false);
-        agent.speed = speed;
+        agent.destination = agent.transform.position;
+        agent.speed = 0f;
     }
 }

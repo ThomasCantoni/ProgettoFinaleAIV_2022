@@ -7,10 +7,16 @@ using UnityEngine.AI;
 public class Enemy_Attack : BaseState
 {
     NavMeshAgent agent;
-    private float timer = 0.1f;
+
+    private float timer = 0f;
     private bool hasAttacked = false;
     private float speed = 2f;
     private float acceleration = 2f;
+    private AnimatorStateInfo infoAnim;
+    private AnimatorTransitionInfo infoTrans;
+    private int animAttacckStateHash = Animator.StringToHash("Chomper_Attack");
+    private int animEndTransitionStateHash = Animator.StringToHash("Chomper_Attack -> Cooldown");
+    private int animStartTransStateHash = Animator.StringToHash("Cooldown -> Chomper_Attack");
     
     ChomperSM sm;
     public Enemy_Attack(ChomperSM stateMachine) : base("Enemy_Patrol", stateMachine)
@@ -20,45 +26,68 @@ public class Enemy_Attack : BaseState
 
     public override void OnEnter()
     {
+        timer = 0f;
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         hasAttacked = false;
-        agent.destination = sm.ObjToChase.position;
-        sm.AttackCollider.enabled = true;
         sm.DetectCollider.enabled = false;
-
-        sm.OnShpereTriggerEnter += OnAttackSuccess;
+        sm.animAct += SetAttackCollider;
     }
 
     public override void UpdateLogic()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0 && !hasAttacked)
+        
+        infoTrans = sm.anim.GetAnimatorTransitionInfo(0);
+        infoAnim = sm.anim.GetCurrentAnimatorStateInfo(0);
+        if (infoAnim.shortNameHash == animAttacckStateHash || infoTrans.nameHash == animStartTransStateHash)
+        {
+            if (infoTrans.nameHash == animEndTransitionStateHash)
+            {
+                agent.transform.position = sm.anim.transform.position;
+                sm.anim.transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                sm.anim.applyRootMotion = true;
+            }
+        }
+        else
+        {
+            sm.anim.applyRootMotion = false;
+            if (hasAttacked)
+            {
+                sm.ChangeState(sm.chaseState);
+            }
+        }
+        
+        timer += Time.deltaTime;
+        if (timer >= sm.PreAttackCooldown && !hasAttacked)
         {
             hasAttacked = true;
             Attack();
         }
-        else
+        else if (timer < sm.PreAttackCooldown && !hasAttacked)
         {
-            sm.transform.LookAt(sm.ObjToChase, Vector3.up);
+            Vector3 dest = (sm.ObjToChase.position - sm.transform.position).normalized;
+            sm.transform.forward = new Vector3(dest.x, 0, dest.z);
         }
     }
-
     protected virtual void Attack()
     {
-        Debug.Log("ATTACK");
+        sm.anim.SetBool("Idle", false); 
         sm.anim.SetTrigger("Attack");
     }
 
-    protected virtual void OnAttackSuccess(GameObject sender, Collider collider, string message, bool fromEvent)
+    protected virtual void SetAttackCollider(bool Active)
     {
-        //HANDLE PLAYER DAMAGE
-        Debug.Log("PLAYER HITTED");
+        sm.AttackCollider.enabled = Active;
+
+        sm.BodyCollider.enabled = !Active;
     }
 
     public override void OnExit()
     {
         sm.anim.SetBool("Run", false);
         agent.speed = speed;
-        sm.OnShpereTriggerEnter -= OnAttackSuccess;
+        sm.animAct -= SetAttackCollider;
     }
 }

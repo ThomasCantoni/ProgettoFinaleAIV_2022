@@ -11,9 +11,11 @@ public class Chomper : MonoBehaviour, IHittable
 {
     public int Health;
     public UnityEvent<Collider> OnHitEvent;
+    public UnityEvent<float> OnAttackHitted;
     public Animator anim;
     public NavMeshAgent agent;
     public Slider HP_Slider;
+    public UnityEvent<bool> HandleAnim;
 
     float timer = 1.35f;
     public virtual void OnHit(Collider sender)
@@ -29,6 +31,20 @@ public class Chomper : MonoBehaviour, IHittable
             StartCoroutine(animDie(timer));
             HP_Slider.transform.parent.gameObject.SetActive( false);
         }
+    }
+    public virtual void OnAttackStart()
+    {
+        HandleAnim?.Invoke(true);
+    }
+
+    public virtual void OnAttackEnd()
+    {
+        HandleAnim?.Invoke(false);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("success attacck");
+        OnAttackHitted?.Invoke(20f);
     }
     public IEnumerator animDie(float timer)
     {
