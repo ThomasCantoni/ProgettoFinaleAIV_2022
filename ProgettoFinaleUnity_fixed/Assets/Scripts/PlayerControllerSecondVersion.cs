@@ -90,17 +90,19 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
     Vector2 accum = Vector2.zero;
-    
 
 
 
+    private void Awake()
+    {
+        controls = new Controls();
+    }
     private void GetStuff()
     {
        
     }
     private void OnEnable()
     {
-        controls = new Controls();
         Anim = GetComponent<Animator>();
         EllenAp = GetComponent<EllenActionPoints>();
         SetPrefs();
@@ -137,11 +139,12 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             characterController = Player.GetComponent<CharacterController>();
             AnimatorVelocityHash = Animator.StringToHash("Velocity");
             AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
-            //AnimatorVelocityHash = Animator.StringToHash("MoveX");
-            //AnimatorVelocityHash = Animator.StringToHash("MoveZ");
+        //AnimatorVelocityHash = Animator.StringToHash("MoveX");
+        //AnimatorVelocityHash = Animator.StringToHash("MoveZ");
 
+            
 
-            //setting up the events for the input
+        //setting up the events for the input
             controls.Player.Enable();
             controls.Player.RotateCamera.performed += OnCameraRotate;
             controls.Player.Zoom.performed += OnZoom;
@@ -270,6 +273,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print((int)(1.0f / Time.smoothDeltaTime));
         if (TimeManager.IsGamePaused)
         {
             return;
@@ -417,5 +421,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         GetComponent<Animator>().SetBool("Jump", false);
     }
 
-    
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
 }
