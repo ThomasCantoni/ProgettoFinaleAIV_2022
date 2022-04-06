@@ -19,7 +19,6 @@ public abstract class ChomperSM : StateMachine
     [HideInInspector]
     public Transform ObjToChase;
 
-    public Material[] Debug_Materials;
     public Animator anim;
     public float AttackDistance = 3f;
     public float AttackCooldown = 1.5f;

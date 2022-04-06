@@ -24,7 +24,6 @@ public class Enemy_Chase : BaseState
         agent.destination = sm.ObjToChase.position;
         sm.anim.SetBool("Run", true);
         agent.speed = speed * acceleration;
-        sm.gameObject.GetComponentInChildren<MeshRenderer>().material = sm.Debug_Materials[1];
     }
 
     public override void UpdateLogic()

@@ -21,7 +21,6 @@ public abstract class Enemy_Patrol : BaseState
         sm.AttackCollider.enabled = false;
         
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
-        sm.gameObject.GetComponentInChildren<MeshRenderer>().material = sm.Debug_Materials[0];
     }
 
     public override void OnExit()
