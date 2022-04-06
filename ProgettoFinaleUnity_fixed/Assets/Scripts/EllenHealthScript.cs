@@ -5,12 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.Animations.Rigging;
 using Cinemachine;
 
+
 public class EllenHealthScript : MonoBehaviour
 {
     public Image HP_Image;
     public Animator anim;
     private float hp_Value = 100f;
     private float maxHp = 100f;
+    public Canvas canvasDeath;
+    public Canvas UiCanvas;
+
     public float HP_Value 
     { 
         get
@@ -39,6 +43,8 @@ public class EllenHealthScript : MonoBehaviour
             anim.SetTrigger("EllenDeath");
             PlayerControllerSecondVersion PCSV = GetComponent<PlayerControllerSecondVersion>();
             PCSV.controls.asset.Disable();
+            canvasDeath.gameObject.SetActive(true);
+            UiCanvas.gameObject.SetActive(false);
             this.gameObject.AddComponent<CameraOut>();
             this.gameObject.GetComponent<CameraOut>().cam = PCSV.ThirdPersonCamera;
             this.GetComponent<InverseKinematicsTest>().enabled = false;
