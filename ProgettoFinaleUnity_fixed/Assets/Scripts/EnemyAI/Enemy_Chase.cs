@@ -10,6 +10,7 @@ public class Enemy_Chase : BaseState
     private float speed = 2f;
     private float timer = 0f;
     private float acceleration = 2f;
+    private bool firstEnter = true;
     
     ChomperSM sm;
     public Enemy_Chase(ChomperSM stateMachine) : base("Enemy_Patrol", stateMachine)
@@ -19,7 +20,15 @@ public class Enemy_Chase : BaseState
 
     public override void OnEnter()
     {
-        timer = 0f;
+        if (firstEnter)
+        {
+            firstEnter = false;
+            timer = sm.AttackCooldown;
+        }
+        else
+        {
+            timer = 0f;
+        }
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         agent.destination = sm.ObjToChase.position;
         sm.anim.SetBool("Run", true);
@@ -28,15 +37,12 @@ public class Enemy_Chase : BaseState
 
     public override void UpdateLogic()
     {
-        
-
         agent.destination = sm.ObjToChase.position;
         timer += Time.deltaTime;
         if (timer >= sm.AttackCooldown && Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance)
         {
             sm.ChangeState(sm.attackState);
         }
-
     }
 
     public override void OnExit()
