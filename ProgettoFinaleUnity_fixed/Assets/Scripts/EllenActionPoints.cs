@@ -19,24 +19,24 @@ public class EllenActionPoints : MonoBehaviour
     {
         Cooldown = 0f;
     }
-    public float AP_Value 
-    { 
+    public float AP_Value
+    {
         get
         {
             return Ap_Value;
         }
         set
         {
-            Ap_Value = Mathf.Clamp(value, 0, MaxAp) ;
+            Ap_Value = Mathf.Clamp(value, 0, MaxAp);
             Ap_Image.GetComponent<Slider>().value = Ap_Value;
         }
     }
-    
+
     private void Update()
     {
         if (isActive && !TimeManager.IsGamePaused)
         {
-            AP_Value -= Ap_Decrement * Time.unscaledDeltaTime ;
+            AP_Value -= Ap_Decrement * Time.unscaledDeltaTime;
         }
         else
         {

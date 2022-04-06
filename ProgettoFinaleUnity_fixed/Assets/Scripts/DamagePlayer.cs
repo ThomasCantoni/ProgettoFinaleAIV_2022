@@ -7,9 +7,9 @@ public class DamagePlayer : MonoBehaviour
     private void OnTriggerStay(Collider collision)
     {
         EllenHealthScript attempt = new EllenHealthScript();
-        if(collision.gameObject.TryGetComponent(out attempt))
+        if (collision.gameObject.TryGetComponent(out attempt))
         {
-           attempt.DamagePlayer(10f * Time.deltaTime);
+            attempt.DamagePlayer(10f * Time.deltaTime);
         }
     }
 }

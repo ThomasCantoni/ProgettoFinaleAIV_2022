@@ -15,8 +15,9 @@ public class EllenHealthScript : MonoBehaviour
     public Canvas canvasDeath;
     public Canvas UiCanvas;
 
-    public float HP_Value 
-    { 
+
+    public float HP_Value
+    {
         get
         {
             return hp_Value;
@@ -38,7 +39,6 @@ public class EllenHealthScript : MonoBehaviour
 
         if (hp_Value <= 0)
         {
-            
             anim.SetBool("isDeath", true);
             anim.SetTrigger("EllenDeath");
             PlayerControllerSecondVersion PCSV = GetComponent<PlayerControllerSecondVersion>();
@@ -49,9 +49,7 @@ public class EllenHealthScript : MonoBehaviour
             this.gameObject.GetComponent<CameraOut>().cam = PCSV.ThirdPersonCamera;
             this.GetComponent<InverseKinematicsTest>().enabled = false;
             this.GetComponent<RigBuilder>().enabled = false;
-            
         }
-
     }
     public void HealPlayer(float amount)
     {
