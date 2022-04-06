@@ -34,9 +34,9 @@ public class EllenActionPoints : MonoBehaviour
     
     private void Update()
     {
-        if (isActive)
+        if (isActive && !TimeManager.IsGamePaused)
         {
-            AP_Value -= Ap_Decrement * Time.unscaledDeltaTime;
+            AP_Value -= Ap_Decrement * Time.unscaledDeltaTime ;
         }
         else
         {
