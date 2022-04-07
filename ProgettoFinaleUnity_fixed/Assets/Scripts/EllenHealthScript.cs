@@ -29,6 +29,14 @@ public class EllenHealthScript : MonoBehaviour
         }
     }
 
+    public IEnumerator activateCanvas()
+    {
+        yield return new WaitForSeconds(2.5f);
+        canvasDeath.gameObject.SetActive(true);
+        UiCanvas.gameObject.SetActive(false);
+    }
+
+
     public void DamagePlayer(float amount)
     {
         if (hp_Value <= 0)
@@ -43,8 +51,8 @@ public class EllenHealthScript : MonoBehaviour
             anim.SetTrigger("EllenDeath");
             PlayerControllerSecondVersion PCSV = GetComponent<PlayerControllerSecondVersion>();
             PCSV.controls.asset.Disable();
-            canvasDeath.gameObject.SetActive(true);
-            UiCanvas.gameObject.SetActive(false);
+            StartCoroutine(activateCanvas());
+            GetComponent<CharacterController>().enabled = false;
             this.gameObject.AddComponent<CameraOut>();
             this.gameObject.GetComponent<CameraOut>().cam = PCSV.ThirdPersonCamera;
             this.GetComponent<InverseKinematicsTest>().enabled = false;

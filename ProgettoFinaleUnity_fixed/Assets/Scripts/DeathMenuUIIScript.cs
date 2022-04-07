@@ -26,6 +26,7 @@ public class RespwanUIScript : MonoBehaviour
         Rb.enabled = true;
         PCSV.Respwan();
         PCSV.Anim.SetBool("isDeath", false);
+        GetComponent<CharacterController>().enabled = true;
         UICanvas.gameObject.SetActive(true);
         DeathCanvas.gameObject.SetActive(false);
     }
