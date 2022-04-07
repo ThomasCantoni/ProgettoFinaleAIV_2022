@@ -103,7 +103,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
 
     }
-    
     private void OnEnable()
     {
         Anim = GetComponent<Animator>();
@@ -140,7 +139,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
 
         Anim.SetLayerWeight(1, 1);
-        
         characterController = Player.GetComponent<CharacterController>();
         AnimatorVelocityHash = Animator.StringToHash("Velocity");
         AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
@@ -204,7 +202,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         controls.Enable();
         Destroy(GetComponent<CameraOut>());
         SetPrefs();
-       
     }
     void OnZoom(InputAction.CallbackContext context)
     {

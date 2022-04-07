@@ -34,7 +34,6 @@ public class EllenHealthScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         canvasDeath.gameObject.SetActive(true);
         UiCanvas.gameObject.SetActive(false);
-        
     }
 
 
@@ -54,11 +53,10 @@ public class EllenHealthScript : MonoBehaviour
             PCSV.controls.asset.Disable();
             StartCoroutine(activateCanvas());
             GetComponent<CharacterController>().enabled = false;
-           
             this.gameObject.AddComponent<CameraOut>();
-            
             this.gameObject.GetComponent<CameraOut>().cam = PCSV.ThirdPersonCamera;
-           
+            this.GetComponent<InverseKinematicsTest>().enabled = false;
+            this.GetComponent<RigBuilder>().enabled = false;
         }
     }
     public void HealPlayer(float amount)
