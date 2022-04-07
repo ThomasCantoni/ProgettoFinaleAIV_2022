@@ -21,11 +21,13 @@ public class RespawnUIScript : MonoBehaviour
     }
     public void Respawn()
     {
-        PCSV.enabled = true;
-        IKT.enabled = true;
-        Rb.enabled = true;
+        //PCSV.enabled = true;
+        //IKT.enabled = true;
+        //Rb.enabled = true;
         PCSV.Respwan();
         PCSV.Anim.SetBool("isDeath", false);
+        
+        
         PCSV.GetComponent<CharacterController>().enabled = true;
         UICanvas.gameObject.SetActive(true);
         DeathCanvas.gameObject.SetActive(false);
