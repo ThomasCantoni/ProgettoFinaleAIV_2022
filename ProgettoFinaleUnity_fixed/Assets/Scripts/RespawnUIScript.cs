@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class RespwanUIScript : MonoBehaviour
+public class RespawnUIScript : MonoBehaviour
 {
     public GameObject Player;
     PlayerControllerSecondVersion PCSV;
@@ -26,7 +26,7 @@ public class RespwanUIScript : MonoBehaviour
         Rb.enabled = true;
         PCSV.Respwan();
         PCSV.Anim.SetBool("isDeath", false);
-        GetComponent<CharacterController>().enabled = true;
+        PCSV.GetComponent<CharacterController>().enabled = true;
         UICanvas.gameObject.SetActive(true);
         DeathCanvas.gameObject.SetActive(false);
     }
