@@ -10,6 +10,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 {
 
     public PlayerData PlayerData;
+   
     public bool GunEquipped
     {
         get
@@ -82,7 +83,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     Vector2 direction;
     Quaternion cameraQuatForMovement;
     public Controls controls;
-    bool isGrounded;
+    public bool isGrounded;
     bool jumpPressed = false;
     public bool isAiming = false;
    
@@ -90,7 +91,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
     Vector2 accum = Vector2.zero;
-
+    public GroundedCollider GroundedCollider;
 
 
     private void Awake()
@@ -273,7 +274,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print((int)(1.0f / Time.smoothDeltaTime));
+        
         if (TimeManager.IsGamePaused)
         {
             return;
@@ -286,13 +287,24 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
 
         MoveRelativeToCameraRotation();
-        isGrounded = IsGroundedTest();
+        //isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
     }
     void GravityAndJumpUpdate()
     {
-        //groundedPlayer = characterController.isGrounded;
+        if (JumpRayCastCd > 0)
+        {
+            JumpRayCastCd -= Time.deltaTime;
+            GroundedCollider.enabled = false;
+            GroundedCollider.GetComponent<SphereCollider>().enabled = false;
+            //isGrounded = false;
+        }
+        else
+        {
+            GroundedCollider.enabled = true;
+            GroundedCollider.GetComponent<SphereCollider>().enabled = true;
+        }
         if (isGrounded)
         {
             playerVel = Vector3.zero;
@@ -310,6 +322,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         if (jumpPressed && isGrounded)
         { // i am grounded and i want to jump
+            isGrounded = false;
+            GroundedCollider.enabled = false;
+            GroundedCollider.GetComponent<SphereCollider>().enabled = false;
+
             JumpRayCastCd = 0.2f;
             jumpPressed = false;
             playerVel.y += Mathf.Sqrt(jumpHeight  * gravityValue * -1f);
