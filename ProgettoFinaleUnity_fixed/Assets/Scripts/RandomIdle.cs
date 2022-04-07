@@ -9,7 +9,7 @@ public class RandomIdle : StateMachineBehaviour
 
     float Timer = 10f;
 
-    string[] Triggers = { "Idle1", "Idle3", "Idle4"};
+    string[] Triggers = { "Idle1", "Idle3", "Idle4" };
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -17,7 +17,7 @@ public class CameraOut : MonoBehaviour
     }
     void Update()
     {
-        cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView,targetFOV, 0.035f);
-        
+        cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, targetFOV, 0.035f);
+
     }
 }

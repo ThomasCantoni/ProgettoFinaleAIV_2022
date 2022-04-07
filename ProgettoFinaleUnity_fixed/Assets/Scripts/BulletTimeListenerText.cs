@@ -11,7 +11,7 @@ public class BulletTimeListenerText : MonoBehaviour
         controls = PCSV.controls;
         controls.Player.BulletTimeInput.performed += Toggle;
         this.gameObject.SetActive(false);
-        
+
     }
 
     void Toggle(InputAction.CallbackContext ctx)

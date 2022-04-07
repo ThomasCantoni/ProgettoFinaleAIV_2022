@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 [Serializable]
-public class PlayerData 
+public class PlayerData
 {
     public float playerPosX, playerPosY, playerPosZ;
     public float PlayerHp, PlayerAp;
     private bool newData = true;
     public int SceneIndex;
-    public bool IsNewGame {
+    public bool IsNewGame
+    {
         get
         {
             return newData;
@@ -26,7 +27,7 @@ public class PlayerData
     }
     public PlayerData()
     {
-        
+
 
     }
 }

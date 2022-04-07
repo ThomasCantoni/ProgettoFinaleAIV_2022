@@ -22,7 +22,7 @@ public class PlayerControllerSecondVersionFrancescoMarotta : MonoBehaviour
             Anim.SetFloat(AnimatorSpeedHash, PlayerSpeedModifier);
         }
     }
-    int AnimatorVelocityHash = 0, AnimatorSpeedHash = 0,MoveXHash,MoveZHash;
+    int AnimatorVelocityHash = 0, AnimatorSpeedHash = 0, MoveXHash, MoveZHash;
     public float AimSensitivity
     {
         get
@@ -174,7 +174,7 @@ public class PlayerControllerSecondVersionFrancescoMarotta : MonoBehaviour
         if (isGamePaused)
             return;
         MoveRelativeToCameraRotation();
-        rigAim.weight = Mathf.Lerp(rigAim.weight,aimRigWeight,Time.deltaTime * 20f);
+        rigAim.weight = Mathf.Lerp(rigAim.weight, aimRigWeight, Time.deltaTime * 20f);
     }
     void FixedUpdate()
     {
@@ -319,11 +319,11 @@ public class PlayerControllerSecondVersionFrancescoMarotta : MonoBehaviour
             characterController.Move(MovementVector * Time.deltaTime);
             transform.rotation = cameraQuatForMovement;
             Anim.SetFloat(AnimatorVelocityHash, magnitude);
-            
+
             if (magnitude > 0.05f)
             {
-                accum.y = Mathf.Lerp(accum.y,direction.y, 0.3f);
-                accum.x = Mathf.Lerp(accum.x,direction.x, 0.3f);
+                accum.y = Mathf.Lerp(accum.y, direction.y, 0.3f);
+                accum.x = Mathf.Lerp(accum.x, direction.x, 0.3f);
             }
             else
             {

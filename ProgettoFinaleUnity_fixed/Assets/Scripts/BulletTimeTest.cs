@@ -19,12 +19,12 @@ public class BulletTimeTest : MonoBehaviour
 
     void SetSpeed(InputAction.CallbackContext context)
     {
-       
+
     }
     // Update is called once per frame
     void Update()
     {
-       
-        transform.Rotate(new Vector3(0,Speed * Time.deltaTime, 0));
+
+        transform.Rotate(new Vector3(0, Speed * Time.deltaTime, 0));
     }
 }

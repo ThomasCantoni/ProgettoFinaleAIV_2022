@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public GameObject MainCanvas, OptionsCanvas,LoadingImage;
+    public GameObject MainCanvas, OptionsCanvas, LoadingImage;
 
     public void StartNewGame()
     {
@@ -14,11 +14,11 @@ public class MainMenuManager : MonoBehaviour
         MainCanvas.SetActive(false);
         OptionsCanvas.SetActive(false);
         LoadingImage.SetActive(true);
-       
-       
+
+
 
         //SceneManager.LoadScene("Scenes/Vertical Slice", LoadSceneMode.Single);
-        
+
 
     }
     public void LoadGame()
@@ -28,7 +28,7 @@ public class MainMenuManager : MonoBehaviour
         MainCanvas.SetActive(false);
         OptionsCanvas.SetActive(false);
         LoadingImage.SetActive(true);
-       
+
 
 
     }

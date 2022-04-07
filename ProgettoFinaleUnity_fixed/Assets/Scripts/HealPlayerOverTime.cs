@@ -4,13 +4,13 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class HealPlayerOverTime :MonoBehaviour
+public class HealPlayerOverTime : MonoBehaviour
 {
-    
+
     public float HealPerSecond = 0f;
-    
+
     public float SecondsActive = 0f;
-    
+
     private float secondsRemaining = 0f;
 
 

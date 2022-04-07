@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class ExitGameUI : MonoBehaviour
 {
-   public void CloseGame()
+    public void CloseGame()
     {
         Application.Quit();
     }

@@ -9,6 +9,6 @@ public class CheckpointScript : MonoBehaviour
         Debug.Log(other.gameObject.name);
         PlayerData newData = new PlayerData(other.GetComponent<PlayerControllerSecondVersion>());
         SaveManager.SavePlayer(newData);
-        other.GetComponent<PlayerControllerSecondVersion>().PlayerData = SaveManager.LastSave; 
+        other.GetComponent<PlayerControllerSecondVersion>().PlayerData = SaveManager.LastSave;
     }
 }

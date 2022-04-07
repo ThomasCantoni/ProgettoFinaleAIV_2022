@@ -29,7 +29,7 @@ public class Chomper : MonoBehaviour, IHittable
             timer += Time.deltaTime;
             anim.SetTrigger("rip");
             StartCoroutine(animDie(timer));
-            HP_Slider.transform.parent.gameObject.SetActive( false);
+            HP_Slider.transform.parent.gameObject.SetActive(false);
         }
     }
     public virtual void OnAttackStart()
