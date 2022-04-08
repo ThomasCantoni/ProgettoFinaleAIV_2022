@@ -15,6 +15,6 @@ public class ChomperSmallSM : ChomperSM
     protected override void OnAwake()
     {
         base.OnAwake();
-        patrolState = new Enemy_PatrolSmall(this);
+        patrolState = new Chomper_PatrolSmall(this);
     }
 }

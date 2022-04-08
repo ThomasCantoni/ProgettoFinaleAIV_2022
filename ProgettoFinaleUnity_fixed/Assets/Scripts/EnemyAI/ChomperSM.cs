@@ -56,7 +56,7 @@ public abstract class ChomperSM : StateMachine
 
     protected virtual void OnAwake()
     {
-        chaseState = new Enemy_Chase(this);
-        attackState = new Enemy_Attack(this);
+        chaseState = new Chomper_Chase(this);
+        attackState = new Chomper_Attack(this);
     }
 }
