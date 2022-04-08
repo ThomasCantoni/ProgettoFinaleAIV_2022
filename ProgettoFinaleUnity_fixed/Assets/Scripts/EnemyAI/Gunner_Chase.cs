@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class Gunner_Chase : Enemy_Chase
 {
     NavMeshAgent agent;
-    private float speed = 2f;
-    private float acceleration = 2f;
+    private float speed = 4f;
+    private float acceleration = 1.2f;
     private float timer = 0f;
 
     GunnerSM sm;
@@ -21,7 +21,7 @@ public class Gunner_Chase : Enemy_Chase
         timer = 0f;
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         agent.destination = sm.ObjToChase.position;
-        //sm.anim.SetBool("Run", true);
+        sm.anim.SetBool("WalkFast", true);
         agent.speed = speed * acceleration;
     }
 
@@ -47,7 +47,7 @@ public class Gunner_Chase : Enemy_Chase
     {
         //METTERE IDLE
         //sm.anim.SetBool("Idle", true);
-        //sm.anim.SetBool("Run", false);
+        sm.anim.SetBool("WalkFast", false);
         agent.destination = agent.transform.position;
         agent.speed = 0f;
     }
