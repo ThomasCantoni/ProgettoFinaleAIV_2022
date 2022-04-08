@@ -205,7 +205,8 @@ public class InverseKinematicsTest : MonoBehaviour
         Vector2 screenCenterPoint = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
         Ray ray = PCSV.Camera.ScreenPointToRay(screenCenterPoint);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, aimColliderLayerMask)) // if the object i hit is an enemy
+       // Physics.SphereCast(ray, 0.05f, out RaycastHit info, 100f, aimColliderLayerMask);
+        if (Physics.SphereCast(ray,0.1f, out RaycastHit hit, 100f, aimColliderLayerMask)) // if the object i hit is an enemy
         {
 
             // hit.collider.gameObject.getcomponent<enemyscript>.add damage

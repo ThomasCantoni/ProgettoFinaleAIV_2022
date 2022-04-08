@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
     public void StartNewGame()
     {
         SaveManager.LastSave = new PlayerData();
-        LevelManager.Instance.LoadScene("Scenes/Vertical Slice");
+        LevelManager.Instance.LoadScene("Scenes/ThomasCantoniMAP");
         MainCanvas.SetActive(false);
         OptionsCanvas.SetActive(false);
         LoadingImage.SetActive(true);
@@ -24,7 +24,7 @@ public class MainMenuManager : MonoBehaviour
     public void LoadGame()
     {
         SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat");
-        LevelManager.Instance.LoadScene("Scenes/Vertical Slice");
+        LevelManager.Instance.LoadScene("Scenes/ThomasCantoniMAP");
         MainCanvas.SetActive(false);
         OptionsCanvas.SetActive(false);
         LoadingImage.SetActive(true);

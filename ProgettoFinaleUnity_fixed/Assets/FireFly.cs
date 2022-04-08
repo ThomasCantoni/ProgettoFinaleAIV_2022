@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class FireFly : MonoBehaviour, IHittable
 {
     public GameObject fireFly;
+    public GameObject TriggerToActivate;
     public int Health;
     public UnityEvent<Collider> OnHitEvent;
     public virtual void OnHit(Collider sender)
@@ -20,6 +21,10 @@ public class FireFly : MonoBehaviour, IHittable
                 fireFly.SetActive(true);
             }
             this.gameObject.SetActive(false);
+            if(TriggerToActivate != null)
+            {
+                TriggerToActivate.GetComponent<BoxCollider>().enabled = true;
+            }
         }
     }
 }
