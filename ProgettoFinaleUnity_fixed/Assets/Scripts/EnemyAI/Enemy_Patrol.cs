@@ -6,31 +6,11 @@ using UnityEngine.AI;
 
 public abstract class Enemy_Patrol : BaseState
 {
-    protected NavMeshAgent agent;
-    
-
-    protected ChomperSM sm;
-    public Enemy_Patrol(string name, ChomperSM stateMachine) : base(name, stateMachine)
+    public Enemy_Patrol(string name, StateMachine stateMachine) : base(name, stateMachine)
     {
-        sm = stateMachine;
-    }
-
-    public override void OnEnter()
-    {
-        sm.OnShpereTriggerStay += OnDetection;
-        sm.AttackCollider.enabled = false;
-        
-        agent = sm.gameObject.GetComponent<NavMeshAgent>();
-    }
-
-    public override void OnExit()
-    {
-        sm.OnShpereTriggerStay -= OnDetection;
-        
     }
 
     public virtual void OnDetection(GameObject sender, Collider c, string message, bool fromEvent)
     {
-        sm.ObjToChase = c.gameObject.transform;
     }
 }

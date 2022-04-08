@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChomperSmallSM : ChomperSM
+public class GunnerSmallSM : GunnerSM
 {
-    public ChomperBigSM Leader;
+    public GunnerBigSM Leader;
     public int ID;
 
     protected override BaseState GetInitialState()
@@ -15,6 +15,6 @@ public class ChomperSmallSM : ChomperSM
     protected override void OnAwake()
     {
         base.OnAwake();
-        patrolState = new Chomper_PatrolSmall(this);
+        patrolState = new Gunner_PatrolSmall(this);
     }
 }
