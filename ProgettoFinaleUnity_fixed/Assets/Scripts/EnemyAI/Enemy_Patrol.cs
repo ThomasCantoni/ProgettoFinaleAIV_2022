@@ -17,15 +17,15 @@ public abstract class Enemy_Patrol : BaseState
 
     public override void OnEnter()
     {
-        sm.OnSphereTriggerEnter += OnDetection;
+        sm.OnShpereTriggerStay += OnDetection;
+        sm.AttackCollider.enabled = false;
         
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
-        sm.gameObject.GetComponentInChildren<MeshRenderer>().material = sm.Debug_Materials[0];
     }
 
     public override void OnExit()
     {
-        sm.OnSphereTriggerEnter -= OnDetection;
+        sm.OnShpereTriggerStay -= OnDetection;
         
     }
 

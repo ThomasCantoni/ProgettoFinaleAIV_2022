@@ -9,11 +9,11 @@ public class GunScript : MonoBehaviour
     public ParticleSystem Ps;
     public GameObject BulletImpact;
     public Transform gunMuzzle;
-    // Start is called before the first frame update
-    
-    public void ReceiveShotImpactPos(Vector3 impactPos,Vector3 dir)
+
+
+    public void ReceiveShotImpactPos(Vector3 impactPos, Vector3 dir)
     {
-        Vector3 towardsImpactPoint = impactPos-gunMuzzle.position;
+        Vector3 towardsImpactPoint = impactPos - gunMuzzle.position;
         Ps.gameObject.SetActive(true);
         Ps.Play();
         GameObject impactGO = Instantiate(BulletImpact, impactPos, Quaternion.LookRotation(dir));

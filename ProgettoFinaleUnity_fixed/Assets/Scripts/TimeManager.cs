@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public static class TimeManager 
+public static class TimeManager
 {
     public static bool IsGamePaused = false;
     public static bool IsBulletTimeActive = false;
@@ -17,16 +17,16 @@ public static class TimeManager
 
     //enemy script will subscribe to this delegate with a 
     public static Notifier EnemyNotifier;
-    
-    public static void EnableBulletTime(InputAction.CallbackContext ctx)
+
+    public static void EnableBulletTime()
     {
         Debug.Log("BT ACTIVE");
-        if(IsBulletTimeActive)
+        if (IsBulletTimeActive)
         {
             DisableBulletTime();
             return;
         }
-        
+
         Time.timeScale = 0.5f;
         PlayerCurrentSpeed = PlayerBulletTimeSpeed;
         //EnemyCurrentSpeed = EnemyBulletTimeSpeed;
@@ -46,14 +46,14 @@ public static class TimeManager
         Time.timeScale = 0f;
         PlayerCurrentSpeed = 0f;
         IsGamePaused = true;
-        
+
     }
     public static void DisablePause()
     {
         if (IsBulletTimeActive)
         {
             Time.timeScale = 0.5f;
-         PlayerCurrentSpeed = PlayerBulletTimeSpeed;
+            PlayerCurrentSpeed = PlayerBulletTimeSpeed;
 
 
 
@@ -61,7 +61,7 @@ public static class TimeManager
         else
         {
             Time.timeScale = 1f;
-         PlayerCurrentSpeed = 1f;
+            PlayerCurrentSpeed = 1f;
 
         }
         IsGamePaused = false;
