@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Chomper_Chase : Enemy_Chase
+public class Gunner_Chase : Enemy_Chase
 {
     NavMeshAgent agent;
     private float speed = 2f;
@@ -11,8 +11,8 @@ public class Chomper_Chase : Enemy_Chase
     private float acceleration = 2f;
     private bool firstEnter = true;
 
-    ChomperSM sm;
-    public Chomper_Chase(ChomperSM stateMachine) : base("Chomper_Chase", stateMachine)
+    GunnerSM sm;
+    public Gunner_Chase(GunnerSM stateMachine) : base("Gunner_Chase", stateMachine)
     {
         sm = stateMachine;
     }
@@ -30,7 +30,7 @@ public class Chomper_Chase : Enemy_Chase
         }
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         agent.destination = sm.ObjToChase.position;
-        sm.anim.SetBool("Run", true);
+        //sm.anim.SetBool("Run", true);
         agent.speed = speed * acceleration;
     }
 
@@ -47,8 +47,8 @@ public class Chomper_Chase : Enemy_Chase
     public override void OnExit()
     {
         //METTERE IDLE
-        sm.anim.SetBool("Idle", true);
-        sm.anim.SetBool("Run", false);
+        //sm.anim.SetBool("Idle", true);
+        //sm.anim.SetBool("Run", false);
         agent.destination = agent.transform.position;
         agent.speed = 0f;
     }

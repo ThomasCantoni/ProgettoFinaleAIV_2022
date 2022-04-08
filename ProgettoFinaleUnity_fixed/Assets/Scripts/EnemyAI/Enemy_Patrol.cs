@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public abstract class Enemy_Patrol : BaseState
 {
-    public Enemy_Patrol(string name, ChomperSM stateMachine) : base(name, stateMachine)
+    public Enemy_Patrol(string name, StateMachine stateMachine) : base(name, stateMachine)
     {
     }
 

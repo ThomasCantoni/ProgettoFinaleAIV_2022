@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class Enemy_PatrolSmall : Enemy_Patrol
 {
-    public Enemy_PatrolSmall(string name, ChomperSmallSM stateMachine) : base(name, stateMachine)
+    public Enemy_PatrolSmall(string name, StateMachine stateMachine) : base(name, stateMachine)
     {
     }
 }
