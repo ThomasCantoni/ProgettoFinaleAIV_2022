@@ -8,12 +8,13 @@ public class Gunner_Attack : Enemy_Attack
     NavMeshAgent agent;
 
     private float timer = 0f;
-    private float speed = 2f;
-    //private AnimatorStateInfo infoAnim;
-    //private AnimatorTransitionInfo infoTrans;
-    //private int animAttacckStateHash = Animator.StringToHash("Chomper_Attack");
-    //private int animEndTransitionStateHash = Animator.StringToHash("Chomper_Attack -> Cooldown");
-    //private int animStartTransStateHash = Animator.StringToHash("Cooldown -> Chomper_Attack");
+    private float speed = 4f;
+    private AnimatorStateInfo infoAnim;
+    private AnimatorTransitionInfo infoTrans;
+    private int animAttacckStateHash = Animator.StringToHash("Grenadier_RangeAttack");
+    private int animEndTransitionStateHash = Animator.StringToHash("Grenadier_RangeAttack -> Grenadier_Idle");
+    private int animStartTransStateHash = Animator.StringToHash("Grenadier_Idle -> Grenadier_RangeAttack");
+    private RaycastHit hitInfo;
 
     GunnerSM sm;
     public Gunner_Attack(GunnerSM stateMachine) : base("Gunner_Attack", stateMachine)
@@ -26,51 +27,53 @@ public class Gunner_Attack : Enemy_Attack
         timer = 0f;
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         sm.DetectCollider.enabled = false;
-        //sm.animAct += SetAttackCollider;
+        sm.animAct += Shoot;
     }
 
     public override void UpdateLogic()
     {
-        Debug.Log("ATTACK");
-        //infoTrans = sm.anim.GetAnimatorTransitionInfo(0);
-        //infoAnim = sm.anim.GetCurrentAnimatorStateInfo(0);
-        //if (infoAnim.shortNameHash == animAttacckStateHash || infoTrans.nameHash == animStartTransStateHash)
-        //{
-        //    if (infoTrans.nameHash == animEndTransitionStateHash)
-        //    {
-        //        agent.transform.position = sm.anim.transform.position;
-        //        sm.anim.transform.localPosition = Vector3.zero;
-        //    }
-        //    else
-        //    {
-        //        sm.anim.applyRootMotion = true;
-        //    }
-        //}
-        //else
-        //{
-        //    sm.anim.applyRootMotion = false;
-        //    if (hasAttacked)
-        //    {
-        //        sm.ChangeState(sm.chaseState);
-        //    }
-        //}
+        infoTrans = sm.anim.GetAnimatorTransitionInfo(0);
+        infoAnim = sm.anim.GetCurrentAnimatorStateInfo(0);
+        if ((infoAnim.shortNameHash == animAttacckStateHash || infoTrans.nameHash == animStartTransStateHash) && (infoTrans.nameHash != animEndTransitionStateHash))
+        {
+            Physics.Raycast(sm.transform.position + Vector3.up, sm.ObjToChase.position - sm.transform.position, out hitInfo, 50f);
+            if (hitInfo.transform != sm.ObjToChase)
+            {
+                sm.anim.SetTrigger("ObjBehindWall");
+            }
+        }
+        else
+        {
+            Physics.Raycast(sm.transform.position + Vector3.up, sm.ObjToChase.position - sm.transform.position, out hitInfo, 50f);
+            if (hitInfo.transform != sm.ObjToChase)
+            {
+                sm.ChangeState(sm.chaseState);
+            }
+
+            if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= (sm.AttackDistance + 2))
+            {
+                sm.ChangeState(sm.chaseState);
+            }
+            timer += Time.deltaTime;
+            if (timer >= sm.PreAttackCooldown)
+            {
+                timer = 0f;
+                RangeAttack();
+            }
+        }
 
         Vector3 dest = (sm.ObjToChase.position - sm.transform.position).normalized;
         sm.transform.forward = Vector3.Lerp(sm.transform.forward, new Vector3(dest.x, 0, dest.z), 0.05f);
 
-        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= (sm.AttackDistance + 1))
-        {
-            sm.ChangeState(sm.chaseState);
-        }
+        
 
-        timer += Time.deltaTime;
-        if (timer >= sm.AttackCooldown)
-        {
-            timer = 0f;
-            Attack();
-        }
+        
     }
-    protected override void Attack()
+    protected virtual void RangeAttack()
+    {
+        sm.anim.SetTrigger("RangeAttack");
+    }
+    protected virtual void Shoot(bool f)
     {
         GameObject go = sm.BulletTransform.GetComponent<GunnerBulletPoolMgr>().SpawnObj(sm.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         if (go != null)
@@ -95,8 +98,9 @@ public class Gunner_Attack : Enemy_Attack
 
     public override void OnExit()
     {
-        //sm.anim.SetBool("Run", false);
+        //sm.anim.SetBool("WalkFast", true);
+        sm.anim.SetBool("Idle", false);
         agent.speed = speed;
-        //sm.animAct -= SetAttackCollider;
+        sm.animAct -= Shoot;
     }
 }

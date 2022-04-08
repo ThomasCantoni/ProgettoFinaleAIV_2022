@@ -36,7 +36,7 @@ public class GunnerSM : StateMachine
     void Awake()
     {
         OnAwake();
-        //anim = anim.GetComponent<Animator>();
+        anim = anim.GetComponent<Animator>();
     }
 
     void OnTriggerStay(Collider c)

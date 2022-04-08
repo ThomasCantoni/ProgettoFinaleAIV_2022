@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Gunner_PatrolBig : Enemy_PatrolBig
 {
-    private float speed = 2f;
+    private float speed = 4f;
     private float acceleration = 2f;
 
     int count = -1;
@@ -21,10 +21,12 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
 
     public override void OnEnter()
     {
+        
         sm.DetectCollider.enabled = true;
         sm.OnShpereTriggerStay += OnDetection;
         sm.AttackCollider.enabled = false;
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
+        Debug.Log(agent);
         CalculateCount();
         agent.speed = speed;
         agent.destination = sm.patrolPoints[count].position;

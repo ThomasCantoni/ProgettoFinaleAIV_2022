@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Gunner_PatrolSmall : Enemy_PatrolSmall
 {
-    private float speed = 2f;
+    private float speed = 4f;
     private float acceleration = 2f;
 
     protected NavMeshAgent agent;
