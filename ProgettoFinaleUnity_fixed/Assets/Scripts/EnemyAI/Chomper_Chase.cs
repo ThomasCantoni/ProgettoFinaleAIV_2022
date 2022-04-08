@@ -8,6 +8,7 @@ public class Chomper_Chase : Enemy_Chase
     NavMeshAgent agent;
     private float speed = 2f;
     private float timer = 0f;
+    private float chaseTimer = 0f;
     private float acceleration = 2f;
     private bool firstEnter = true;
 
@@ -36,12 +37,21 @@ public class Chomper_Chase : Enemy_Chase
 
     public override void UpdateLogic()
     {
-        agent.destination = sm.ObjToChase.position;
         timer += Time.deltaTime;
+        chaseTimer += Time.deltaTime;
         if (timer >= sm.AttackCooldown && Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance)
         {
             sm.ChangeState(sm.attackState);
         }
+        if (timer >= 5f)
+        {
+            sm.ChangeState(sm.patrolState);
+        }
+        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= sm.AttackDistance * 2)
+        {
+            sm.ChangeState(sm.patrolState);
+        }
+        agent.destination = sm.ObjToChase.position;
     }
 
     public override void OnExit()

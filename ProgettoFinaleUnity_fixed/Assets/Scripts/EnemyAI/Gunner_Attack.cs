@@ -31,6 +31,7 @@ public class Gunner_Attack : Enemy_Attack
 
     public override void UpdateLogic()
     {
+        Debug.Log("ATTACK");
         //infoTrans = sm.anim.GetAnimatorTransitionInfo(0);
         //infoAnim = sm.anim.GetCurrentAnimatorStateInfo(0);
         //if (infoAnim.shortNameHash == animAttacckStateHash || infoTrans.nameHash == animStartTransStateHash)
@@ -55,12 +56,15 @@ public class Gunner_Attack : Enemy_Attack
         //}
 
         Vector3 dest = (sm.ObjToChase.position - sm.transform.position).normalized;
-        sm.transform.forward = new Vector3(dest.x, 0, dest.z);
+        sm.transform.forward = Vector3.Lerp(sm.transform.forward, new Vector3(dest.x, 0, dest.z), 0.05f);
 
-
+        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= (sm.AttackDistance + 1))
+        {
+            sm.ChangeState(sm.chaseState);
+        }
 
         timer += Time.deltaTime;
-        if (timer >= sm.PreAttackCooldown)
+        if (timer >= sm.AttackCooldown)
         {
             timer = 0f;
             Attack();
@@ -71,7 +75,19 @@ public class Gunner_Attack : Enemy_Attack
         GameObject go = sm.BulletTransform.GetComponent<GunnerBulletPoolMgr>().SpawnObj(sm.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         if (go != null)
         {
-            Vector3 velocityOffset = sm.UseVeloictyOffset ? sm.ObjToChase.GetComponent<CharacterController>().velocity * 0.6f : Vector3.zero;
+            Vector3 velocityOffset;
+            Vector3 targetVelocity;
+
+            if (sm.UseVeloictyOffset)
+            {
+                targetVelocity = sm.ObjToChase.GetComponent<CharacterController>().velocity;
+                velocityOffset = new Vector3(targetVelocity.x * 0.6f, targetVelocity.y * 0.2f, targetVelocity.z * 0.6f);
+            }
+            else
+            {
+                velocityOffset = Vector3.zero;
+            }
+
             Debug.Log(velocityOffset);
             go.transform.LookAt(sm.ObjToChase.position + new Vector3(0, 1, 0) + velocityOffset, Vector3.up);
         }

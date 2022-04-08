@@ -5074,9 +5074,9 @@ MonoBehaviour:
   NumBullets: 3
   UseVeloictyOffset: 1
   anim: {fileID: 0}
-  AttackDistance: 8
-  AttackCooldown: 2
-  PreAttackCooldown: 0.9
+  AttackDistance: 6
+  AttackCooldown: 1
+  PreAttackCooldown: 0.6
   DetectCollider: {fileID: 1543943201}
   AttackCollider: {fileID: 1771069003}
   BodyCollider: {fileID: 1771069003}
@@ -5102,7 +5102,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &1543943202
 NavMeshAgent:
@@ -5196,9 +5196,9 @@ MonoBehaviour:
   NumBullets: 3
   UseVeloictyOffset: 1
   anim: {fileID: 0}
-  AttackDistance: 7
-  AttackCooldown: 2
-  PreAttackCooldown: 0.7
+  AttackDistance: 4
+  AttackCooldown: 1
+  PreAttackCooldown: 0.6
   DetectCollider: {fileID: 1584214594}
   AttackCollider: {fileID: 1381895976}
   BodyCollider: {fileID: 1381895976}
@@ -5237,7 +5237,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1584849240
 GameObject:

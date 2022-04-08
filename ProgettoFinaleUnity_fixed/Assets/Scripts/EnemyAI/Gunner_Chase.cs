@@ -7,9 +7,8 @@ public class Gunner_Chase : Enemy_Chase
 {
     NavMeshAgent agent;
     private float speed = 2f;
-    private float timer = 0f;
     private float acceleration = 2f;
-    private bool firstEnter = true;
+    private float timer = 0f;
 
     GunnerSM sm;
     public Gunner_Chase(GunnerSM stateMachine) : base("Gunner_Chase", stateMachine)
@@ -19,15 +18,7 @@ public class Gunner_Chase : Enemy_Chase
 
     public override void OnEnter()
     {
-        if (firstEnter)
-        {
-            firstEnter = false;
-            timer = sm.AttackCooldown;
-        }
-        else
-        {
-            timer = 0f;
-        }
+        timer = 0f;
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
         agent.destination = sm.ObjToChase.position;
         //sm.anim.SetBool("Run", true);
@@ -36,12 +27,20 @@ public class Gunner_Chase : Enemy_Chase
 
     public override void UpdateLogic()
     {
-        agent.destination = sm.ObjToChase.position;
         timer += Time.deltaTime;
-        if (timer >= sm.AttackCooldown && Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance)
+        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance)
         {
             sm.ChangeState(sm.attackState);
         }
+        if (timer >= 5f)
+        {
+            sm.ChangeState(sm.patrolState);
+        }
+        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= sm.AttackDistance * 2)
+        {
+            sm.ChangeState(sm.patrolState);
+        }
+        agent.destination = sm.ObjToChase.position;
     }
 
     public override void OnExit()

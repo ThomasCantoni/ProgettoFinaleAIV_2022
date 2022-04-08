@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class Gunner_PatrolSmall : Enemy_PatrolSmall
 {
+    private float speed = 2f;
+    private float acceleration = 2f;
+
     protected NavMeshAgent agent;
     protected GunnerSmallSM sm;
     public Gunner_PatrolSmall(GunnerSmallSM stateMachine) : base("Gunner_PatrolSmall", stateMachine)
@@ -14,9 +17,11 @@ public class Gunner_PatrolSmall : Enemy_PatrolSmall
 
     public override void OnEnter()
     {
+        sm.DetectCollider.enabled = true;
         sm.OnShpereTriggerStay += OnDetection;
         sm.AttackCollider.enabled = false;
         agent = sm.gameObject.GetComponent<NavMeshAgent>();
+        agent.speed = speed;
         agent.destination = sm.Leader.FollowerDestinations[sm.ID].position;
     }
 

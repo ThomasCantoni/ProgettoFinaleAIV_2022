@@ -17,11 +17,6 @@ public class GunnerBulletPoolMgr : MonoBehaviour
         Bullets.Enqueue(bullet);
     }
 
-    private void Update()
-    {
-        Debug.Log(Bullets.Count);
-    }
-
     public GameObject SpawnObj(Vector3 pos, Quaternion rot)
     {
         if (Bullets.Peek().activeSelf) return null;
