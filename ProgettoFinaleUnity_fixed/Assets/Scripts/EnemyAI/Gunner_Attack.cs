@@ -14,6 +14,7 @@ public class Gunner_Attack : Enemy_Attack
     private int animAttacckStateHash = Animator.StringToHash("Grenadier_RangeAttack");
     private int animEndTransitionStateHash = Animator.StringToHash("Grenadier_RangeAttack -> Grenadier_Idle");
     private int animStartTransStateHash = Animator.StringToHash("Grenadier_Idle -> Grenadier_RangeAttack");
+    private RaycastHit hitInfo;
 
     GunnerSM sm;
     public Gunner_Attack(GunnerSM stateMachine) : base("Gunner_Attack", stateMachine)
@@ -33,12 +34,22 @@ public class Gunner_Attack : Enemy_Attack
     {
         infoTrans = sm.anim.GetAnimatorTransitionInfo(0);
         infoAnim = sm.anim.GetCurrentAnimatorStateInfo(0);
-        if (infoAnim.shortNameHash == animAttacckStateHash || infoTrans.nameHash == animStartTransStateHash)
+        if ((infoAnim.shortNameHash == animAttacckStateHash || infoTrans.nameHash == animStartTransStateHash) && (infoTrans.nameHash != animEndTransitionStateHash))
         {
-
+            Physics.Raycast(sm.transform.position + Vector3.up, sm.ObjToChase.position - sm.transform.position, out hitInfo, 50f);
+            if (hitInfo.transform != sm.ObjToChase)
+            {
+                sm.anim.SetTrigger("ObjBehindWall");
+            }
         }
         else
         {
+            Physics.Raycast(sm.transform.position + Vector3.up, sm.ObjToChase.position - sm.transform.position, out hitInfo, 50f);
+            if (hitInfo.transform != sm.ObjToChase)
+            {
+                sm.ChangeState(sm.chaseState);
+            }
+
             if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= (sm.AttackDistance + 2))
             {
                 sm.ChangeState(sm.chaseState);
@@ -87,7 +98,8 @@ public class Gunner_Attack : Enemy_Attack
 
     public override void OnExit()
     {
-        sm.anim.SetBool("WalkFast", true);
+        //sm.anim.SetBool("WalkFast", true);
+        sm.anim.SetBool("Idle", false);
         agent.speed = speed;
         sm.animAct -= Shoot;
     }
