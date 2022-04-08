@@ -17,7 +17,7 @@ public class Gunner : MonoBehaviour, IHittable
     //public Slider HP_Slider;
     public UnityEvent<bool> HandleAnim;
 
-    float timer = 1.35f;
+    float timer = 4.7f;
     public virtual void OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
