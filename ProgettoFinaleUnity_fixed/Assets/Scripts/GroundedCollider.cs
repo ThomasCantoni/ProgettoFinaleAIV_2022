@@ -9,11 +9,11 @@ public class GroundedCollider : MonoBehaviour
     {
         //PCSV = gameObject.GetComponentInParent<PlayerControllerSecondVersion>();
     }
-    //private void OnTriggerStay(Collider other)
-    //{
-       
-    //    PCSV.isGrounded = true;
-    //}
+    private void OnTriggerStay(Collider other)
+    {
+
+        PCSV.isGrounded = true;
+    }
     //private void OnCollisionEnter(Collision collision)
     //{
     //    PCSV.isGrounded = true;
@@ -21,9 +21,9 @@ public class GroundedCollider : MonoBehaviour
     //}
     //private void OnCollisionStay(Collision collision)
     //{
-       
+
     //    PCSV.isGrounded = true;
-        
+
     //}
     //private void OnCollisionExit(Collision collision)
     //{
