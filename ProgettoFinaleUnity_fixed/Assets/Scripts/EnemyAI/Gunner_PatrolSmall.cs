@@ -18,6 +18,7 @@ public class Gunner_PatrolSmall : Enemy_PatrolSmall
         sm.OnShpereTriggerStay += OnDetection;
 
         sm.DetectCollider.enabled = true;
+        sm.DetectMeleeCollider.enabled = true;
         sm.AttackCollider.enabled = false;
         sm.agent.speed = speed;
         sm.agent.destination = sm.Leader.FollowerDestinations[sm.ID].position;

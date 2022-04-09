@@ -22,6 +22,7 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
     {
         firstFrame = true;
         sm.DetectCollider.enabled = true;
+        sm.DetectMeleeCollider.enabled = true;
         sm.OnShpereTriggerStay += OnDetection;
         sm.AttackCollider.enabled = false;
         CalculateCount();

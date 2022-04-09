@@ -53,6 +53,15 @@ public class Gunner_Chase : Enemy_Chase
                 sm.ChangeState(sm.attackState);
             }
         }
+        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackMeleeDistance)
+        {
+            Physics.Raycast(sm.transform.position + Vector3.up, sm.ObjToChase.position - sm.transform.position, out hitInfo, 50f);
+            if (hitInfo.transform == sm.ObjToChase)
+            {
+                sm.anim.SetBool("Idle", false);
+                sm.ChangeState(sm.attackState);
+            }
+        }
         if (timer >= 5f && AttemptReturnPatrol())
         {
             sm.ChangeState(sm.patrolState);

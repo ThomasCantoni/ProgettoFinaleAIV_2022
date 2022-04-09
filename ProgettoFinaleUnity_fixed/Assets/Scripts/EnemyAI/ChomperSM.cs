@@ -65,8 +65,6 @@ public abstract class ChomperSM : StateMachine
     protected virtual void OnAwake()
     {
         agent = GetComponent<NavMeshAgent>();
-        //anim = GetComponent<Animator>();
-
         chaseState = new Chomper_Chase(this);
         attackState = new Chomper_Attack(this);
         deathState = new Chomper_Death(this);

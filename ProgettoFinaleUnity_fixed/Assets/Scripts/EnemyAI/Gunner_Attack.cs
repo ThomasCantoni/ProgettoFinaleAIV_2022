@@ -5,7 +5,10 @@ using UnityEngine.AI;
 
 public class Gunner_Attack : Enemy_Attack
 {
+    NavMeshAgent agent;
+
     private float timer = 0f;
+    private float speed = 4f;
     private AnimatorStateInfo infoAnim;
     private AnimatorTransitionInfo infoTrans;
     private int animAttacckStateHash = Animator.StringToHash("Grenadier_RangeAttack");
@@ -22,8 +25,11 @@ public class Gunner_Attack : Enemy_Attack
     public override void OnEnter()
     {
         timer = 0f;
+        agent = sm.gameObject.GetComponent<NavMeshAgent>();
         sm.DetectCollider.enabled = false;
+        sm.DetectMeleeCollider.enabled = false;
         sm.animAct += Shoot;
+
     }
 
     public override void UpdateLogic()
@@ -46,7 +52,18 @@ public class Gunner_Attack : Enemy_Attack
                 sm.ChangeState(sm.chaseState);
             }
 
-            if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= (sm.AttackDistance + 2))
+            //if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= (sm.AttackDistance + 2))
+            //{
+            //    sm.ChangeState(sm.chaseState);
+            //}
+            //timer += Time.deltaTime;
+            //if (timer >= sm.PreAttackCooldown)
+            //{
+            //    timer = 0f;
+            //    //RangeAttack();
+            //}
+
+            if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= (sm.AttackMeleeDistance + 5))
             {
                 sm.ChangeState(sm.chaseState);
             }
@@ -54,7 +71,7 @@ public class Gunner_Attack : Enemy_Attack
             if (timer >= sm.PreAttackCooldown)
             {
                 timer = 0f;
-                RangeAttack();
+                MeleeAttack();
             }
         }
 
@@ -65,13 +82,19 @@ public class Gunner_Attack : Enemy_Attack
     {
         sm.anim.SetTrigger("RangeAttack");
     }
+
+    protected virtual void MeleeAttack()
+    {
+        sm.anim.SetBool("Idle", false);
+        sm.anim.SetTrigger("MeleeAttack");
+    }
     protected virtual void Shoot(bool f)
     {
         GameObject go = sm.BulletTransform.GetComponent<GunnerBulletPoolMgr>().SpawnObj(sm.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         if (go != null)
         {
             Vector3 velocityOffset;
-            Vector3 targetVelocity = Vector3.zero;
+            Vector3 targetVelocity;
 
             if (sm.UseVeloictyOffset)
             {
@@ -83,15 +106,15 @@ public class Gunner_Attack : Enemy_Attack
                 velocityOffset = Vector3.zero;
             }
 
-            Debug.Log(targetVelocity);
+            Debug.Log(velocityOffset);
             go.transform.LookAt(sm.ObjToChase.position + new Vector3(0, 1, 0) + velocityOffset, Vector3.up);
         }
     }
 
     public override void OnExit()
     {
-        //sm.anim.SetBool("WalkFast", true);
         sm.anim.SetBool("Idle", false);
+        agent.speed = speed;
         sm.animAct -= Shoot;
     }
 }

@@ -9,6 +9,9 @@ public class GunnerSM : StateMachine
     public event OnSphereTriggerDelecate OnShpereTriggerStay;
     public event OnSphereTriggerDelecate OnShpereTriggerEnter;
 
+    public event OnSphereTriggerDelecate OnShpereTriggerMeleeStay;
+    public event OnSphereTriggerDelecate OnShpereTriggerMeleeEnter;
+
     public delegate void ActionAnim(bool start);
     public event ActionAnim animAct;
 
@@ -31,9 +34,11 @@ public class GunnerSM : StateMachine
     public Animator anim;
     public NavMeshAgent agent;
     public float AttackDistance = 3f;
+    public float AttackMeleeDistance = 0.5f;
     public float AttackCooldown = 1.5f;
     public float PreAttackCooldown = 0.1f;
     public Collider DetectCollider;
+    public Collider DetectMeleeCollider;
     public Collider AttackCollider;
     public Collider BodyCollider;
 
@@ -47,11 +52,13 @@ public class GunnerSM : StateMachine
     void OnTriggerStay(Collider c)
     {
         OnShpereTriggerStay?.Invoke(this.gameObject, c, "Collision with: " + c.name, true);
+        OnShpereTriggerMeleeStay?.Invoke(this.gameObject, c, "Collision with: " + c.name, true);
     }
 
     void OnTriggerEnter(Collider c)
     {
         OnShpereTriggerEnter?.Invoke(this.gameObject, c, "Collision with: " + c.name, true);
+        OnShpereTriggerMeleeEnter?.Invoke(this.gameObject, c, "Collision with: " + c.name, true);
     }
 
     public void OnSphereTrigger(Collider c)
