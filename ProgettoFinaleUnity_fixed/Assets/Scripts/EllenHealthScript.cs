@@ -34,7 +34,7 @@ public class EllenHealthScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         canvasDeath.gameObject.SetActive(true);
         UiCanvas.gameObject.SetActive(false);
-        
+        Cursor.visible = true;
     }
 
 
