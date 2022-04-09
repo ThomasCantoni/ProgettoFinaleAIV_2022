@@ -6,13 +6,11 @@ using UnityEngine.AI;
 public class Gunner_PatrolBig : Enemy_PatrolBig
 {
     private float speed = 4f;
-    private float acceleration = 2f;
 
     int count = -1;
     bool turnBack = false;
     float timer;
 
-    protected NavMeshAgent agent;
     protected GunnerBigSM sm;
     public Gunner_PatrolBig(GunnerBigSM stateMachine) : base("Gunner_PatrolBig", stateMachine)
     {
@@ -21,20 +19,17 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
 
     public override void OnEnter()
     {
-        
         sm.DetectCollider.enabled = true;
         sm.OnShpereTriggerStay += OnDetection;
         sm.AttackCollider.enabled = false;
-        agent = sm.gameObject.GetComponent<NavMeshAgent>();
-        Debug.Log(agent);
         CalculateCount();
-        agent.speed = speed;
-        agent.destination = sm.patrolPoints[count].position;
+        sm.agent.speed = speed;
+        sm.agent.destination = sm.patrolPoints[count].position;
     }
 
     public override void UpdateLogic()
     {
-        if (!agent.hasPath)
+        if (!sm.agent.hasPath)
         {
             timer += Time.deltaTime;
             if (timer < sm.TimeBetweenPatrolPoints)
@@ -44,7 +39,7 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
             timer = 0;
             CalculateCount();
             if (count >= 0 && count < sm.patrolPoints.Count)
-                agent.destination = sm.patrolPoints[count].position;
+                sm.agent.destination = sm.patrolPoints[count].position;
         }
     }
 

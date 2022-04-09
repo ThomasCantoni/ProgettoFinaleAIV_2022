@@ -5,10 +5,7 @@ using UnityEngine.AI;
 
 public class Gunner_Attack : Enemy_Attack
 {
-    NavMeshAgent agent;
-
     private float timer = 0f;
-    private float speed = 4f;
     private AnimatorStateInfo infoAnim;
     private AnimatorTransitionInfo infoTrans;
     private int animAttacckStateHash = Animator.StringToHash("Grenadier_RangeAttack");
@@ -25,7 +22,6 @@ public class Gunner_Attack : Enemy_Attack
     public override void OnEnter()
     {
         timer = 0f;
-        agent = sm.gameObject.GetComponent<NavMeshAgent>();
         sm.DetectCollider.enabled = false;
         sm.animAct += Shoot;
     }
@@ -64,10 +60,6 @@ public class Gunner_Attack : Enemy_Attack
 
         Vector3 dest = (sm.ObjToChase.position - sm.transform.position).normalized;
         sm.transform.forward = Vector3.Lerp(sm.transform.forward, new Vector3(dest.x, 0, dest.z), 0.05f);
-
-        
-
-        
     }
     protected virtual void RangeAttack()
     {
@@ -79,7 +71,7 @@ public class Gunner_Attack : Enemy_Attack
         if (go != null)
         {
             Vector3 velocityOffset;
-            Vector3 targetVelocity;
+            Vector3 targetVelocity = Vector3.zero;
 
             if (sm.UseVeloictyOffset)
             {
@@ -91,7 +83,7 @@ public class Gunner_Attack : Enemy_Attack
                 velocityOffset = Vector3.zero;
             }
 
-            Debug.Log(velocityOffset);
+            Debug.Log(targetVelocity);
             go.transform.LookAt(sm.ObjToChase.position + new Vector3(0, 1, 0) + velocityOffset, Vector3.up);
         }
     }
@@ -100,7 +92,6 @@ public class Gunner_Attack : Enemy_Attack
     {
         //sm.anim.SetBool("WalkFast", true);
         sm.anim.SetBool("Idle", false);
-        agent.speed = speed;
         sm.animAct -= Shoot;
     }
 }

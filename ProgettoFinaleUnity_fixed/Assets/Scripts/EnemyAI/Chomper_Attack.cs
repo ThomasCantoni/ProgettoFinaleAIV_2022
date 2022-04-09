@@ -5,12 +5,8 @@ using UnityEngine.AI;
 
 public class Chomper_Attack : Enemy_Attack
 {
-    NavMeshAgent agent;
-
     private float timer = 0f;
     private bool hasAttacked = false;
-    private float speed = 2f;
-    private float acceleration = 2f;
     private AnimatorStateInfo infoAnim;
     private AnimatorTransitionInfo infoTrans;
     private int animAttacckStateHash = Animator.StringToHash("Chomper_Attack");
@@ -26,7 +22,6 @@ public class Chomper_Attack : Enemy_Attack
     public override void OnEnter()
     {
         timer = 0f;
-        agent = sm.gameObject.GetComponent<NavMeshAgent>();
         hasAttacked = false;
         sm.DetectCollider.enabled = false;
         sm.animAct += SetAttackCollider;
@@ -41,7 +36,7 @@ public class Chomper_Attack : Enemy_Attack
         {
             if (infoTrans.nameHash == animEndTransitionStateHash)
             {
-                agent.transform.position = sm.anim.transform.position;
+                sm.agent.transform.position = sm.anim.transform.position;
                 sm.anim.transform.localPosition = Vector3.zero;
             }
             else
@@ -86,7 +81,6 @@ public class Chomper_Attack : Enemy_Attack
     public override void OnExit()
     {
         sm.anim.SetBool("Run", false);
-        agent.speed = speed;
         sm.animAct -= SetAttackCollider;
     }
 }

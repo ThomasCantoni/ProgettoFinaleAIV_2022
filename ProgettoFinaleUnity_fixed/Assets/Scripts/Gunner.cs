@@ -16,8 +16,8 @@ public class Gunner : MonoBehaviour, IHittable
     public NavMeshAgent agent;
     //public Slider HP_Slider;
     public UnityEvent<bool> HandleAnim;
+    public UnityEvent OnDeath;
 
-    float timer = 4.7f;
     public virtual void OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
@@ -26,10 +26,9 @@ public class Gunner : MonoBehaviour, IHittable
         if (Health <= 0)
         {
             agent.speed = 0;
-            timer += Time.deltaTime;
             anim.SetTrigger("rip");
-            StartCoroutine(animDie(timer));
             //HP_Slider.transform.parent.gameObject.SetActive(false);
+            OnDeath?.Invoke();
         }
     }
     public virtual void OnAttackStart()
@@ -41,14 +40,13 @@ public class Gunner : MonoBehaviour, IHittable
     {
         HandleAnim?.Invoke(false);
     }
+    public virtual void OnDeathEndAnim()
+    {
+        HandleAnim?.Invoke(false);
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("success attacck");
         OnAttackHitted?.Invoke(20f);
-    }
-    public IEnumerator animDie(float timer)
-    {
-        yield return new WaitForSeconds(timer);
-        this.gameObject.SetActive(false);
     }
 }
