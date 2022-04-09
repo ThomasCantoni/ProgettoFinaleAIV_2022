@@ -10,6 +10,7 @@ using UnityEngine.Audio;
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
 
+    public bool UseLatestData = false;
 
     public PlayerData PlayerData;
    
@@ -126,15 +127,33 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void LoadData()
     {
-
-        if (SaveManager.LastSave == null)
+        if(!UseLatestData)
         {
-            Debug.LogError("COULD NOT LOAD SAVEFILE");
+            Debug.Log("Data not loaded. Uncheck the boolean 'UseLatestData' in PCSV \n if you wish to load the latest savefile");
             return;
+        }
+        for(int i=0;i<2;i++)
+        {
+            if (SaveManager.LastSave == null)
+            {
+                Debug.LogError("COULD NOT LOAD SAVEFILE. TRYING TO LOAD AGAIN");
+                SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat");
+                if(i==1)
+                {
+                    Debug.LogError("SECOND SAVEFILE LOADING ATTEMPT FAILED");
+                    return;
+                }
+            }
+            else
+            {
+                Debug.Log("Savefile succesfully loaded");
+                break;
+            }
         }
         this.PlayerData = SaveManager.LastSave;
         if (PlayerData.IsNewGame)
         {
+            FOV = 50f;
             return;
         }
         characterController.enabled = false;

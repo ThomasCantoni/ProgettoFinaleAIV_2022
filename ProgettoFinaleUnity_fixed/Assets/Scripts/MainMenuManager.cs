@@ -1,12 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
     public GameObject MainCanvas, OptionsCanvas, LoadingImage;
-
+    public Button ContinueButton;
+    private void Start()
+    {
+        
+        if(SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat") == null)
+        {
+            ContinueButton.enabled = false;
+        }
+        else
+        {
+            ContinueButton.enabled = true;
+        }
+    }
     public void StartNewGame()
     {
         SaveManager.LastSave = new PlayerData();
