@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
 
     public EllenActionPoints EllenAp;
-
+    public AudioMixerGroup Mixer;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
     public Camera Camera;
     public CharacterController characterController;
@@ -311,6 +312,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             TimeManager.DisableBulletTime();
             EllenAp.Disable();
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
+            Mixer.audioMixer.SetFloat("Pitch", 0.3f);
         }
 
 
@@ -394,14 +396,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             return;
         }
         TimeManager.EnableBulletTime();
+        
         if (TimeManager.IsBulletTimeActive)
         {
             EllenAp.Activate();
-
+            Mixer.audioMixer.SetFloat("Pitch", 0.3f);
         }
         else
         {
             EllenAp.Disable();
+            Mixer.audioMixer.SetFloat("Pitch", 1f);
         }
 
         Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
