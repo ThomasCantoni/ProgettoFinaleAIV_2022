@@ -6,7 +6,7 @@ public class CheckpointScript : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
         PlayerData newData = new PlayerData(other.GetComponent<PlayerControllerSecondVersion>());
         SaveManager.SavePlayer(newData);
         other.GetComponent<PlayerControllerSecondVersion>().PlayerData = SaveManager.LastSave;
