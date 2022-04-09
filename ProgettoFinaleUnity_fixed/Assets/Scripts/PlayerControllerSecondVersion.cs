@@ -312,7 +312,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             TimeManager.DisableBulletTime();
             EllenAp.Disable();
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
-            Mixer.audioMixer.SetFloat("Pitch", 0.3f);
+            Mixer.audioMixer.SetFloat("Pitch", 1f);
         }
 
 
