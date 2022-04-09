@@ -82,6 +82,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public Transform CameraReference;
     private float aimSensitivity = 1f;
     public float jumpHeight = 5f;
+    public float SpeedInAir = 2.5f;
     public Canvas PauseCanvas;
     public LayerMask SphereCastLayers;
     Vector3 playerVel;
@@ -348,8 +349,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
         else
         { //i am jumping
-            playerVel.x = MovementVector.x * 2.5f;
-            playerVel.z = MovementVector.z * 2.5f;
+            playerVel.x = MovementVector.x * SpeedInAir;
+            playerVel.z = MovementVector.z * SpeedInAir;
         }
 
         if (jumpPressed && isGrounded)
