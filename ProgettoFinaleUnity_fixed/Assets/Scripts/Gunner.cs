@@ -14,20 +14,26 @@ public class Gunner : MonoBehaviour, IHittable
     public UnityEvent<float> OnAttackHitted;
     public Animator anim;
     public NavMeshAgent agent;
-    //public Slider HP_Slider;
+    public Slider HP_Slider;
     public UnityEvent<bool> HandleAnim;
     public UnityEvent OnDeath;
+
+    void Start()
+    {
+        HP_Slider.maxValue = Health;
+        HP_Slider.value = Health;
+    }
 
     public virtual void OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
         Health--;
-        //HP_Slider.value = Health;
+        HP_Slider.value = Health;
         if (Health <= 0)
         {
             agent.speed = 0;
             anim.SetTrigger("rip");
-            //HP_Slider.transform.parent.gameObject.SetActive(false);
+            HP_Slider.transform.parent.gameObject.SetActive(false);
             OnDeath?.Invoke();
         }
     }

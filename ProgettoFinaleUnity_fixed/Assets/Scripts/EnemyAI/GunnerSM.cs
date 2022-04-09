@@ -42,7 +42,6 @@ public class GunnerSM : StateMachine
     void Awake()
     {
         OnAwake();
-        
     }
 
     void OnTriggerStay(Collider c)
@@ -63,7 +62,7 @@ public class GunnerSM : StateMachine
     {
         animAct?.Invoke(start);
     }
-    public void OnDeath()
+    public void OnEnemyDeath()
     {
         ChangeState(deathState);
     }
@@ -87,6 +86,11 @@ public class GunnerSM : StateMachine
             GameObject go = Instantiate(BulletPrefab);
             go.SetActive(false);
             go.transform.parent = BulletTransform;
+            if (BulletTransform.GetComponent<GunnerBulletPoolMgr>() == null)
+            {
+                BulletTransform.gameObject.AddComponent<GunnerBulletPoolMgr>();
+                BulletTransform.GetComponent<GunnerBulletPoolMgr>().OnCreation();
+            }
             BulletTransform.GetComponent<GunnerBulletPoolMgr>().AddBullet(go);
         }
     }

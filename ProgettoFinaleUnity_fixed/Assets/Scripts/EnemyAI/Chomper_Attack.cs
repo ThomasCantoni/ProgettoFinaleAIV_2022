@@ -25,6 +25,7 @@ public class Chomper_Attack : Enemy_Attack
         hasAttacked = false;
         sm.DetectCollider.enabled = false;
         sm.animAct += SetAttackCollider;
+        sm.anim.SetBool("Idle", true);
     }
 
     public override void UpdateLogic()

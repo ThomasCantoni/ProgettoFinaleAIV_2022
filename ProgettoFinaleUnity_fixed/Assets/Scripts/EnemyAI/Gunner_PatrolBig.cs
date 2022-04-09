@@ -7,9 +7,10 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
 {
     private float speed = 4f;
 
-    int count = -1;
-    bool turnBack = false;
-    float timer;
+    private int count = -1;
+    private bool turnBack = false;
+    private float timer;
+    private bool firstFrame = true;
 
     protected GunnerBigSM sm;
     public Gunner_PatrolBig(GunnerBigSM stateMachine) : base("Gunner_PatrolBig", stateMachine)
@@ -19,6 +20,7 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
 
     public override void OnEnter()
     {
+        firstFrame = true;
         sm.DetectCollider.enabled = true;
         sm.OnShpereTriggerStay += OnDetection;
         sm.AttackCollider.enabled = false;
@@ -40,6 +42,11 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
             CalculateCount();
             if (count >= 0 && count < sm.patrolPoints.Count)
                 sm.agent.destination = sm.patrolPoints[count].position;
+        }
+        else if (firstFrame)
+        {
+            sm.agent.destination = sm.patrolPoints[count].position;
+            firstFrame = false;
         }
     }
 

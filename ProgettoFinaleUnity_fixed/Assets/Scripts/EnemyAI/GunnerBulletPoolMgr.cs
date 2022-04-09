@@ -5,16 +5,15 @@ using UnityEngine;
 public class GunnerBulletPoolMgr : MonoBehaviour
 {
     Queue<GameObject> Bullets;
-    int freffa;
-
-    void Awake()
-    {
-        Bullets = new Queue<GameObject>(50);
-    }
 
     public void AddBullet(GameObject bullet)
     {
         Bullets.Enqueue(bullet);
+    }
+
+    public void OnCreation()
+    {
+        Bullets = new Queue<GameObject>(50);
     }
 
     public GameObject SpawnObj(Vector3 pos, Quaternion rot)
