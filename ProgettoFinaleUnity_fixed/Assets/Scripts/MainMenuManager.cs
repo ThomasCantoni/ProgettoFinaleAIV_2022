@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
     public Button ContinueButton;
     private void Start()
     {
-        
+        Cursor.visible = true;
         if(SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat") == null)
         {
             ContinueButton.enabled = false;
