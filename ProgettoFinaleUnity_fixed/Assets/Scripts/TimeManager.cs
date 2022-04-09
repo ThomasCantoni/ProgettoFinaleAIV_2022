@@ -43,6 +43,7 @@ public static class TimeManager
     }
     public static void EnablePause()
     {
+        Cursor.visible = true;
         Time.timeScale = 0f;
         PlayerCurrentSpeed = 0f;
         IsGamePaused = true;
@@ -65,5 +66,7 @@ public static class TimeManager
 
         }
         IsGamePaused = false;
+        Cursor.visible = false;
+
     }
 }

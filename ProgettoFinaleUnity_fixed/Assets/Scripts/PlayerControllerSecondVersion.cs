@@ -118,7 +118,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     
     private void OnEnable()
     {
-
+        
         Anim = GetComponent<Animator>();
         EllenAp = GetComponent<EllenActionPoints>();
         SetPrefs();
@@ -169,7 +169,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void Start()
     {
-
+        Cursor.visible = false;
         Anim.SetLayerWeight(1, 1);
         
         characterController = Player.GetComponent<CharacterController>();
