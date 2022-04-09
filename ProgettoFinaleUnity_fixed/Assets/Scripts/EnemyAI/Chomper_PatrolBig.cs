@@ -7,9 +7,10 @@ public class Chomper_PatrolBig : Enemy_PatrolBig
 {
     private float speed = 2f;
 
-    int count = -1;
-    bool turnBack = false;
-    float timer;
+    private int count = -1;
+    private bool turnBack = false;
+    private float timer;
+    private bool firstFrame = true;
 
     protected ChomperBigSM sm;
     public Chomper_PatrolBig(ChomperBigSM stateMachine) : base("Chomper_PatrolBig", stateMachine)
@@ -19,6 +20,8 @@ public class Chomper_PatrolBig : Enemy_PatrolBig
 
     public override void OnEnter()
     {
+        firstFrame = true;
+
         sm.DetectCollider.enabled = true;
         sm.OnShpereTriggerStay += OnDetection;
         sm.AttackCollider.enabled = false;
@@ -29,6 +32,7 @@ public class Chomper_PatrolBig : Enemy_PatrolBig
 
     public override void UpdateLogic()
     {
+        Debug.Log("PATROL");
         if (!sm.agent.hasPath)
         {
             timer += Time.deltaTime;
@@ -40,6 +44,11 @@ public class Chomper_PatrolBig : Enemy_PatrolBig
             CalculateCount();
             if (count >= 0 && count < sm.patrolPoints.Count)
                 sm.agent.destination = sm.patrolPoints[count].position;
+        }
+        else if (firstFrame)
+        {
+            sm.agent.destination = sm.patrolPoints[count].position;
+            firstFrame = false;
         }
     }
 

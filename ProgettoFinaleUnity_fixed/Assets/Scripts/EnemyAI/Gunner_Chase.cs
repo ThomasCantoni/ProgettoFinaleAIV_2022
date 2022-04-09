@@ -57,10 +57,10 @@ public class Gunner_Chase : Enemy_Chase
         {
             sm.ChangeState(sm.patrolState);
         }
-        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= sm.AttackDistance * 2 && timer <= 1f && AttemptReturnPatrol())
-        {
-            sm.ChangeState(sm.patrolState);
-        }
+        //if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= sm.AttackDistance * 2 && AttemptReturnPatrol())
+        //{
+        //    sm.ChangeState(sm.patrolState);
+        //}
         sm.agent.destination = sm.ObjToChase.position;
     }
 

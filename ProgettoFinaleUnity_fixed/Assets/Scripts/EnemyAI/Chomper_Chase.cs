@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class Chomper_Chase : Enemy_Chase
 {
     private float speed = 2f;
+    private float acceleration = 2f;
     private float timer = 0f;
     private float chaseTimer = 0f;
-    private float acceleration = 2f;
     private bool firstEnter = true;
 
     ChomperSM sm;
@@ -28,6 +28,7 @@ public class Chomper_Chase : Enemy_Chase
         {
             timer = 0f;
         }
+        chaseTimer = 0f;
         sm.agent.destination = sm.ObjToChase.position;
         sm.anim.SetBool("Run", true);
         sm.agent.speed = speed * acceleration;
@@ -35,26 +36,26 @@ public class Chomper_Chase : Enemy_Chase
 
     public override void UpdateLogic()
     {
+        Debug.Log("CHASE");
         timer += Time.deltaTime;
         chaseTimer += Time.deltaTime;
         if (timer >= sm.AttackCooldown && Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance)
         {
             sm.ChangeState(sm.attackState);
         }
-        if (timer >= 5f && AttemptReturnPatrol())
+        if (chaseTimer >= 5f && AttemptReturnPatrol())
         {
             sm.ChangeState(sm.patrolState);
         }
-        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= sm.AttackDistance * 2 && timer <= 1f && AttemptReturnPatrol())
-        {
-            sm.ChangeState(sm.patrolState);
-        }
+        //if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= sm.AttackDistance * 2 && chaseTimer >= 1f && AttemptReturnPatrol())
+        //{
+        //    sm.ChangeState(sm.patrolState);
+        //}
         sm.agent.destination = sm.ObjToChase.position;
     }
 
     public override void OnExit()
     {
-        sm.anim.SetBool("Idle", true);
         sm.anim.SetBool("Run", false);
         sm.agent.destination = sm.transform.position;
         sm.agent.speed = 0f;

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -17,6 +15,12 @@ public class Chomper : MonoBehaviour, IHittable
     public Slider HP_Slider;
     public UnityEvent<bool> HandleAnim;
     public UnityEvent OnDeath;
+
+    void Start()
+    {
+        HP_Slider.maxValue = Health;
+        HP_Slider.value = Health;
+    }
 
     public virtual void OnHit(Collider sender)
     {
@@ -46,7 +50,7 @@ public class Chomper : MonoBehaviour, IHittable
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("success attacck");
+        Debug.Log("20 DAMAGE");
         OnAttackHitted?.Invoke(20f);
     }
 }
