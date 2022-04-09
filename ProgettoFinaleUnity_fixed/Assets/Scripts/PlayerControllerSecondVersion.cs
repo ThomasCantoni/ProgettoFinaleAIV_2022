@@ -68,7 +68,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
     }
-
+    public AudioSource BulletTimeAudioSource;
     public EllenActionPoints EllenAp;
     public AudioMixerGroup Mixer;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
@@ -313,8 +313,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             EllenAp.Disable();
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
             Mixer.audioMixer.SetFloat("Pitch", 1f);
+            BulletTimeAudioSource.Stop();
         }
-
+        if(BulletTimeAudioSource.isPlaying)
+        {
+            BulletTimeAudioSource.pitch = 1.5f - (GetComponent<EllenActionPoints>().AP_Value / GetComponent<EllenActionPoints>().MaxAp)*0.8f;
+        }
+        
 
         MoveRelativeToCameraRotation();
         //isGrounded = IsGroundedTest();
@@ -400,12 +405,14 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         if (TimeManager.IsBulletTimeActive)
         {
             EllenAp.Activate();
+            BulletTimeAudioSource.Play();
             Mixer.audioMixer.SetFloat("Pitch", 0.3f);
         }
         else
         {
             EllenAp.Disable();
             Mixer.audioMixer.SetFloat("Pitch", 1f);
+            BulletTimeAudioSource.Stop();
         }
 
         Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
