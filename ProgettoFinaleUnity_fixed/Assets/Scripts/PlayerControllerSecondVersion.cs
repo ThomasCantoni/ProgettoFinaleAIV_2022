@@ -85,7 +85,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public LayerMask SphereCastLayers;
     Vector3 playerVel;
     Vector2 cameraRotationVec2FromMouse;
-    Vector3 MovementVector;
+    public Vector3 MovementVector;
     Vector2 direction;
     Quaternion cameraQuatForMovement;
     public Controls controls;
@@ -300,7 +300,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void Update()
     {
-        
         if (TimeManager.IsGamePaused)
         {
             return;

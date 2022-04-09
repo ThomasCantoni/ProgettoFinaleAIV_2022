@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class Gunner_Chase : Enemy_Chase
 {
-    NavMeshAgent agent;
     private float speed = 4f;
     private float acceleration = 1.2f;
     private float timer = 0f;
@@ -27,10 +26,9 @@ public class Gunner_Chase : Enemy_Chase
     public override void OnEnter()
     {
         timer = 0f;
-        agent = sm.gameObject.GetComponent<NavMeshAgent>();
-        agent.destination = sm.ObjToChase.position;
+        sm.agent.destination = sm.ObjToChase.position;
         sm.anim.SetBool("WalkFast", true);
-        agent.speed = speed * acceleration;
+        sm.agent.speed = speed * acceleration;
     }
 
     public override void UpdateLogic()
@@ -39,11 +37,11 @@ public class Gunner_Chase : Enemy_Chase
         infoAnim = sm.anim.GetCurrentAnimatorStateInfo(0);
         if (infoAnim.shortNameHash == animIdleStateHash && infoTrans.nameHash != animEndTransitionStateHash)
         {
-            agent.speed = 0f;
+            sm.agent.speed = 0f;
         }
         else
         {
-            agent.speed = speed * acceleration;
+            sm.agent.speed = speed * acceleration;
         }
         timer += Time.deltaTime;
         if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance )
@@ -55,23 +53,40 @@ public class Gunner_Chase : Enemy_Chase
                 sm.ChangeState(sm.attackState);
             }
         }
-        if (timer >= 5f)
+        if (timer >= 5f && AttemptReturnPatrol())
         {
             sm.ChangeState(sm.patrolState);
         }
-        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= sm.AttackDistance * 2 && timer <= 1f)
+        if (Vector3.Distance(sm.transform.position, sm.ObjToChase.position) >= sm.AttackDistance * 2 && timer <= 1f && AttemptReturnPatrol())
         {
             sm.ChangeState(sm.patrolState);
         }
-        agent.destination = sm.ObjToChase.position;
+        sm.agent.destination = sm.ObjToChase.position;
     }
 
     public override void OnExit()
     {
-        //METTERE IDLE
-        
         sm.anim.SetBool("WalkFast", false);
-        agent.destination = agent.transform.position;
-        agent.speed = 0f;
+        sm.agent.destination = sm.transform.position;
+        sm.agent.speed = 0f;
+    }
+
+    public virtual bool AttemptReturnPatrol()
+    {
+        if (sm is GunnerSmallSM)
+        {
+            if (((GunnerSmallSM)sm).Leader.gameObject.activeSelf)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
     }
 }

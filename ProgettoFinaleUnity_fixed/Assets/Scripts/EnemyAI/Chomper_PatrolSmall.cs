@@ -6,9 +6,7 @@ using UnityEngine.AI;
 public class Chomper_PatrolSmall : Enemy_PatrolSmall
 {
     private float speed = 2f;
-    private float acceleration = 2f;
 
-    protected NavMeshAgent agent;
     protected ChomperSmallSM sm;
     public Chomper_PatrolSmall(ChomperSmallSM stateMachine) : base("Chomper_PatrolSmall", stateMachine)
     {
@@ -20,14 +18,13 @@ public class Chomper_PatrolSmall : Enemy_PatrolSmall
         sm.DetectCollider.enabled = true;
         sm.OnShpereTriggerStay += OnDetection;
         sm.AttackCollider.enabled = false;
-        agent = sm.gameObject.GetComponent<NavMeshAgent>();
-        agent.speed = speed;
-        agent.destination = sm.Leader.FollowerDestinations[sm.ID].position;
+        sm.agent.speed = speed;
+        sm.agent.destination = sm.Leader.FollowerDestinations[sm.ID].position;
     }
 
     public override void UpdateLogic()
     {
-        agent.destination = sm.Leader.FollowerDestinations[sm.ID].position;
+        sm.agent.destination = sm.Leader.FollowerDestinations[sm.ID].position;
     }
 
     public override void OnExit()

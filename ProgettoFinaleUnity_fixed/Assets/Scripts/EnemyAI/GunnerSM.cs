@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GunnerSM : StateMachine
 {
     public delegate void OnSphereTriggerDelecate(GameObject sender, Collider collider, string message, bool fromEvent);
     public event OnSphereTriggerDelecate OnShpereTriggerStay;
     public event OnSphereTriggerDelecate OnShpereTriggerEnter;
+
     public delegate void ActionAnim(bool start);
     public event ActionAnim animAct;
+
     [HideInInspector]
     public Enemy_Patrol patrolState;
     [HideInInspector]
     public Enemy_Chase chaseState;
     [HideInInspector]
     public Enemy_Attack attackState;
+    [HideInInspector]
+    public Enemy_Death deathState;
     [HideInInspector]
     public Transform ObjToChase;
 
@@ -24,6 +29,7 @@ public class GunnerSM : StateMachine
     public bool UseVeloictyOffset = true;
 
     public Animator anim;
+    public NavMeshAgent agent;
     public float AttackDistance = 3f;
     public float AttackCooldown = 1.5f;
     public float PreAttackCooldown = 0.1f;
@@ -36,7 +42,7 @@ public class GunnerSM : StateMachine
     void Awake()
     {
         OnAwake();
-        anim = anim.GetComponent<Animator>();
+        
     }
 
     void OnTriggerStay(Collider c)
@@ -57,11 +63,19 @@ public class GunnerSM : StateMachine
     {
         animAct?.Invoke(start);
     }
+    public void OnDeath()
+    {
+        ChangeState(deathState);
+    }
 
     protected virtual void OnAwake()
     {
+        agent = GetComponent<NavMeshAgent>();
+        //anim = GetComponent<Animator>();
+
         chaseState = new Gunner_Chase(this);
         attackState = new Gunner_Attack(this);
+        deathState = new Gunner_Death(this);
 
         InstantiateBullets();
     }

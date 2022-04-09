@@ -2,14 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class ChomperSM : StateMachine
 {
     public delegate void OnSphereTriggerDelecate(GameObject sender, Collider collider, string message, bool fromEvent);
     public event OnSphereTriggerDelecate OnShpereTriggerStay;
     public event OnSphereTriggerDelecate OnShpereTriggerEnter;
+
     public delegate void ActionAnim(bool start);
     public event ActionAnim animAct;
+
     [HideInInspector]
     public Enemy_Patrol patrolState;
     [HideInInspector]
@@ -17,9 +20,12 @@ public abstract class ChomperSM : StateMachine
     [HideInInspector]
     public Enemy_Attack attackState;
     [HideInInspector]
+    public Enemy_Death deathState;
+    [HideInInspector]
     public Transform ObjToChase;
 
     public Animator anim;
+    public NavMeshAgent agent;
     public float AttackDistance = 3f;
     public float AttackCooldown = 1.5f;
     public float PreAttackCooldown = 0.1f;
@@ -28,11 +34,9 @@ public abstract class ChomperSM : StateMachine
     public Collider BodyCollider;
 
 
-
     void Awake()
     {
         OnAwake();
-        anim = anim.GetComponent<Animator>();
     }
 
     void OnTriggerStay(Collider c)
@@ -53,10 +57,18 @@ public abstract class ChomperSM : StateMachine
     {
         animAct?.Invoke(start);
     }
+    public void OnEnemyDeath()
+    {
+        ChangeState(deathState);
+    }
 
     protected virtual void OnAwake()
     {
+        agent = GetComponent<NavMeshAgent>();
+        //anim = GetComponent<Animator>();
+
         chaseState = new Chomper_Chase(this);
         attackState = new Chomper_Attack(this);
+        deathState = new Chomper_Death(this);
     }
 }
