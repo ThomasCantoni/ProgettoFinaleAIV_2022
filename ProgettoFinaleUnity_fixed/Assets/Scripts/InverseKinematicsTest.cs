@@ -17,11 +17,12 @@ public class InverseKinematicsTest : MonoBehaviour
     public TwoBoneIKConstraint restingGun;
     public Transform TargetIKShooting;
     private Transform CameraReference;
-    public float restingTarget = 0f, returnToRestCooldown = 1f;
-    public float returnToRestCooldownReset = 1f;
+    public float restingTarget = 0f;
+    public float returnToRestCooldown = 0.5f;
+    public float returnToRestCooldownReset = 0.5f;
     public float zoomLookAtTarget = 0f;
-    public float shootCooldownReset = 0.7f;
-    private float shootCooldown = 0f;
+    public float shootCooldownReset = 0.1f;
+    public float shootCooldown = 0f;
     public bool ShootingAvailable = false;
     public bool ShootingAvailableAngle = false;
 
@@ -84,7 +85,7 @@ public class InverseKinematicsTest : MonoBehaviour
                 returnToRestCooldown = returnToRestCooldownReset;
                 restingTarget = 0f;
                 ShootingAvailable = false;
-
+                shootCooldown = shootCooldownReset;
                 Shoot();
 
             }
