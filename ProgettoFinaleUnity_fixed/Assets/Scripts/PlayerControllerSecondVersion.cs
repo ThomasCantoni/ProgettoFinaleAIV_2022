@@ -100,6 +100,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     float JumpRayCastCd = 0f;
     float jumpCooldown = 0.1f;
     Vector2 accum = Vector2.zero;
+    float speedAirMulti = 1f;
+    public float SpeedInAirMultiplier = 1.8f;
 
     public GroundedCollider GroundedCollider;
 
@@ -369,8 +371,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
         else
         { //i am jumping
-            playerVel.x = MovementVector.x * SpeedInAir;
-            playerVel.z = MovementVector.z * SpeedInAir;
+            playerVel.x = MovementVector.x * SpeedInAir * speedAirMulti;
+            playerVel.z = MovementVector.z * SpeedInAir * speedAirMulti;
         }
 
         if (jumpPressed && isGrounded)
@@ -475,11 +477,15 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     void ShiftPressed(InputAction.CallbackContext context)
     {
         if (!isAiming)
+        {
             Anim.SetBool("Shift", true);
+            speedAirMulti = SpeedInAirMultiplier;
+        }
     }
     void ShiftReleased(InputAction.CallbackContext context)
     {
         Anim.SetBool("Shift", false);
+        speedAirMulti = 1f;
     }
 
     void SpacePressed(InputAction.CallbackContext context)
