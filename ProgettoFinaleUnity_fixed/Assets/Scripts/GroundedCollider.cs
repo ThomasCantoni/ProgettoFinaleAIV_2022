@@ -13,6 +13,7 @@ public class GroundedCollider : MonoBehaviour
     {
 
         PCSV.isGrounded = true;
+        GlobalVariables.IsPlayerGrounded = true;
     }
     //private void OnCollisionEnter(Collision collision)
     //{
@@ -33,9 +34,11 @@ public class GroundedCollider : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         PCSV.isGrounded = false;
+        GlobalVariables.IsPlayerGrounded = false;
     }
     private void OnTriggerEnter(Collider other)
     {
         PCSV.isGrounded = true;
+        GlobalVariables.IsPlayerGrounded = true;
     }
 }
