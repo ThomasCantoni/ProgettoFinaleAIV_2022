@@ -40,14 +40,17 @@ public class EllenHealthScript : MonoBehaviour
 
     public void DamagePlayer(float amount)
     {
-        if (hp_Value <= 0)
-        {
-            return;
-        }
-        HP_Value -= amount;
+        //if (hp_Value <= 0)
+        //{
+        //    return;
+        //}
 
+        HP_Value -= amount;
+        anim.SetTrigger("Hit");
+        anim.SetLayerWeight(2, 0.5f);
         if (hp_Value <= 0)
         {
+            anim.SetLayerWeight(2, 0);
             anim.SetBool("isDeath", true);
             anim.SetTrigger("EllenDeath");
             PlayerControllerSecondVersion PCSV = GetComponent<PlayerControllerSecondVersion>();
@@ -56,9 +59,7 @@ public class EllenHealthScript : MonoBehaviour
             GetComponent<CharacterController>().enabled = false;
             GetComponent<RigBuilder>().enabled = false;
             this.gameObject.AddComponent<CameraOut>();
-            
             this.gameObject.GetComponent<CameraOut>().cam = PCSV.ThirdPersonCamera;
-           
         }
     }
     public void HealPlayer(float amount)
