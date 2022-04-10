@@ -8,7 +8,6 @@ public class InverseKinematicsTest : MonoBehaviour
 {
     public PlayerControllerSecondVersion PCSV;
     public GameObject Gun;
-    public bool GunEquipped = false, Shooting = false;
     [SerializeField] public Rig zoomLookAtRig;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform point;
@@ -21,8 +20,20 @@ public class InverseKinematicsTest : MonoBehaviour
     public float returnToRestCooldown = 0.5f;
     public float returnToRestCooldownReset = 0.5f;
     public float zoomLookAtTarget = 0f;
+ 
+    public float FireRate 
+    { get
+        {
+            return 1f / shootCooldownReset;
+        }
+        set
+        {
+            shootCooldownReset = 1f / value;
+        }
+    }
     public float shootCooldownReset = 0.1f;
     public float shootCooldown = 0f;
+    public bool GunEquipped = false, Shooting = false;
     public bool ShootingAvailable = false;
     public bool ShootingAvailableAngle = false;
 
@@ -164,7 +175,7 @@ public class InverseKinematicsTest : MonoBehaviour
         if (shootCooldown <= 0f)
         {
             ShootingAvailable = true;
-            shootCooldown = shootCooldownReset;
+            
 
         }
 

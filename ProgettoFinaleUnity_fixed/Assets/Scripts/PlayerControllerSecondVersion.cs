@@ -10,10 +10,6 @@ using UnityEngine.Audio;
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
 
-    public bool UseLatestData = false;
-
-    public PlayerData PlayerData;
-   
     public bool GunEquipped
     {
         get
@@ -69,6 +65,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
     }
+    public bool UseLatestData = false;
+    public PlayerData PlayerData;
     public AudioSource BulletTimeAudioSource;
     public EllenActionPoints EllenAp;
     public AudioMixerGroup Mixer;
@@ -78,7 +76,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public Animator Anim;
     public GameObject Player;
 
-    // public Transform modelToMove;
+  
 
     public Transform CameraReference;
     private float aimSensitivity = 1f;
@@ -105,24 +103,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
     public GroundedCollider GroundedCollider;
 
-
-
     private void Awake()
     {
-        controls = new Controls();
     }
-    private void GetStuff()
-    {
-
-    }
-    
     private void OnEnable()
     {
-        
+        controls = new Controls();
         Anim = GetComponent<Animator>();
         EllenAp = GetComponent<EllenActionPoints>();
-        SetPrefs();
         LoadData();
+        SetPrefs();
 
     }
     void LoadData()
@@ -153,7 +143,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         this.PlayerData = SaveManager.LastSave;
         if (PlayerData.IsNewGame)
         {
-            FOV = 50f;
+            PlayerPrefs.SetFloat(SaveManager.FOV,50f);
+            PlayerPrefs.SetFloat(SaveManager.AimSensitivity,5f);
             return;
         }
         characterController.enabled = false;
@@ -164,6 +155,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void SetPrefs()
     {
+       
         AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
     }
@@ -321,6 +313,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void Update()
     {
+        
+        
         if (TimeManager.IsGamePaused)
         {
             return;
@@ -344,6 +338,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         //isGrounded = IsGroundedTest();
         Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
+
+       // Debug.LogWarning(GlobalVariables.PlayerVelocityAuto + " ..... " + characterController.velocity + " #### " + MeasuredVelocity) ;
     }
     void GravityAndJumpUpdate()
     {
@@ -380,6 +376,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         if (jumpPressed && isGrounded)
         { // i am grounded and i want to jump
             isGrounded = false;
+            GlobalVariables.IsPlayerGrounded = isGrounded;
             GroundedCollider.enabled = false;
             GroundedCollider.GetComponent<SphereCollider>().enabled = false;
 
@@ -392,6 +389,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             jumpCooldown = 0.3f;
         }
         playerVel.y += GravityScaled;
+        GlobalVariables.PlayerVelocityNotGrounded = playerVel;
         characterController.Move(playerVel * PlayerSpeed);
     }
     public bool IsGroundedTest()
@@ -440,6 +438,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         Vector3 fromAbsoluteToRelative = cameraQuatForMovement * new Vector3(direction.x, 0, direction.y);
         MovementVector = fromAbsoluteToRelative;
+        GlobalVariables.PlayerVelocityGrounded = MovementVector;
         float magnitude = MovementVector.magnitude;
 
         Anim.SetFloat(AnimatorVelocityHash, magnitude);
@@ -499,5 +498,5 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         controls.Disable();
     }
-
+    
 }
