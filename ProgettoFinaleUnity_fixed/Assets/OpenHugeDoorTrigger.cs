@@ -8,9 +8,9 @@ public class OpenHugeDoorTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider collision)
     {
-        PlayerControllerSecondVersion attempt = new PlayerControllerSecondVersion();
+        
 
-        if (collision.gameObject.TryGetComponent(out attempt))
+        if (collision.gameObject.layer == 3)
         {
             if (!Anim.GetBool("isDoorOpen"))
             {
@@ -22,14 +22,13 @@ public class OpenHugeDoorTrigger : MonoBehaviour
     }
     private void OnTriggerExit(Collider collision)
     {
-        PlayerControllerSecondVersion attempt = new PlayerControllerSecondVersion();
-
-        if (collision.gameObject.TryGetComponent(out attempt))
+        if (collision.gameObject.layer == 3)
         {
             if (Anim.GetBool("isDoorOpen"))
             {
                 Anim.SetTrigger("CloseDoor");
                 Anim.SetBool("isDoorOpen", false);
+
             }
         }
     }
