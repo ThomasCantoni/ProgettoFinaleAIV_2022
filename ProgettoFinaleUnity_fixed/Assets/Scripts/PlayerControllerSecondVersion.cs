@@ -60,7 +60,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         get
         {
-            return gravityValue * PlayerSpeed;
+            return Physics.gravity.y * Time.deltaTime;
         }
 
 
