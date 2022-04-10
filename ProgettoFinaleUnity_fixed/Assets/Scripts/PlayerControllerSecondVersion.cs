@@ -349,14 +349,14 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         if (JumpRayCastCd > 0)
         {
             JumpRayCastCd -= Time.deltaTime;
+            GroundedCollider.Disable();
             GroundedCollider.enabled = false;
-            GroundedCollider.GetComponent<SphereCollider>().enabled = false;
             //isGrounded = false;
         }
         else
         {
             GroundedCollider.enabled = true;
-            GroundedCollider.GetComponent<SphereCollider>().enabled = true;
+            GroundedCollider.Enable();
         }
 
         if (isGrounded)
@@ -379,8 +379,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         { // i am grounded and i want to jump
             isGrounded = false;
             GlobalVariables.IsPlayerGrounded = isGrounded;
+            GroundedCollider.Disable();
             GroundedCollider.enabled = false;
-            GroundedCollider.GetComponent<SphereCollider>().enabled = false;
 
 
             JumpRayCastCd = 0.2f;
