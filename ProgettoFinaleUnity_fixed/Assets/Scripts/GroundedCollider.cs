@@ -4,41 +4,53 @@ using UnityEngine;
 
 public class GroundedCollider : MonoBehaviour
 {
-    public PlayerControllerSecondVersion PCSV;
-    private void Start()
+    
+    public SphereCollider Small, Big;
+    public bool touching;
+    private void OnTriggerEnter(Collider other)
     {
-        //PCSV = gameObject.GetComponentInParent<PlayerControllerSecondVersion>();
+        touching = true;
+        
     }
     private void OnTriggerStay(Collider other)
     {
 
-        PCSV.isGrounded = true;
-        GlobalVariables.IsPlayerGrounded = true;
+        touching = true;
+        
     }
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    PCSV.isGrounded = true;
-
-    //}
-    //private void OnCollisionStay(Collision collision)
-    //{
-
-    //    PCSV.isGrounded = true;
-
-    //}
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    PCSV.isGrounded = false;
-
-    //}
     private void OnTriggerExit(Collider other)
     {
-        PCSV.isGrounded = false;
-        GlobalVariables.IsPlayerGrounded = false;
+        touching = false;
+        
     }
-    private void OnTriggerEnter(Collider other)
+    public void Disable()
     {
-        PCSV.isGrounded = true;
-        GlobalVariables.IsPlayerGrounded = true;
+        SphereCollider[] c = GetComponents<SphereCollider>();
+        foreach (SphereCollider x in c)
+        {
+            x.enabled = false;
+        }
+        touching = false;
+        this.enabled = false;
     }
+    public void Enable()
+    {
+       SphereCollider[] c = GetComponents<SphereCollider>();
+       foreach(SphereCollider x in c)
+        {
+            x.enabled = true;
+        }
+        this.enabled = true;
+    }
+    public void SwitchToSmall()
+    {
+        Small.enabled = true;
+        Big.enabled = false;
+    }
+    public void SwitchToBig()
+    {
+        Small.enabled = false;
+        Big.enabled = true;
+    }
+   
 }

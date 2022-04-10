@@ -97,7 +97,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
     float gravityValue = -9.81f;
-    float JumpRayCastCd = 0f;
+    float GroundCheckCooldown = 0.1f;
     float jumpCooldown = 0.1f;
     Vector2 accum = Vector2.zero;
     float speedAirMulti = 1f;
@@ -345,18 +345,19 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void GravityAndJumpUpdate()
     {
-
-        if (JumpRayCastCd > 0)
+        
+        if (GroundCheckCooldown > 0f)
         {
-            JumpRayCastCd -= Time.deltaTime;
-            GroundedCollider.enabled = false;
-            GroundedCollider.GetComponent<SphereCollider>().enabled = false;
+            GroundCheckCooldown -= Time.deltaTime;
+            GroundedCollider.Disable();
+           
             //isGrounded = false;
         }
         else
         {
-            GroundedCollider.enabled = true;
-            GroundedCollider.GetComponent<SphereCollider>().enabled = true;
+            isGrounded = GroundedCollider.touching;
+            GlobalVariables.IsPlayerGrounded = isGrounded;
+            GroundedCollider.Enable();
         }
 
         if (isGrounded)
@@ -364,13 +365,15 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             playerVel = Vector3.zero;
             jumpCooldown -= Time.deltaTime;
             jumpCooldown = Mathf.Clamp(jumpCooldown, 0f, 1f);
-
+            GroundedCollider.SwitchToBig();
             //Anim.SetBool("isGrounded", true);
             if (!isAiming)
                 Anim.applyRootMotion = true;
         }
         else
-        { //i am jumping
+        { //i am in the air
+            GroundedCollider.SwitchToSmall();
+
             playerVel.x = MovementVector.x * SpeedInAir * speedAirMulti;
             playerVel.z = MovementVector.z * SpeedInAir * speedAirMulti;
         }
@@ -379,11 +382,13 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         { // i am grounded and i want to jump
             isGrounded = false;
             GlobalVariables.IsPlayerGrounded = isGrounded;
-            GroundedCollider.enabled = false;
-            GroundedCollider.GetComponent<SphereCollider>().enabled = false;
+            GroundedCollider.Disable();
+           
+            
+           
 
 
-            JumpRayCastCd = 0.2f;
+            GroundCheckCooldown = 0.2f;
             jumpPressed = false;
             playerVel.y += Mathf.Sqrt(jumpHeight * gravityValue * -1f);
             Anim.SetBool("Jump", true);
@@ -396,9 +401,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     public bool IsGroundedTest()
     {
-        if (JumpRayCastCd > 0)
+        if (GroundCheckCooldown > 0)
         {
-            JumpRayCastCd = JumpRayCastCd - Time.deltaTime;
+            GroundCheckCooldown = GroundCheckCooldown - Time.deltaTime;
             return false;
         }
         else
