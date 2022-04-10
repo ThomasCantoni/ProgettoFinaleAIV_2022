@@ -86,7 +86,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public LayerMask SphereCastLayers;
     Vector3 playerVel;
     Vector2 cameraRotationVec2FromMouse;
-    public Vector3 MovementVector;
+    Vector3 MovementVector;
     Vector2 direction;
     Quaternion cameraQuatForMovement;
     public Controls controls;

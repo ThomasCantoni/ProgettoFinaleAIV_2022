@@ -31,7 +31,7 @@ public class InverseKinematicsTest : MonoBehaviour
             shootCooldownReset = 1f / value;
         }
     }
-    public float shootCooldownReset = 0.1f;
+    public float shootCooldownReset = 0.6f;
     public float shootCooldown = 0f;
     public bool GunEquipped = false, Shooting = false;
     public bool ShootingAvailable = false;
@@ -216,8 +216,9 @@ public class InverseKinematicsTest : MonoBehaviour
         PCSV.Anim.SetBool("Shot", true);
         Vector2 screenCenterPoint = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
         Ray ray = PCSV.Camera.ScreenPointToRay(screenCenterPoint);
-
-       // Physics.SphereCast(ray, 0.05f, out RaycastHit info, 100f, aimColliderLayerMask);
+        GunScript GS = Gun.GetComponent<GunScript>();
+        GS.FX_Play();
+        // Physics.SphereCast(ray, 0.05f, out RaycastHit info, 100f, aimColliderLayerMask);
         if (Physics.SphereCast(ray,0.1f, out RaycastHit hit, 100f, aimColliderLayerMask)) // if the object i hit is an enemy
         {
 
