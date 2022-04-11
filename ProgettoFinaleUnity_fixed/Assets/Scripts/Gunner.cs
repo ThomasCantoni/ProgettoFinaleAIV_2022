@@ -11,17 +11,20 @@ public class Gunner : MonoBehaviour, IHittable
 {
     public int Health;
     public UnityEvent<Collider> OnHitEvent;
-    public UnityEvent<float> OnAttackHitted;
+    //public UnityEvent<float> OnAttackHitted;
     public Animator anim;
     public NavMeshAgent agent;
     public Slider HP_Slider;
     public UnityEvent<bool> HandleAnim;
     public UnityEvent OnDeath;
+    EllenHealthScript EHS;
 
     void Start()
     {
         HP_Slider.maxValue = Health;
         HP_Slider.value = Health;
+        GameObject ellen = GameObject.Find("Ellen_PLAYER");
+        EHS = ellen.GetComponent<EllenHealthScript>();
     }
 
     public virtual void OnHit(Collider sender)
@@ -52,7 +55,8 @@ public class Gunner : MonoBehaviour, IHittable
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("success attacck");
-        OnAttackHitted?.Invoke(20f);
+        EHS.DamagePlayer(20f);
+        //Debug.Log("success attacck");
+        //OnAttackHitted?.Invoke(20f);
     }
 }
