@@ -19,12 +19,16 @@ public class Chomper : MonoBehaviour, IHittable
 
     void Start()
     {
+        GetEllen();
         HP_Slider.maxValue = Health;
         HP_Slider.value = Health;
+    }
+
+    public void GetEllen()
+    {
         GameObject ellen = GameObject.Find("Ellen PLAYER");
         EHS = ellen.GetComponent<EllenHealthScript>();
     }
-
     public virtual void OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
@@ -53,6 +57,10 @@ public class Chomper : MonoBehaviour, IHittable
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (EHS == null)
+        {
+            GetEllen();
+        }
         EHS.DamagePlayer(20f);
         //Debug.Log("20 DAMAGE");
         //OnAttackHitted?.Invoke(20f);
