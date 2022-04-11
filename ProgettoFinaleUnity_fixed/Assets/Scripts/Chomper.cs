@@ -9,7 +9,7 @@ public class Chomper : MonoBehaviour, IHittable
 {
     public int Health;
     public UnityEvent<Collider> OnHitEvent;
-    public UnityEvent<float> OnAttackHitted;
+    //public UnityEvent<float> OnAttackHitted;
     public Animator anim;
     public NavMeshAgent agent;
     public Slider HP_Slider;
@@ -22,7 +22,7 @@ public class Chomper : MonoBehaviour, IHittable
         HP_Slider.maxValue = Health;
         HP_Slider.value = Health;
         GameObject ellen = GameObject.Find("Ellen PLAYER");
-       EHS = ellen.GetComponent<EllenHealthScript>();
+        EHS = ellen.GetComponent<EllenHealthScript>();
     }
 
     public virtual void OnHit(Collider sender)
@@ -54,7 +54,7 @@ public class Chomper : MonoBehaviour, IHittable
     private void OnTriggerEnter(Collider other)
     {
         EHS.DamagePlayer(20f);
-        Debug.Log("20 DAMAGE");
+        //Debug.Log("20 DAMAGE");
         //OnAttackHitted?.Invoke(20f);
     }
 }
