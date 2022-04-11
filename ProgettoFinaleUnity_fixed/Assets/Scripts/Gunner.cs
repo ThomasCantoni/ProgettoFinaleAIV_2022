@@ -21,12 +21,16 @@ public class Gunner : MonoBehaviour, IHittable
 
     void Start()
     {
+        GetEllen();
         HP_Slider.maxValue = Health;
         HP_Slider.value = Health;
-        GameObject ellen = GameObject.Find("Ellen_PLAYER");
-        EHS = ellen.GetComponent<EllenHealthScript>();
     }
 
+    public void GetEllen()
+    {
+        GameObject ellen = GameObject.Find("Ellen PLAYER");
+        EHS = ellen.GetComponent<EllenHealthScript>();
+    }
     public virtual void OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
@@ -55,7 +59,11 @@ public class Gunner : MonoBehaviour, IHittable
     }
     private void OnTriggerEnter(Collider other)
     {
-        EHS.DamagePlayer(20f);
+        if (EHS == null)
+        {
+            GetEllen();
+        }
+        EHS.DamagePlayer(40f);
         //Debug.Log("success attacck");
         //OnAttackHitted?.Invoke(20f);
     }
