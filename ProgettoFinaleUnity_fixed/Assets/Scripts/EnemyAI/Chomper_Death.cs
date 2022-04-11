@@ -32,7 +32,7 @@ public class Chomper_Death : Enemy_Death
         if (startTimer)
         {
             timer += Time.deltaTime;
-            if (timer >= 0.2f)
+            if (timer >= 0.1f)
             {
                 sm.transform.gameObject.SetActive(false);
                 sm.animAct -= OnEndDeathAnimation;
