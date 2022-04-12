@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class KeyScript : MonoBehaviour
 {
     [SerializeField]
     public int KeyID = 0;
     AudioSource AS;
+    public UnityEvent Event;
     private void Start()
     {
         AS = GetComponent<AudioSource>();
+      
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -14,11 +14,11 @@ public class CheckpointScript : MonoBehaviour
         SaveManager.SavePlayer(newData);
         other.GetComponent<PlayerControllerSecondVersion>().PlayerData = SaveManager.LastSave;
         this.GetComponent<AudioSource>().Play();
-        System.Diagnostics.Stopwatch s = new System.Diagnostics.Stopwatch();
-        s.Start();
+       // System.Diagnostics.Stopwatch s = new System.Diagnostics.Stopwatch();
+        //s.Start();
         GameObject go = FindGameObjectWithInactiveTag("Game Saved");
-        s.Stop();
-        Debug.LogError(s.ElapsedMilliseconds * 0.001);
+        //s.Stop();
+        //Debug.LogError(s.ElapsedMilliseconds * 0.001);
         go.SetActive(true);
         StartCoroutine(DisableText(go));
     }
