@@ -19,8 +19,11 @@ public class Gunner : MonoBehaviour, IHittable
     public UnityEvent OnDeath;
     EllenHealthScript EHS;
 
+    
+
     void Start()
     {
+        
         GetEllen();
         HP_Slider.maxValue = Health;
         HP_Slider.value = Health;
@@ -31,6 +34,7 @@ public class Gunner : MonoBehaviour, IHittable
         GameObject ellen = GameObject.Find("Ellen PLAYER");
         EHS = ellen.GetComponent<EllenHealthScript>();
     }
+    
     public virtual void OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
@@ -41,7 +45,7 @@ public class Gunner : MonoBehaviour, IHittable
             agent.speed = 0;
             anim.SetTrigger("rip");
             HP_Slider.transform.parent.gameObject.SetActive(false);
-            OnDeath?.Invoke();
+        OnDeath?.Invoke();
         }
     }
     public virtual void OnAttackStart()
@@ -53,8 +57,10 @@ public class Gunner : MonoBehaviour, IHittable
     {
         HandleAnim?.Invoke(false);
     }
+   
     public virtual void OnDeathEndAnim()
     {
+        
         HandleAnim?.Invoke(false);
     }
     private void OnTriggerEnter(Collider other)
@@ -67,4 +73,6 @@ public class Gunner : MonoBehaviour, IHittable
         //Debug.Log("success attacck");
         //OnAttackHitted?.Invoke(20f);
     }
+
+   
 }

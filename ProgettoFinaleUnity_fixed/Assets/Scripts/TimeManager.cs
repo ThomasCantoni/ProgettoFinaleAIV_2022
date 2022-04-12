@@ -65,8 +65,8 @@ public static class TimeManager
             PlayerCurrentSpeed = 1f;
 
         }
-        IsGamePaused = false;
         Cursor.visible = false;
+        IsGamePaused = false;
 
     }
 }
