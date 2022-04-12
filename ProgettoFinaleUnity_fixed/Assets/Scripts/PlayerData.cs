@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+
 [Serializable]
 public class PlayerData
 {
@@ -9,6 +10,8 @@ public class PlayerData
     public float PlayerHp, PlayerAp;
     private bool newData = true;
     public int SceneIndex;
+    [SerializeField]
+    public List<int> TakenKeysID;
     public bool IsNewGame
     {
         get
