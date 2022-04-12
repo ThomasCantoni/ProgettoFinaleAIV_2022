@@ -11,7 +11,7 @@ public class PlayerData
     private bool newData = true;
     public int SceneIndex;
     [SerializeField]
-    public List<int> TakenKeysID;
+    public List<int> keysTaken = new List<int>();
     public bool IsNewGame
     {
         get
@@ -26,6 +26,7 @@ public class PlayerData
         playerPosX = pcsv.transform.position.x;
         playerPosY = pcsv.transform.position.y;
         playerPosZ = pcsv.transform.position.z;
+        keysTaken = pcsv.PlayerData.keysTaken;
         newData = false;
     }
     public PlayerData()

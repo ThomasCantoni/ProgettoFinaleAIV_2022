@@ -13,7 +13,7 @@ public class KeyScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<PlayerControllerSecondVersion>().PlayerData.TakenKeysID.Add(this.KeyID);
+        other.GetComponent<PlayerControllerSecondVersion>().PlayerData.keysTaken.Add(this.KeyID);
         AS.Play();
         Transform[] children = GetComponentsInChildren<Transform>();
         for (int i = 0; i < children.Length; i++)

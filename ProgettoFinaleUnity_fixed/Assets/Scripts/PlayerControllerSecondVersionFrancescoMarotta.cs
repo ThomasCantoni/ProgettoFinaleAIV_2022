@@ -50,7 +50,7 @@ public class PlayerControllerSecondVersionFrancescoMarotta : MonoBehaviour
     public Animator Anim;
     public Canvas PauseCanvas;
     Quaternion cameraQuatForMovement;
-    float ciao = 17f;
+    
 
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform point;
