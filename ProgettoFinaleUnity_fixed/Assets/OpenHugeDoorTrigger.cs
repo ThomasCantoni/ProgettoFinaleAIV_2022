@@ -6,6 +6,7 @@ public class OpenHugeDoorTrigger : MonoBehaviour
 {
     public Animator Anim;
 
+   
     private void OnTriggerStay(Collider collision)
     {
         
@@ -16,7 +17,7 @@ public class OpenHugeDoorTrigger : MonoBehaviour
             {
                 Anim.SetBool("isDoorOpen", true);
                 Anim.SetTrigger("OpenDoor");
-
+                
             }
         }
     }
@@ -28,6 +29,7 @@ public class OpenHugeDoorTrigger : MonoBehaviour
             {
                 Anim.SetTrigger("CloseDoor");
                 Anim.SetBool("isDoorOpen", false);
+                
 
             }
         }
