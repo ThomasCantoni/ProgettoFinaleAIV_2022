@@ -57,7 +57,8 @@ public class EllenHealthScript : MonoBehaviour
             PCSV.controls.asset.Disable();
             StartCoroutine(activateCanvas());
             GetComponent<CharacterController>().enabled = false;
-            GetComponent<RigBuilder>().enabled = false;
+            //NON TOCCARE RIGBUILDER
+            //GetComponent<RigBuilder>().enabled = false;
             this.gameObject.AddComponent<CameraOut>();
             this.gameObject.GetComponent<CameraOut>().cam = PCSV.ThirdPersonCamera;
         }
