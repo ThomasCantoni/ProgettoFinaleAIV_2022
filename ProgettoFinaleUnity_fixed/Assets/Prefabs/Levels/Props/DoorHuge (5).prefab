@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3183451696875505444}
   - component: {fileID: 7705345083851951067}
   - component: {fileID: 8377762096451961229}
-  - component: {fileID: 1850840305162675}
   m_Layer: 0
   m_Name: DoorHuge (5)
   m_TagString: Untagged
@@ -71,24 +70,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.5, z: -8.5}
   m_TimeToStationary: 0.5
---- !u!114 &1850840305162675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5017937305972653985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e9634ae800aba4f82d510d382da65c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Enemies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  AmountDead: 0
 --- !u!1 &5807467216575758966
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +87,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6418518530676394812
 Transform:
   m_ObjectHideFlags: 0
@@ -130,7 +111,7 @@ BoxCollider:
   m_GameObject: {fileID: 5807467216575758966}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5, y: 2.43, z: 15}
   m_Center: {x: 0, y: 1, z: 0}

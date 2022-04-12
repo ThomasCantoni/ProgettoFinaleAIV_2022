@@ -23,7 +23,7 @@ public class RespawnUIScript : MonoBehaviour
     {
         //PCSV.enabled = true;
         //IKT.enabled = true;
-        Rb.enabled = true;
+        
         PCSV.Respwan();
         PCSV.Anim.SetBool("isDeath", false);
         
