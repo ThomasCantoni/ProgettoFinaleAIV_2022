@@ -322,10 +322,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         {
             return;
         }
-        else
-        {
-            Cursor.visible = false;
-        }
+        
 
         if (EllenAp.AP_Value <= 0f && EllenAp.isActive)
         {

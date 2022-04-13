@@ -26,7 +26,7 @@ public class RespawnUIScript : MonoBehaviour
         
         PCSV.Respwan();
         PCSV.Anim.SetBool("isDeath", false);
-        
+        Cursor.visible = false;
         
         PCSV.GetComponent<CharacterController>().enabled = true;
         UICanvas.gameObject.SetActive(true);
