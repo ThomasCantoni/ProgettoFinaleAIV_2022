@@ -369,6 +369,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         if (isGrounded)
         {
             playerVel = Vector3.zero;
+            playerVel.y = -1f;
             jumpCooldown -= Time.deltaTime;
             jumpCooldown = Mathf.Clamp(jumpCooldown, 0f, 1f);
             GroundedCollider.SwitchToBig();
@@ -393,6 +394,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
             GroundCheckCooldown = 0.2f;
             jumpPressed = false;
+            playerVel.y = 0f;
             playerVel.y += Mathf.Sqrt(jumpHeight * gravityValue * -1f);
             Anim.SetBool("Jump", true);
             Anim.applyRootMotion = false;
