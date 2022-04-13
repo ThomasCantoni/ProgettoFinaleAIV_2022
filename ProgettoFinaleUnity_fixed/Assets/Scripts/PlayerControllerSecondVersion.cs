@@ -148,6 +148,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         {
             PlayerPrefs.SetFloat(SaveManager.FOV,50f);
             PlayerPrefs.SetFloat(SaveManager.AimSensitivity,5f);
+
+            //overwrite data with current data
+            PlayerData = new PlayerData(this);
+            SaveManager.SavePlayer(PlayerData);
             return;
         }
         characterController.enabled = false;
