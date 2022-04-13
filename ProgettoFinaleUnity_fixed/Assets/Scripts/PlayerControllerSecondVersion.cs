@@ -322,11 +322,11 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         
         
+        
         if (TimeManager.IsGamePaused)
         {
             return;
         }
-        
 
         if (EllenAp.AP_Value <= 0f && EllenAp.isActive)
         {
