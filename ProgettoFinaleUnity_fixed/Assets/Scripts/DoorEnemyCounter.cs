@@ -15,7 +15,7 @@ public class DoorEnemyCounter : MonoBehaviour
         for(int i=0;i<Enemies.Length;i++)
         {
 
-            Enemies[i].GetComponent<Chomper>().OnDeath.AddListener(OnEnemyDeath);
+            Enemies[i].GetComponent<Enemy>().OnDeath.AddListener(OnEnemyDeath);
         }
         
         
