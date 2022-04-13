@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlaySound : MonoBehaviour
 {
    public  AudioSource AS;
+    public AudioClip Clip;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,10 @@ public class PlaySound : MonoBehaviour
 
     public void PlaySource()
     {
+        if(Clip != null)
+        {
+            AS.clip = Clip;
+        }
         AS.Play();
     }
 }
