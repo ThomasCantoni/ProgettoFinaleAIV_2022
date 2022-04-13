@@ -82,6 +82,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     private float aimSensitivity = 1f;
     public float jumpHeight = 5f;
     public float SpeedInAir = 2.5f;
+    public float SpeedWhileAiming = 2f;
     public Canvas PauseCanvas;
     public LayerMask SphereCastLayers;
     Vector3 playerVel;
@@ -342,8 +343,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         MoveRelativeToCameraRotation();
         //isGrounded = IsGroundedTest();
-        Anim.SetBool("isGrounded", isGrounded);
         GravityAndJumpUpdate();
+        //Anim.SetBool("isGrounded", isGrounded);
 
        // Debug.LogWarning(GlobalVariables.PlayerVelocityAuto + " ..... " + characterController.velocity + " #### " + MeasuredVelocity) ;
     }
@@ -359,9 +360,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         }
         else
         {
-            isGrounded = GroundedCollider.touching;
-            GlobalVariables.IsPlayerGrounded = isGrounded;
             GroundedCollider.Enable();
+            isGrounded = GroundedCollider.touching;
+            Anim.SetBool("isGrounded", isGrounded);
+            GlobalVariables.IsPlayerGrounded = isGrounded;
         }
 
         if (isGrounded)
@@ -387,10 +389,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             isGrounded = false;
             GlobalVariables.IsPlayerGrounded = isGrounded;
             GroundedCollider.Disable();
-           
             
-           
-
 
             GroundCheckCooldown = 0.2f;
             jumpPressed = false;
@@ -465,7 +464,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         {
 
             //root motion is now disabled
-            characterController.Move(MovementVector * PlayerSpeed);
+            characterController.Move(MovementVector * PlayerSpeed * SpeedWhileAiming);
 
             transform.rotation = cameraQuatForMovement;
             if (magnitude > 0.05f)
