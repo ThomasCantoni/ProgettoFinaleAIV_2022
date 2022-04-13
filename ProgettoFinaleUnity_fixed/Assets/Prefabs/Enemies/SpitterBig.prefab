@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 2103398498306605964}
   - component: {fileID: 921096741418854107}
   - component: {fileID: 3967644905742989003}
-  - component: {fileID: 9084218781568478589}
+  - component: {fileID: 1581715474837922697}
   m_Layer: 2
   m_Name: SpitterBig
   m_TagString: Untagged
@@ -102,7 +102,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9084218781568478589
+--- !u!114 &1581715474837922697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1550430110105674040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11f682859382c5a4bb499036f127ec88, type: 3}
+  m_Script: {fileID: 11500000, guid: f5f775b5cccb90b40bb181c549e4e62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToChase: {fileID: 0}
@@ -123,10 +123,8 @@ MonoBehaviour:
   DetectCollider: {fileID: 3967644905742989003}
   AttackCollider: {fileID: 949987894351788057}
   BodyCollider: {fileID: 5687573446302258735}
-  Followers:
-  - {fileID: 0}
-  FollowerDestinations:
-  - {fileID: 1833015747}
+  Followers: []
+  FollowerDestinations: []
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -1892,6 +1890,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
+
 --- !u!82 &7742766459049742909
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2025,6 +2024,7 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 4
 --- !u!114 &3563111921728386406
+
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2033,15 +2033,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2044366069271730531}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e06ba5fa7ff1d34cbf68ce249b338fd, type: 3}
+  m_Script: {fileID: 11500000, guid: fbd2dc977c9169a4c967751bdb274735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 3
+  Health: 5
+  MeleeDamage: 30
   OnHitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9084218781568478589}
-        m_TargetAssemblyTypeName: ChomperSM, AI
+      - m_Target: {fileID: 1581715474837922697}
+        m_TargetAssemblyTypeName: EnemySM, AI
         m_MethodName: OnSphereTrigger
         m_Mode: 0
         m_Arguments:
@@ -2052,14 +2053,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  anim: {fileID: 2044366069264345767}
-  agent: {fileID: 921096741418854107}
+
+  Anim: {fileID: 2044366069264345767}
+  Agent: {fileID: 921096741418854107}
+
   HP_Slider: {fileID: 1822010638641574176}
   HandleAnim:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9084218781568478589}
-        m_TargetAssemblyTypeName: ChomperSM, AI
+      - m_Target: {fileID: 1581715474837922697}
+        m_TargetAssemblyTypeName: EnemySM, AI
         m_MethodName: HandleAttackAnim
         m_Mode: 0
         m_Arguments:
@@ -2073,8 +2076,8 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9084218781568478589}
-        m_TargetAssemblyTypeName: ChomperSM, AI
+      - m_Target: {fileID: 1581715474837922697}
+        m_TargetAssemblyTypeName: EnemySM, AI
         m_MethodName: OnEnemyDeath
         m_Mode: 1
         m_Arguments:

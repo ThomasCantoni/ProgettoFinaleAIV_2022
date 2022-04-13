@@ -5,6 +5,6 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Chomper : Enemy
+public class Spitter : Enemy
 {
 }
