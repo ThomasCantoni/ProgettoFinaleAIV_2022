@@ -19,12 +19,12 @@ public class Spitter_Death : Enemy_Death
         timer = 0f;
         startTimer = true;
 
-        sm.animAct += OnEndDeathAnimation;
 
         sm.agent.speed = 0f;
         sm.BodyCollider.enabled = false;
         sm.AttackCollider.enabled = false;
         sm.DetectCollider.enabled = false;
+        sm.animAct += OnEndDeathAnimation;
 
     }
 
@@ -35,8 +35,8 @@ public class Spitter_Death : Enemy_Death
             timer += Time.deltaTime;
             if (timer >= 1f)
             {
-                sm.animAct -= OnEndDeathAnimation;
                 sm.transform.gameObject.SetActive(false);
+                sm.animAct -= OnEndDeathAnimation;
             }
         }
     }
