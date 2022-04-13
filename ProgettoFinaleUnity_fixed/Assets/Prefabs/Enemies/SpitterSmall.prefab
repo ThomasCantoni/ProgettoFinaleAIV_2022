@@ -85,8 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6014027447345075958}
   - component: {fileID: 519866529479279525}
-  - component: {fileID: 375923538775364274}
   - component: {fileID: 7285511231753268796}
+  - component: {fileID: 3011599508952767142}
   m_Layer: 2
   m_Name: SpitterSmall
   m_TagString: Untagged
@@ -131,29 +131,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &375923538775364274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072413702459069894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c336ffbd8e12dc4896b64e754fab6f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjToChase: {fileID: 0}
-  anim: {fileID: 5654179162061967238}
-  agent: {fileID: 519866529479279525}
-  AttackDistance: 4
-  AttackCooldown: 1
-  PreAttackCooldown: 0.6
-  DetectCollider: {fileID: 7285511231753268796}
-  AttackCollider: {fileID: 8155886845230755487}
-  BodyCollider: {fileID: 9125080717395090352}
-  Leader: {fileID: 0}
-  ID: 0
 --- !u!135 &7285511231753268796
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -167,6 +144,29 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3011599508952767142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072413702459069894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b50f71a27a14148b647fa64452498b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjToChase: {fileID: 0}
+  anim: {fileID: 5654179162061967238}
+  agent: {fileID: 519866529479279525}
+  AttackDistance: 4
+  AttackCooldown: 1
+  PreAttackCooldown: 0.6
+  DetectCollider: {fileID: 7285511231753268796}
+  AttackCollider: {fileID: 8155886845230755487}
+  BodyCollider: {fileID: 9125080717395090352}
+  Leader: {fileID: 0}
+  ID: 0
 --- !u!1 &3324838296174876129
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,7 +980,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &2911408279482755294
+--- !u!114 &3400216054111636407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -989,15 +989,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5654179162069400642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e06ba5fa7ff1d34cbf68ce249b338fd, type: 3}
+  m_Script: {fileID: 11500000, guid: fbd2dc977c9169a4c967751bdb274735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 2
+  Health: 3
+  MeleeDamage: 30
   OnHitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 375923538775364274}
-        m_TargetAssemblyTypeName: ChomperSM, AI
+      - m_Target: {fileID: 3011599508952767142}
+        m_TargetAssemblyTypeName: EnemySM, AI
         m_MethodName: OnSphereTrigger
         m_Mode: 0
         m_Arguments:
@@ -1008,29 +1009,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnAttackHitted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: EllenHealthScript, Scripts
-        m_MethodName: DamagePlayer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  anim: {fileID: 5654179162061967238}
-  agent: {fileID: 519866529479279525}
+  Anim: {fileID: 5654179162061967238}
+  Agent: {fileID: 519866529479279525}
   HP_Slider: {fileID: 7945639752372426532}
   HandleAnim:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 375923538775364274}
-        m_TargetAssemblyTypeName: ChomperSM, AI
+      - m_Target: {fileID: 3011599508952767142}
+        m_TargetAssemblyTypeName: EnemySM, AI
         m_MethodName: HandleAttackAnim
         m_Mode: 0
         m_Arguments:
@@ -1044,8 +1030,8 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 375923538775364274}
-        m_TargetAssemblyTypeName: ChomperSM, AI
+      - m_Target: {fileID: 3011599508952767142}
+        m_TargetAssemblyTypeName: EnemySM, AI
         m_MethodName: OnEnemyDeath
         m_Mode: 1
         m_Arguments:

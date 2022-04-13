@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Gunner : Enemy
+public class Spitter : Enemy
 {
 }
