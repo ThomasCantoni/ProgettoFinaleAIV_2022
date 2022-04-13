@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 public class NextSceneScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    public string SceneToLoad;
+    public UnityAction<Collider> test;
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+        SceneManager.LoadScene(SceneToLoad,LoadSceneMode.Single);
+        
         
     }
+    
 }

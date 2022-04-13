@@ -6,6 +6,7 @@ using Cinemachine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
@@ -125,15 +126,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             Debug.Log("Data not loaded. Uncheck the boolean 'UseLatestData' in PCSV \n if you wish to load the latest savefile");
             return;
         }
+        //check save 
         for(int i=0;i<2;i++)
         {
             if (SaveManager.LastSave == null)
             {
-                Debug.LogError("COULD NOT LOAD SAVEFILE. TRYING TO LOAD AGAIN");
+                
                 SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat");
                 if(i==1)
                 {
-                    Debug.LogError("SECOND SAVEFILE LOADING ATTEMPT FAILED");
+                    Debug.LogError("SAVEFILE LOAD ATTEMPT FAILED TWICE");
                     return;
                 }
             }
@@ -143,6 +145,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
                 break;
             }
         }
+        //check if save is new
         this.PlayerData = SaveManager.LastSave;
         if (PlayerData.IsNewGame)
         {
@@ -153,6 +156,14 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             PlayerData = new PlayerData(this);
             SaveManager.SavePlayer(PlayerData);
             return;
+        }
+        //if save is not new, check scene
+        else if(PlayerData.SceneName != SceneManager.GetActiveScene().name)
+        {
+            PlayerData pd = new PlayerData(this);
+            this.PlayerData = pd;
+            SaveManager.SavePlayer(pd);
+            
         }
         characterController.enabled = false;
         this.transform.position = new Vector3(PlayerData.playerPosX, PlayerData.playerPosY, PlayerData.playerPosZ);
@@ -216,6 +227,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         if (TimeManager.IsGamePaused == false)
         {
             TimeManager.EnablePause();
+            BulletTimeAudioSource.Pause();
             Debug.Log(Anim);
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
 
@@ -226,7 +238,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             TimeManager.DisablePause();
             Debug.Log(Anim);
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
-
+            if(TimeManager.IsBulletTimeActive)
+            {
+                BulletTimeAudioSource.UnPause();
+            }
             PauseCanvas.gameObject.SetActive(false);
         }
 
@@ -420,7 +435,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     public void ManageBulletTimePlayerSide(InputAction.CallbackContext ctx)
     {
-        if (EllenAp.Cooldown > 0f)
+        
+        if (EllenAp.Cooldown > 0f || TimeManager.IsGamePaused)
         {
             return;
         }

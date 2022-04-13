@@ -18,7 +18,7 @@ public class DropOnDeathScript : MonoBehaviour
         onDeath = Initiate;
         hittable = GetComponent<IHittable>();
         System.Type t = hittable.GetType();
-        Debug.LogError(t);
+       
         if(t == typeof(Chomper))
         {
             Chomper c = GetComponent<Chomper>();

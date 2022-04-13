@@ -37,7 +37,8 @@ public class MainMenuManager : MonoBehaviour
     public void LoadGame()
     {
         SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat");
-        LevelManager.Instance.LoadScene("Scenes/ThomasCantoniMAP");
+        string sceneName = SaveManager.LastSave.SceneName;
+        LevelManager.Instance.LoadScene("Scenes/"+sceneName);
         MainCanvas.SetActive(false);
         OptionsCanvas.SetActive(false);
         LoadingImage.SetActive(true);
