@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour, IHittable
     void Start()
     {
         OnStart();
+        
     }
 
     protected virtual void OnStart()

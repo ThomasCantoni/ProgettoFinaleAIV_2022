@@ -2213,6 +2213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 3
+  MeleeDamage: 20
   OnHitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2228,8 +2229,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  anim: {fileID: 28934987946868697}
-  agent: {fileID: 28934987932077256}
+  Anim: {fileID: 28934987946868697}
+  Agent: {fileID: 28934987932077256}
   HP_Slider: {fileID: 28934987593744242}
   HandleAnim:
     m_PersistentCalls:
