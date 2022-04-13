@@ -391,8 +391,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             isGrounded = false;
             GlobalVariables.IsPlayerGrounded = isGrounded;
             GroundedCollider.Disable();
-            
-
             GroundCheckCooldown = 0.2f;
             jumpPressed = false;
             playerVel.y = 0f;
@@ -418,11 +416,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             Ray groundedTest = new Ray(this.transform.position + Vector3.up * 0.7f, Vector3.up * -0.5f);
             Debug.DrawRay(this.transform.position + Vector3.up, Vector3.down, Color.red, 1f);
             return Physics.SphereCast(groundedTest, 0.7f, 0.1f, SphereCastLayers);
-
-
         }
-
-
     }
     public void ManageBulletTimePlayerSide(InputAction.CallbackContext ctx)
     {
