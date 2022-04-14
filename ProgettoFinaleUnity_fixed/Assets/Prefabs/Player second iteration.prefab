@@ -10137,7 +10137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f25384fa84d1e4a8e71659feade9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGamePaused: 0
   UseLatestData: 1
   PlayerData:
     playerPosX: 0
@@ -10148,7 +10147,11 @@ MonoBehaviour:
     SceneIndex: 0
     SceneName: 
     keysTaken: 
+  isGamePaused: 0
   BulletTimeAudioSource: {fileID: 786823613}
+  AmbientAudioSource: {fileID: 786823612}
+  Lvl1_Ambient: {fileID: 8300000, guid: 0be9d5f266b274594b5f36c99e0960bf, type: 3}
+  Lvl2_ambient: {fileID: 8300000, guid: 775978b1ecec245cabb73e0e8e077208, type: 3}
   EllenAp: {fileID: 0}
   Mixer: {fileID: 24300002, guid: fc0ff840d2de9d54ca1a9e29c7324f01, type: 2}
   AimCamera: {fileID: 2613453764815782687}
@@ -10158,8 +10161,8 @@ MonoBehaviour:
   Anim: {fileID: 3664539948111772123}
   Player: {fileID: 3664539948121279485}
   CameraReference: {fileID: 3664539948128966687}
-  jumpHeight: 5
-  SpeedInAir: 3.5
+  jumpHeight: 4.5
+  SpeedInAir: 3.3
   SpeedWhileAiming: 2
   PauseCanvas: {fileID: 907146067}
   SphereCastLayers:
@@ -10167,7 +10170,7 @@ MonoBehaviour:
     m_Bits: 183
   isGrounded: 0
   isAiming: 0
-  SpeedInAirMultiplier: 1.8
+  SpeedInAirMultiplier: 1.5
   GroundedCollider: {fileID: 5038528992663462964}
 --- !u!114 &1268612662
 MonoBehaviour:
