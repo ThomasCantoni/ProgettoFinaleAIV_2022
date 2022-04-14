@@ -7,6 +7,7 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
     }
 
-    public bool isGamePaused = false;
     public float PlayerSpeed
     {
         get
@@ -68,7 +68,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     public bool UseLatestData = false;
     public PlayerData PlayerData;
-    public AudioSource BulletTimeAudioSource;
+    public bool isGamePaused = false;
+    public AudioSource BulletTimeAudioSource,AmbientAudioSource;
+    public AudioClip Lvl1_Ambient, Lvl2_ambient;
     public EllenActionPoints EllenAp;
     public AudioMixerGroup Mixer;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
@@ -117,8 +119,24 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         EllenAp = GetComponent<EllenActionPoints>();
         LoadData();
         SetPrefs();
-
+        SelectAmbient();
     }
+
+    private void SelectAmbient()
+    {
+        if(SceneManager.GetActiveScene().buildIndex > 1)
+        {
+            AmbientAudioSource.clip = Lvl2_ambient;
+
+        }
+        else
+        {
+            AmbientAudioSource.clip = Lvl1_Ambient;
+
+        }
+        AmbientAudioSource.Play();
+    }
+
     void LoadData()
     {
         if(!UseLatestData)

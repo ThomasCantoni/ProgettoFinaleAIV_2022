@@ -253,8 +253,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5950040613046677387}
   - component: {fileID: 5950040613032672043}
-  - component: {fileID: 7316297689093728108}
   - component: {fileID: 5587231976323635200}
+  - component: {fileID: 6886337332348657919}
   m_Layer: 0
   m_Name: WallTallCorner01
   m_TagString: StructureWall
@@ -306,20 +306,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5950040613048970599}
   m_Enabled: 1
---- !u!64 &7316297689093728108
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5950040613046776747}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300010, guid: ffcae93c62e108a4299efd518de02e61, type: 3}
 --- !u!208 &5587231976323635200
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -336,3 +322,16 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 1.38, y: 5.16, z: 1.45}
   m_TimeToStationary: 0.5
+--- !u!65 &6886337332348657919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5950040613046776747}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 10, z: 3}
+  m_Center: {x: 1.38, y: 5.16, z: 1.45}
