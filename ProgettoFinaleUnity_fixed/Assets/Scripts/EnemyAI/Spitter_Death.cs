@@ -17,14 +17,15 @@ public class Spitter_Death : Enemy_Death
     public override void OnEnter()
     {
         timer = 0f;
-        startTimer = false;
+        startTimer = true;
 
-        sm.animAct += OnEndDeathAnimation;
 
         sm.agent.speed = 0f;
         sm.BodyCollider.enabled = false;
         sm.AttackCollider.enabled = false;
         sm.DetectCollider.enabled = false;
+        sm.animAct += OnEndDeathAnimation;
+
     }
 
     public override void UpdateLogic()
@@ -32,7 +33,7 @@ public class Spitter_Death : Enemy_Death
         if (startTimer)
         {
             timer += Time.deltaTime;
-            if (timer >= 0.1f)
+            if (timer >= 1f)
             {
                 sm.transform.gameObject.SetActive(false);
                 sm.animAct -= OnEndDeathAnimation;

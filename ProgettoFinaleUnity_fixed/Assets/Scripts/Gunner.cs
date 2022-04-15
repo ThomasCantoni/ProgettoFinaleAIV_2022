@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class Gunner : MonoBehaviour, IHittable
 {
+   
     public int Health;
     public UnityEvent<Collider> OnHitEvent;
     //public UnityEvent<float> OnAttackHitted;
@@ -51,6 +52,7 @@ public class Gunner : MonoBehaviour, IHittable
     public virtual void OnAttackStart()
     {
         HandleAnim?.Invoke(true);
+       
     }
 
     public virtual void OnAttackEnd()

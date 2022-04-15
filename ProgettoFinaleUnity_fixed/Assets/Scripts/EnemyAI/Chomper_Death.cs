@@ -17,7 +17,7 @@ public class Chomper_Death : Enemy_Death
     public override void OnEnter()
     {
         timer = 0f;
-        startTimer = false;
+        startTimer = true;
 
         sm.animAct += OnEndDeathAnimation;
 
@@ -32,10 +32,11 @@ public class Chomper_Death : Enemy_Death
         if (startTimer)
         {
             timer += Time.deltaTime;
-            if (timer >= 0.1f)
+            if (timer >= 1f)
             {
                 sm.transform.gameObject.SetActive(false);
                 sm.animAct -= OnEndDeathAnimation;
+                
             }
         }
     }

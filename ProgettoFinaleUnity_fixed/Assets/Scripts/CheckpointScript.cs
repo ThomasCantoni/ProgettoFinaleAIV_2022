@@ -10,6 +10,7 @@ public class CheckpointScript : MonoBehaviour
     {
         //Debug.Log(other.gameObject.name);
         PlayerControllerSecondVersion PCSV = other.GetComponent<PlayerControllerSecondVersion>();
+        PCSV.UseLatestData = true;
         PlayerData newData = new PlayerData(PCSV);
         SaveManager.SavePlayer(newData);
         other.GetComponent<PlayerControllerSecondVersion>().PlayerData = SaveManager.LastSave;
