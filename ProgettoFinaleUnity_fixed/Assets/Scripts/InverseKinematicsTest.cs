@@ -44,10 +44,10 @@ public class InverseKinematicsTest : MonoBehaviour
         LookAtConstraintRIG.weight = 0f;
         PCSV = GetComponent<PlayerControllerSecondVersion>();
         CameraReference = GetComponent<PlayerControllerSecondVersion>().CameraReference;
-        GetComponent<PlayerControllerSecondVersion>().controls.Player.Shot.performed += ManageShooting;
-        GetComponent<PlayerControllerSecondVersion>().controls.Player.EquipWeapon.performed += EquipGun;
-        GetComponent<PlayerControllerSecondVersion>().controls.Player.Zoom.performed += SetIKWeights;
-        GetComponent<PlayerControllerSecondVersion>().controls.Player.Zoom.canceled += CancelIKWeights;
+        GetComponent<PlayerControllerSecondVersion>().Controls.Player.Shot.performed += ManageShooting;
+        GetComponent<PlayerControllerSecondVersion>().Controls.Player.EquipWeapon.performed += EquipGun;
+        GetComponent<PlayerControllerSecondVersion>().Controls.Player.Zoom.performed += SetIKWeights;
+        GetComponent<PlayerControllerSecondVersion>().Controls.Player.Zoom.canceled += CancelIKWeights;
 
         //GetComponent<PlayerControllerSecondVersion>().controls.Player.RotateCamera.performed += CheckInverseKinematics;
         // GetComponent<PlayerControllerSecondVersion>().controls.Player.Movement.performed += CheckInverseKinematics;
@@ -114,7 +114,7 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void EquipGun(InputAction.CallbackContext ctx)
     {
-        if (TimeManager.IsGamePaused || PCSV.isAiming)
+        if (TimeManager.IsGamePaused || PCSV.IsAiming)
         {
             return;
         }
@@ -184,7 +184,7 @@ public class InverseKinematicsTest : MonoBehaviour
             returnToRestCooldown = returnToRestCooldownReset;
 
             GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("Shot", false);
-            if (!PCSV.isAiming)
+            if (!PCSV.IsAiming)
                 restingTarget = 1f;
 
             Shooting = false;
