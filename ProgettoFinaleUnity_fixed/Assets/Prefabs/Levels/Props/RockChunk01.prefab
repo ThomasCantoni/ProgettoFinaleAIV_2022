@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 1348944981776004819}
   - component: {fileID: 2058485486679799955}
   - component: {fileID: 3906516645641691963}
+  - component: {fileID: 5102997750738849986}
   m_Layer: 0
   m_Name: RockChunk01
   m_TagString: Untagged
@@ -174,6 +175,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.55, y: 3.35, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &5102997750738849986
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348944981795323475}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.85, y: 10.7, z: 14.1}
+  m_Center: {x: 0.55, y: 3.35, z: 0}
 --- !u!1 &1348944981795323477
 GameObject:
   m_ObjectHideFlags: 0

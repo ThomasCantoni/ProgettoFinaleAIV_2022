@@ -8,7 +8,7 @@ public class BulletTimeListenerText : MonoBehaviour
     private Controls controls;
     void Start()
     {
-        controls = PCSV.controls;
+        controls = PCSV.Controls;
         controls.Player.BulletTimeInput.performed += Toggle;
         this.gameObject.SetActive(false);
 

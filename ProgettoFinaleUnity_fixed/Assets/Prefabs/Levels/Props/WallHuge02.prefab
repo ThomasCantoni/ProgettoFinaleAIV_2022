@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5132011215682806014}
   - component: {fileID: 558649007219825140}
   - component: {fileID: 3217237784824902936}
+  - component: {fileID: 3521848122822156100}
   m_Layer: 0
   m_Name: WallHuge02
   m_TagString: StructureWall
@@ -93,6 +94,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -6.5, y: 4.32, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &3521848122822156100
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132011215700191352}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 13, y: 15, z: 10}
+  m_Center: {x: -6.5, y: 7, z: 0}
 --- !u!1 &5132011215700191354
 GameObject:
   m_ObjectHideFlags: 0
