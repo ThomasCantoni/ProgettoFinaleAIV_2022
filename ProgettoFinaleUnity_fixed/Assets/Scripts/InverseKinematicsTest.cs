@@ -114,7 +114,7 @@ public class InverseKinematicsTest : MonoBehaviour
     }
     void EquipGun(InputAction.CallbackContext ctx)
     {
-        if (TimeManager.IsGamePaused || PCSV.IsAiming)
+        if (TimeManager.IsGamePaused || PCSV.isAiming)
         {
             return;
         }
@@ -184,7 +184,7 @@ public class InverseKinematicsTest : MonoBehaviour
             returnToRestCooldown = returnToRestCooldownReset;
 
             GetComponent<PlayerControllerSecondVersion>().Anim.SetBool("Shot", false);
-            if (!PCSV.IsAiming)
+            if (!PCSV.isAiming)
                 restingTarget = 1f;
 
             Shooting = false;

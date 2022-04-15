@@ -93,7 +93,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     Vector3 MovementVector;
     Vector2 direction;
     Quaternion cameraQuatForMovement;
-    public Controls controls;
+    public Controls Controls;
     public bool isGrounded;
     bool jumpPressed = false;
     public bool isAiming = false;
@@ -112,7 +112,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
   
     private void OnEnable()
     {
-        controls = new Controls();
+        Controls = new Controls();
         Anim = GetComponent<Animator>();
         EllenAp = GetComponent<EllenActionPoints>();
         LoadData();
@@ -207,19 +207,19 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
         //setting up the events for the input
-        controls.Player.Enable();
-        controls.Player.RotateCamera.performed += OnCameraRotate;
-        controls.Player.Zoom.performed += OnZoom;
-        controls.Player.Zoom.canceled += OnZoomCancel;
-        controls.Player.Movement.performed += cntxt => OnMovement(cntxt.ReadValue<Vector2>());
-        controls.Player.Movement.canceled += OnMovementCanceled;
-        controls.Player.Sprint.performed += ShiftPressed;
-        controls.Player.Sprint.canceled += ShiftReleased;
-        controls.Player.Jump.started += SpacePressed;
-        controls.Player.Jump.canceled += SpaceReleased;
-        controls.Player.Pause.performed += PauseGame;
+        Controls.Player.Enable();
+        Controls.Player.RotateCamera.performed += OnCameraRotate;
+        Controls.Player.Zoom.performed += OnZoom;
+        Controls.Player.Zoom.canceled += OnZoomCancel;
+        Controls.Player.Movement.performed += cntxt => OnMovement(cntxt.ReadValue<Vector2>());
+        Controls.Player.Movement.canceled += OnMovementCanceled;
+        Controls.Player.Sprint.performed += ShiftPressed;
+        Controls.Player.Sprint.canceled += ShiftReleased;
+        Controls.Player.Jump.started += SpacePressed;
+        Controls.Player.Jump.canceled += SpaceReleased;
+        Controls.Player.Pause.performed += PauseGame;
         //controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
-        controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;
+        Controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;
 
 
 
@@ -265,7 +265,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public void Respwan()
     {
         LoadData();
-        controls.Enable();
+        Controls.Enable();
         Destroy(GetComponent<CameraOut>());
         SetPrefs();
 
@@ -539,7 +539,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Disable();
+        Controls.Disable();
     }
 
 }
