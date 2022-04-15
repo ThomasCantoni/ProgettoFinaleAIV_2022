@@ -6,25 +6,31 @@ using Cinemachine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
 {
+
     public bool GunEquipped
     {
         get
         {
             return this.GetComponent<InverseKinematicsTest>().GunEquipped;
         }
+
     }
 
     public float PlayerSpeed
     {
         get
         {
+
             return Time.unscaledDeltaTime * TimeManager.PlayerCurrentSpeed;
         }
-    }
 
+    }
+    int AnimatorVelocityHash = 0, AnimatorSpeedHash = 0;
     public float FOV
     {
         get
@@ -35,9 +41,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         {
             ThirdPersonCamera.m_Lens.FieldOfView = value;
             AimCamera.m_Lens.FieldOfView = value;
+
+
         }
     }
-
     public float AimSensitivity
     {
         get
@@ -50,96 +57,129 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             PauseCanvas.transform.GetComponentInChildren<Slider>().value = value;
         }
     }
-
     public float GravityScaled
     {
         get
         {
             return Physics.gravity.y * Time.deltaTime;
         }
-    }
 
-    public bool IsGamePaused = false;
-    public AudioSource BulletTimeAudioSource;
+
+    }
+    public bool UseLatestData = false;
+    public PlayerData PlayerData;
+    public bool isGamePaused = false;
+    public AudioSource BulletTimeAudioSource, AmbientAudioSource;
+    public AudioClip Lvl1_Ambient, Lvl2_ambient;
     public AudioMixerGroup Mixer;
+    public EllenActionPoints EllenAp;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
     public Camera Camera;
     public CharacterController characterController;
+    public Animator Anim;
     public GameObject Player;
+
+
+
     public Transform CameraReference;
+    private float aimSensitivity = 1f;
+    public float jumpHeight = 5f;
+    public float SpeedInAir = 2.5f;
+    public float SpeedWhileAiming = 2f;
     public Canvas PauseCanvas;
     public LayerMask SphereCastLayers;
+    Vector3 playerVel;
+    Vector2 cameraRotationVec2FromMouse;
+    Vector3 MovementVector;
+    Vector2 direction;
+    Quaternion cameraQuatForMovement;
+    public Controls controls;
+    public bool isGrounded;
+    bool jumpPressed = false;
+    public bool isAiming = false;
+
+
+
+    float gravityValue = -9.81f;
+    float GroundCheckCooldown = 0.1f;
+    float jumpCooldown = 0.1f;
+    Vector2 accum = Vector2.zero;
+    float speedAirMulti = 1f;
+    public float SpeedInAirMultiplier = 1.8f;
+
     public GroundedCollider GroundedCollider;
-    public bool UseLatestData = false;
-    public PlayerData PlayerData;
-    [HideInInspector]
-    public EllenActionPoints EllenAp;
-    [HideInInspector]
-    public Animator Anim;
-    [HideInInspector]
-    public Controls Controls;
-    [HideInInspector]
-    public bool IsAiming = false;
 
-    private float aimSensitivity;
-    private int animatorVelocityHash = 0, animatorSpeedHash = 0;
-    private float jumpHeight = 5f;
-    private float speedInAir = 2.5f;
-    private float speedWhileAiming = 2f;
-    private Vector3 playerVel;
-    private Vector2 cameraRotationVec2FromMouse;
-    private Vector3 movementVector;
-    private Vector2 direction;
-    private Quaternion cameraQuatForMovement;
-    private bool isGrounded;
-    private bool jumpPressed = false;
-    private float gravityValue = -9.81f;
-    private float groundedCheckCooldown = 0.1f;
-    private float jumpCooldown = 0.1f;
-    private Vector2 accum = Vector2.zero;
-    private float speedAirMulti = 1f;
-    private float speedInAirMult = 1.8f;
-
-    void OnEnable()
+  
+    private void OnEnable()
     {
-        Controls = new Controls();
+        controls = new Controls();
         Anim = GetComponent<Animator>();
         EllenAp = GetComponent<EllenActionPoints>();
         LoadData();
         SetPrefs();
+        SelectAmbient();
+    }
+
+    private void SelectAmbient()
+    {
+        if (SceneManager.GetActiveScene().buildIndex > 1)
+        {
+            AmbientAudioSource.clip = Lvl2_ambient;
+
+        }
+        else
+        {
+            AmbientAudioSource.clip = Lvl1_Ambient;
+
+        }
+        AmbientAudioSource.Play();
     }
 
     void LoadData()
     {
-        if(!UseLatestData)
+        if (!UseLatestData)
         {
+            Debug.Log("Data not loaded. Uncheck the boolean 'UseLatestData' in PCSV \n if you wish to load the latest savefile");
             return;
         }
-        for(int i=0;i<2;i++)
+        //check save 
+        for (int i = 0; i < 2; i++)
         {
             if (SaveManager.LastSave == null)
             {
+
                 SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat");
-                if(i==1)
+                if (i == 1)
                 {
+                    Debug.LogError("SAVEFILE LOAD ATTEMPT FAILED TWICE");
                     return;
                 }
             }
             else
             {
+                Debug.Log("Savefile succesfully loaded");
                 break;
             }
         }
+        //check if save is new
         this.PlayerData = SaveManager.LastSave;
         if (PlayerData.IsNewGame)
         {
-            PlayerPrefs.SetFloat(SaveManager.FOV,50f);
-            PlayerPrefs.SetFloat(SaveManager.AimSensitivity,5f);
+            PlayerPrefs.SetFloat(SaveManager.FOV, 50f);
+            PlayerPrefs.SetFloat(SaveManager.AimSensitivity, 5f);
 
             //overwrite data with current data
             PlayerData = new PlayerData(this);
             SaveManager.SavePlayer(PlayerData);
             return;
+        }
+        //if save is not new, check scene
+        else if (PlayerData.SceneName != SceneManager.GetActiveScene().name)
+        {
+            PlayerData pd = new PlayerData(this);
+            this.PlayerData = pd;
+            SaveManager.SavePlayer(pd);
+
         }
         characterController.enabled = false;
         this.transform.position = new Vector3(PlayerData.playerPosX, PlayerData.playerPosY, PlayerData.playerPosZ);
@@ -147,42 +187,52 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         this.GetComponent<EllenHealthScript>().HP_Value = PlayerData.PlayerHp;
         EllenAp.AP_Value = PlayerData.PlayerAp;
     }
-
     void SetPrefs()
     {
+
         AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
     }
-
     void Start()
     {
         Cursor.visible = false;
         Anim.SetLayerWeight(1, 1);
-        
+
         characterController = Player.GetComponent<CharacterController>();
-        animatorVelocityHash = Animator.StringToHash("Velocity");
-        animatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
+        AnimatorVelocityHash = Animator.StringToHash("Velocity");
+        AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
+        //AnimatorVelocityHash = Animator.StringToHash("MoveX");
+        //AnimatorVelocityHash = Animator.StringToHash("MoveZ");
+
+
 
         //setting up the events for the input
-        Controls.Player.Enable();
-        Controls.Player.RotateCamera.performed += OnCameraRotate;
-        Controls.Player.Zoom.performed += OnZoom;
-        Controls.Player.Zoom.canceled += OnZoomCancel;
-        Controls.Player.Movement.performed += cntxt => OnMovement(cntxt.ReadValue<Vector2>());
-        Controls.Player.Movement.canceled += OnMovementCanceled;
-        Controls.Player.Sprint.performed += ShiftPressed;
-        Controls.Player.Sprint.canceled += ShiftReleased;
-        Controls.Player.Jump.started += SpacePressed;
-        Controls.Player.Jump.canceled += SpaceReleased;
-        Controls.Player.Pause.performed += PauseGame;
-        Controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;
-    }
+        controls.Player.Enable();
+        controls.Player.RotateCamera.performed += OnCameraRotate;
+        controls.Player.Zoom.performed += OnZoom;
+        controls.Player.Zoom.canceled += OnZoomCancel;
+        controls.Player.Movement.performed += cntxt => OnMovement(cntxt.ReadValue<Vector2>());
+        controls.Player.Movement.canceled += OnMovementCanceled;
+        controls.Player.Sprint.performed += ShiftPressed;
+        controls.Player.Sprint.canceled += ShiftReleased;
+        controls.Player.Jump.started += SpacePressed;
+        controls.Player.Jump.canceled += SpaceReleased;
+        controls.Player.Pause.performed += PauseGame;
+        //controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
+        controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;
 
+
+
+
+
+    }
     public void PlayerActivateBT(InputAction.CallbackContext ctxt)
     {
+
+
         AimSensitivity = 5f;
     }
-    
+
     void PauseGame(InputAction.CallbackContext ctxt)
     {
         if (Anim == null)
@@ -193,60 +243,73 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         if (TimeManager.IsGamePaused == false)
         {
             TimeManager.EnablePause();
-            Anim.SetFloat(animatorSpeedHash, TimeManager.PlayerCurrentSpeed);
+            BulletTimeAudioSource.Pause();
+            Debug.Log(Anim);
+            Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
 
             PauseCanvas.gameObject.SetActive(true);
         }
         else
         {
             TimeManager.DisablePause();
-            Anim.SetFloat(animatorSpeedHash, TimeManager.PlayerCurrentSpeed);
-
+            Debug.Log(Anim);
+            Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
+            if (TimeManager.IsBulletTimeActive)
+            {
+                BulletTimeAudioSource.UnPause();
+            }
             PauseCanvas.gameObject.SetActive(false);
         }
 
     }
-
     public void Respwan()
     {
         LoadData();
-        Controls.Enable();
+        controls.Enable();
         Destroy(GetComponent<CameraOut>());
         SetPrefs();
-       
-    }
 
+    }
     void OnZoom(InputAction.CallbackContext context)
     {
         if (TimeManager.IsGamePaused || !GunEquipped)
         {
             return;
         }
-        IsAiming = true;
+        isAiming = true;
         Anim.SetBool("IsAiming", true);
         ThirdPersonCamera.Priority = 0;
         AimCamera.Priority = 30;
         Anim.applyRootMotion = false;
-    }
 
+
+
+    }
     void OnZoomCancel(InputAction.CallbackContext context)
     {
         if (TimeManager.IsGamePaused)
         {
             return;
         }
-        IsAiming = false;
+        isAiming = false;
         Anim.SetBool("IsAiming", false);
         ThirdPersonCamera.Priority = 30;
         AimCamera.Priority = 0;
-        Anim.applyRootMotion = true;
-    }
 
+
+
+        Anim.applyRootMotion = true;
+
+
+    }
     void OnCameraRotate(InputAction.CallbackContext context)
     {
         if (TimeManager.IsGamePaused)
             return;
         Vector2 lookValue = context.ReadValue<Vector2>();
+
+
+        // lookValue.y = Mathf.Clamp(lookValue.y, -70f,70f);
 
         cameraRotationVec2FromMouse.x -= lookValue.y * AimSensitivity * Time.deltaTime;
         cameraRotationVec2FromMouse.y += lookValue.x * AimSensitivity * Time.deltaTime;
@@ -261,16 +324,36 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public void OnMovement(Vector2 dir)
     {
         direction = dir;
-    }
 
+
+        #region Useless but preserve
+
+
+        //Vector3 camForward = CameraReference.forward;
+        ////fetching the quaternion of the now rotated camera, to rotate the movement vector
+        //Quaternion q = Quaternion.LookRotation(
+        //    new Vector3(camForward.x, 0, camForward.z),
+        //    Vector3.up);
+
+        ////rotating the direction vector according to camera 
+        //Vector3 cooking = q * new Vector3(dir.x, 0, dir.y);
+
+        //// applying rot to vector
+        //MovementVector = cooking;
+        #endregion
+
+    }
     public void OnMovementCanceled(InputAction.CallbackContext context)
     {
-        movementVector = Vector3.zero;
+        MovementVector = Vector3.zero;
         direction = Vector2.zero;
-    }
 
+    }
     void Update()
     {
+
+
+
         if (TimeManager.IsGamePaused)
         {
             return;
@@ -280,24 +363,32 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         {
             TimeManager.DisableBulletTime();
             EllenAp.Disable();
-            Anim.SetFloat(animatorSpeedHash, TimeManager.PlayerCurrentSpeed);
+            Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
             Mixer.audioMixer.SetFloat("Pitch", 1f);
             BulletTimeAudioSource.Stop();
         }
-        if(BulletTimeAudioSource.isPlaying)
+        if (BulletTimeAudioSource.isPlaying)
         {
-            BulletTimeAudioSource.pitch = 1.5f - (GetComponent<EllenActionPoints>().AP_Value / GetComponent<EllenActionPoints>().MaxAp)*0.8f;
+            BulletTimeAudioSource.pitch = 1.5f - (GetComponent<EllenActionPoints>().AP_Value / GetComponent<EllenActionPoints>().MaxAp) * 0.8f;
         }
-        MoveRelativeToCameraRotation();
-        GravityAndJumpUpdate();
-    }
 
+
+        MoveRelativeToCameraRotation();
+        //isGrounded = IsGroundedTest();
+        GravityAndJumpUpdate();
+        //Anim.SetBool("isGrounded", isGrounded);
+
+        // Debug.LogWarning(GlobalVariables.PlayerVelocityAuto + " ..... " + characterController.velocity + " #### " + MeasuredVelocity) ;
+    }
     void GravityAndJumpUpdate()
     {
-        if (groundedCheckCooldown > 0f)
+
+        if (GroundCheckCooldown > 0f)
         {
-            groundedCheckCooldown -= Time.deltaTime;
+            GroundCheckCooldown -= Time.deltaTime;
             GroundedCollider.Disable();
+
+            //isGrounded = false;
         }
         else
         {
@@ -314,14 +405,16 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             jumpCooldown -= Time.deltaTime;
             jumpCooldown = Mathf.Clamp(jumpCooldown, 0f, 1f);
             GroundedCollider.SwitchToBig();
-            if (!IsAiming)
+            //Anim.SetBool("isGrounded", true);
+            if (!isAiming)
                 Anim.applyRootMotion = true;
         }
         else
         { //i am in the air
             GroundedCollider.SwitchToSmall();
-            playerVel.x = movementVector.x * speedInAir * speedAirMulti;
-            playerVel.z = movementVector.z * speedInAir * speedAirMulti;
+
+            playerVel.x = MovementVector.x * SpeedInAir * speedAirMulti;
+            playerVel.z = MovementVector.z * SpeedInAir * speedAirMulti;
         }
 
         if (jumpPressed && isGrounded)
@@ -329,7 +422,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             isGrounded = false;
             GlobalVariables.IsPlayerGrounded = isGrounded;
             GroundedCollider.Disable();
-            groundedCheckCooldown = 0.2f;
+            GroundCheckCooldown = 0.2f;
             jumpPressed = false;
             playerVel.y = 0f;
             playerVel.y += Mathf.Sqrt(jumpHeight * gravityValue * -1f);
@@ -341,29 +434,30 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         GlobalVariables.PlayerVelocityNotGrounded = playerVel;
         characterController.Move(playerVel * PlayerSpeed);
     }
-
     public bool IsGroundedTest()
     {
-        if (groundedCheckCooldown > 0)
+        if (GroundCheckCooldown > 0)
         {
-            groundedCheckCooldown = groundedCheckCooldown - Time.deltaTime;
+            GroundCheckCooldown = GroundCheckCooldown - Time.deltaTime;
             return false;
         }
         else
         {
+
             Ray groundedTest = new Ray(this.transform.position + Vector3.up * 0.7f, Vector3.up * -0.5f);
+            Debug.DrawRay(this.transform.position + Vector3.up, Vector3.down, Color.red, 1f);
             return Physics.SphereCast(groundedTest, 0.7f, 0.1f, SphereCastLayers);
         }
     }
-
     public void ManageBulletTimePlayerSide(InputAction.CallbackContext ctx)
     {
-        if (EllenAp.Cooldown > 0f)
+
+        if (EllenAp.Cooldown > 0f || TimeManager.IsGamePaused)
         {
             return;
         }
         TimeManager.EnableBulletTime();
-        
+
         if (TimeManager.IsBulletTimeActive)
         {
             EllenAp.Activate();
@@ -377,28 +471,29 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             BulletTimeAudioSource.Stop();
         }
 
-        Anim.SetFloat(animatorSpeedHash, TimeManager.PlayerCurrentSpeed);
+        Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
     }
-
     void MoveRelativeToCameraRotation()
     {
         Vector3 fromAbsoluteToRelative = cameraQuatForMovement * new Vector3(direction.x, 0, direction.y);
-        movementVector = fromAbsoluteToRelative;
-        GlobalVariables.PlayerVelocityGrounded = movementVector;
-        float magnitude = movementVector.magnitude;
-        Anim.SetFloat(animatorVelocityHash, magnitude);
+        MovementVector = fromAbsoluteToRelative;
+        GlobalVariables.PlayerVelocityGrounded = MovementVector;
+        float magnitude = MovementVector.magnitude;
+
+        Anim.SetFloat(AnimatorVelocityHash, magnitude);
+
 
         Quaternion contextualQuaternion;
         if (magnitude > 0.05f)
         {
-            contextualQuaternion = Quaternion.LookRotation(movementVector, Vector3.up);
+            contextualQuaternion = Quaternion.LookRotation(MovementVector, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, contextualQuaternion, 0.1f);
         }
-        if (IsAiming)
+        if (isAiming)
         {
 
             //root motion is now disabled
-            characterController.Move(movementVector * PlayerSpeed * speedWhileAiming);
+            characterController.Move(MovementVector * PlayerSpeed * SpeedWhileAiming);
 
             transform.rotation = cameraQuatForMovement;
             if (magnitude > 0.05f)
@@ -418,13 +513,12 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
     void ShiftPressed(InputAction.CallbackContext context)
     {
-        if (!IsAiming)
+        if (!isAiming)
         {
             Anim.SetBool("Shift", true);
-            speedAirMulti = speedInAirMult;
+            speedAirMulti = SpeedInAirMultiplier;
         }
     }
-
     void ShiftReleased(InputAction.CallbackContext context)
     {
         Anim.SetBool("Shift", false);
@@ -442,8 +536,10 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         GetComponent<Animator>().SetBool("Jump", false);
     }
 
+
     private void OnDisable()
     {
-        Controls.Disable();
+        controls.Disable();
     }
+
 }
