@@ -10138,8 +10138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f25384fa84d1e4a8e71659feade9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   IsGamePaused: 0
   BulletTimeAudioSource: {fileID: 786823613}
+
   Mixer: {fileID: 24300002, guid: fc0ff840d2de9d54ca1a9e29c7324f01, type: 2}
   AimCamera: {fileID: 2613453764815782687}
   ThirdPersonCamera: {fileID: 3664539946783304983}
@@ -10147,10 +10149,13 @@ MonoBehaviour:
   characterController: {fileID: 3664539946894271333}
   Player: {fileID: 3664539948121279485}
   CameraReference: {fileID: 3664539948128966687}
+
+
   PauseCanvas: {fileID: 907146067}
   SphereCastLayers:
     serializedVersion: 2
     m_Bits: 183
+
   GroundedCollider: {fileID: 5038528992663462964}
   UseLatestData: 0
   PlayerData:
