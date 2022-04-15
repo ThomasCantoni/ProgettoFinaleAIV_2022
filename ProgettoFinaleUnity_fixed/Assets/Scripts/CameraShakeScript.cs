@@ -7,9 +7,20 @@ public class CameraShakeScript : MonoBehaviour
 {
     [SerializeField]
     public List<CinemachineVirtualCamera> Cameras;
-    public float DurationSeconds = 1f;
     public float Frequency=1f, Amplitude=1f,DecreaseFactor=1f;
+    private float initialFrequency = 1f, initialAmplitude = 1f;
 
+    private float initialDuration = 1, currentDuration = 0;
+    public float Duration 
+    {  get
+        {
+            return currentDuration;
+        }
+        set
+        {
+            initialDuration = value;
+        }
+    }
     private void Start()
     {
         enabled = false;
@@ -17,18 +28,20 @@ public class CameraShakeScript : MonoBehaviour
     public void ApplyShake(float duration=1f,float frequency = 1f,float amplitude=1f)
     {
         enabled = true;
-        DurationSeconds = duration;
-        Frequency = frequency;
-        Amplitude = amplitude;
+        initialDuration = duration;
+        currentDuration = initialDuration;
+        initialAmplitude = amplitude;
+        initialFrequency = frequency;
     }
     public void Update()
     {
         
-        if(DurationSeconds >= 0)
+        if(currentDuration > 0)
         {
-            DurationSeconds -= Time.deltaTime*DecreaseFactor;
-            Frequency -= Time.deltaTime * DecreaseFactor;
-            Amplitude -= Time.deltaTime * DecreaseFactor;
+            currentDuration -= Time.deltaTime;
+            
+            Frequency = initialFrequency * (currentDuration/initialDuration);
+            Amplitude = initialAmplitude * (currentDuration / initialDuration);
             for (int i = 0; i < Cameras.Count; i++)
             {
                 CinemachineBasicMultiChannelPerlin noise = Cameras[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
