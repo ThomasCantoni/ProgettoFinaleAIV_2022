@@ -13,7 +13,7 @@ public class BulletTimeTest : MonoBehaviour
     void Start()
     {
         PCSV = Player.GetComponent<PlayerControllerSecondVersion>();
-        playerInput = PCSV.controls;
+        playerInput = PCSV.Controls;
         playerInput.Player.BulletTimeInput.performed += SetSpeed;
     }
 

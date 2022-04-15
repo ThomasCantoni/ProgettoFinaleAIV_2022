@@ -64,24 +64,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Gun"",
-                    ""type"": ""Button"",
-                    ""id"": ""53d1a5dc-3372-4e5a-8d37-759faf264909"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""GunAway"",
-                    ""type"": ""Button"",
-                    ""id"": ""8af9e429-3b79-45b2-8042-2aa8f7d1d1d6"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Shot"",
                     ""type"": ""Button"",
                     ""id"": ""1d832ac5-cccd-418b-96e0-68a9fff2bf30"",
@@ -242,7 +224,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""686fae25-b5cb-4606-8418-001924bbf16a"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""MouseAndKeyboard"",
                     ""action"": ""Jump"",
@@ -257,28 +239,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bff9e30d-e99c-4cb8-8db8-5145c62aa6a6"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""MouseAndKeyboard"",
-                    ""action"": ""Gun"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c89fe456-2f39-47a3-9484-ce5db54fec2d"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""MouseAndKeyboard"",
-                    ""action"": ""GunAway"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -308,7 +268,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""ef9948dd-393f-4636-b593-c905063c283c"",
                     ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""MouseAndKeyboard"",
                     ""action"": ""Pause"",
@@ -330,7 +290,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""fe700f24-36dc-4566-b234-875ee8797d53"",
                     ""path"": ""<Keyboard>/f"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""MouseAndKeyboard"",
                     ""action"": ""EquipWeapon"",
@@ -374,7 +334,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""7a6342c5-9cbb-4fa2-a0e8-63ef8289889e"",
                     ""path"": ""<Keyboard>/q"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""MouseAndKeyboard"",
                     ""action"": ""BulletTimeInput"",
@@ -431,8 +391,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Gun = m_Player.FindAction("Gun", throwIfNotFound: true);
-        m_Player_GunAway = m_Player.FindAction("GunAway", throwIfNotFound: true);
         m_Player_Shot = m_Player.FindAction("Shot", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_EquipWeapon = m_Player.FindAction("EquipWeapon", throwIfNotFound: true);
@@ -501,8 +459,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Gun;
-    private readonly InputAction m_Player_GunAway;
     private readonly InputAction m_Player_Shot;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_EquipWeapon;
@@ -516,8 +472,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Gun => m_Wrapper.m_Player_Gun;
-        public InputAction @GunAway => m_Wrapper.m_Player_GunAway;
         public InputAction @Shot => m_Wrapper.m_Player_Shot;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @EquipWeapon => m_Wrapper.m_Player_EquipWeapon;
@@ -544,12 +498,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Gun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGun;
-                @Gun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGun;
-                @Gun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGun;
-                @GunAway.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGunAway;
-                @GunAway.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGunAway;
-                @GunAway.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGunAway;
                 @Shot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShot;
                 @Shot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShot;
                 @Shot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShot;
@@ -581,12 +529,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Gun.started += instance.OnGun;
-                @Gun.performed += instance.OnGun;
-                @Gun.canceled += instance.OnGun;
-                @GunAway.started += instance.OnGunAway;
-                @GunAway.performed += instance.OnGunAway;
-                @GunAway.canceled += instance.OnGunAway;
                 @Shot.started += instance.OnShot;
                 @Shot.performed += instance.OnShot;
                 @Shot.canceled += instance.OnShot;
@@ -630,8 +572,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnGun(InputAction.CallbackContext context);
-        void OnGunAway(InputAction.CallbackContext context);
         void OnShot(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnEquipWeapon(InputAction.CallbackContext context);
