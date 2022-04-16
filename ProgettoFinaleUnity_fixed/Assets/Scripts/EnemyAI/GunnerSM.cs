@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class GunnerSM : EnemySM
 {
@@ -9,6 +10,8 @@ public class GunnerSM : EnemySM
     public GameObject BulletPrefab;
     public int NumBullets = 3;
     public bool UseVeloictyOffset = true;
+
+    public UnityEvent<int> OnHeal;
 
     protected override void OnAwake()
     {

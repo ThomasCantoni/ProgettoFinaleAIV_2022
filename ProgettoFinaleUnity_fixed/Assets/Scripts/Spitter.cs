@@ -7,4 +7,5 @@ using UnityEngine.UI;
 
 public class Spitter : Enemy
 {
+
 }
