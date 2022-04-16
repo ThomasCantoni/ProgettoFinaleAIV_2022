@@ -120,8 +120,55 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         LoadData();
         SetPrefs();
         SelectAmbient();
+        CheckKeys();
     }
+    public void CheckKeys()
+    {
+        for (int i = 0; i < PlayerData.keysTaken.Count; i++)
+        {
+            for (int j =1; j < PlayerData.keysTaken.Count;j++)
+            {
+                if (PlayerData.keysTaken[i] == PlayerData.keysTaken[j]) 
+                {
+                    RemoveKey(j);
+                }
+            }
+        }
+        for (int i = 0; i < PlayerData.keysTaken.Count; i++)
+        {
+            if(PlayerData.keysTaken[i] <0)
+            {
+                PlayerData.keysTaken.RemoveAt(i);
+                i = 0;
+            }
+        }
+        for (int i = 0; i < PlayerData.keysTaken.Count; i++)
+       
+        {
+            AddKey(PlayerData.keysTaken[i]);
+        }
 
+    }
+    public void AddKey(int ID)
+    {
+        
+            KeyCanvas.GetComponent<KeyCanvasScript>().AddKey(ID);
+        if(!PlayerData.keysTaken.Contains(ID))
+        {
+            PlayerData.keysTaken.Add(ID);
+        }
+       else
+       {
+            Debug.LogWarning("Player already has this key!");
+        }
+    }
+    public void RemoveKey(int ID)
+    {
+        this.KeyCanvas.GetComponent<KeyCanvasScript>().RemoveKey(ID);
+
+        PlayerData.keysTaken[ID] = -1;
+
+    }
     private void SelectAmbient()
     {
         if (SceneManager.GetActiveScene().buildIndex > 1)
@@ -195,11 +242,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
     }
-    public void AddKey(int ID)
-    {
-        KeyCanvas.GetComponent<KeyScript>();
-
-    }
+    
     void Start()
     {
         
@@ -273,6 +316,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         Controls.Enable();
         Destroy(GetComponent<CameraOut>());
         SetPrefs();
+        CheckKeys();
     }
     void OnZoom(InputAction.CallbackContext context)
     {

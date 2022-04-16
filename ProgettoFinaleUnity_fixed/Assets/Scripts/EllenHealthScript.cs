@@ -55,7 +55,7 @@ public class EllenHealthScript : MonoBehaviour
             anim.SetTrigger("EllenDeath");
             PlayerControllerSecondVersion PCSV = GetComponent<PlayerControllerSecondVersion>();
             PCSV.Controls.asset.Disable();
-            PCSV.KeyCanvas.gameObject.SetActive(false);
+            
             StartCoroutine(activateCanvas());
             GetComponent<CharacterController>().enabled = false;
             //NON TOCCARE RIGBUILDER
