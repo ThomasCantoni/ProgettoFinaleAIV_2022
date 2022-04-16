@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 714e5ab35ca4cb147883cdcf86845442, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 51b74d7bad397457d883c5940f7664d8, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5652688, g: 0.23266676, b: 0.076116644, a: 1}
+  m_IndirectSpecularColor: {r: 0.54271555, g: 0.22048733, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -727,14 +727,6 @@ PrefabInstance:
     - target: {fileID: 3664539947725699254, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
       propertyPath: m_LocalPosition.z
       value: -339.3422
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664539947725699254, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.999655
-      objectReference: {fileID: 0}
-    - target: {fileID: 3664539947725699254, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.02626415
       objectReference: {fileID: 0}
     - target: {fileID: 3664539947725699254, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
       propertyPath: m_LocalRotation.z
@@ -4209,11 +4201,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1934979037935162866, guid: 2e3adf257bb41ae429f013804301f736, type: 3}
   m_PrefabInstance: {fileID: 370911320}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &371009634 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2682233510397663186, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
-  m_PrefabInstance: {fileID: 500365566}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &376785029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5076,6 +5063,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+--- !u!4 &500365567 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2682233510397663186, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+  m_PrefabInstance: {fileID: 500365566}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &504466004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6316,11 +6308,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2994230917014423110, guid: a9bad5c48640f234e8a454f2ed5413f8, type: 3}
   m_PrefabInstance: {fileID: 642138226}
   m_PrefabAsset: {fileID: 0}
+
 --- !u!4 &648134856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3815815720596758851, guid: f8e058f6f80e5a042b061ec079fb4297, type: 3}
   m_PrefabInstance: {fileID: 3815815721160843659}
   m_PrefabAsset: {fileID: 0}
+
 --- !u!1001 &648327236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15668,7 +15662,7 @@ Transform:
   - {fileID: 1768514393}
   - {fileID: 1109947179}
   - {fileID: 11864647}
-  - {fileID: 371009634}
+  - {fileID: 500365567}
   - {fileID: 320681926}
   - {fileID: 1480508431}
   - {fileID: 1121680803}
