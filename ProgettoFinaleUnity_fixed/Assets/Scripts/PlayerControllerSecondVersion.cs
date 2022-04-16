@@ -66,6 +66,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
     }
+
     public bool UseLatestData = false;
     public PlayerData PlayerData;
     public bool isGamePaused = false;
@@ -193,6 +194,11 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
+    }
+    public void AddKey(int ID)
+    {
+        KeyCanvas.GetComponent<KeyScript>();
+
     }
     void Start()
     {
