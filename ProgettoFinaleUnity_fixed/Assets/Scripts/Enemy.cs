@@ -21,7 +21,6 @@ public class Enemy : MonoBehaviour, IHittable
     void Start()
     {
         OnStart();
-        
     }
 
     protected virtual void OnStart()
@@ -29,6 +28,7 @@ public class Enemy : MonoBehaviour, IHittable
         GetEllen();
         HP_Slider.maxValue = Health;
         HP_Slider.value = Health;
+        HP_Slider.transform.parent.gameObject.SetActive(true);
     }
 
     public void GetEllen()

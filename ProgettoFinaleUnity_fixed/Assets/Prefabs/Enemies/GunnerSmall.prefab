@@ -158,10 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToChase: {fileID: 0}
-  BulletTransform: {fileID: 0}
-  BulletPrefab: {fileID: 4399311173531986816, guid: 82765a7d91b30c74288d0155c0a611d9, type: 3}
-  NumBullets: 5
-  UseVeloictyOffset: 1
   anim: {fileID: 5849116579025502990}
   agent: {fileID: 5849116577464960743}
   AttackDistance: 12
@@ -170,6 +166,10 @@ MonoBehaviour:
   DetectCollider: {fileID: 5849116577464960740}
   AttackCollider: {fileID: 5849116578094899729}
   BodyCollider: {fileID: 5849116578094899756}
+  BulletTransform: {fileID: 0}
+  BulletPrefab: {fileID: 4399311173531986816, guid: 82765a7d91b30c74288d0155c0a611d9, type: 3}
+  NumBullets: 5
+  UseVeloictyOffset: 1
   Leader: {fileID: 0}
   ID: 0
 --- !u!82 &-5122636605279208942
@@ -1138,6 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 7
+  MeleeDamage: 40
   OnHitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1153,8 +1154,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  anim: {fileID: 5849116579025502990}
-  agent: {fileID: 5849116577464960743}
+  Anim: {fileID: 5849116579025502990}
+  Agent: {fileID: 5849116577464960743}
   HP_Slider: {fileID: 5849116578184959331}
   HandleAnim:
     m_PersistentCalls:
