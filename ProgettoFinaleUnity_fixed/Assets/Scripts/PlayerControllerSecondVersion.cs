@@ -87,6 +87,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public float SpeedInAir = 2.5f;
     public float SpeedWhileAiming = 2f;
     public Canvas PauseCanvas;
+    public Canvas KeyCanvas;
     public LayerMask SphereCastLayers;
     Vector3 playerVel;
     Vector2 cameraRotationVec2FromMouse;
@@ -197,14 +198,11 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         Cursor.visible = false;
         Anim.SetLayerWeight(1, 1);
-
         characterController = Player.GetComponent<CharacterController>();
         AnimatorVelocityHash = Animator.StringToHash("Velocity");
         AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
         //AnimatorVelocityHash = Animator.StringToHash("MoveX");
         //AnimatorVelocityHash = Animator.StringToHash("MoveZ");
-
-
 
         //setting up the events for the input
         Controls.Player.Enable();
