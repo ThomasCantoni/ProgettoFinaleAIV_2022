@@ -444,9 +444,26 @@ MonoBehaviour:
   BulletPrefab: {fileID: 4399311173531986816, guid: 82765a7d91b30c74288d0155c0a611d9, type: 3}
   NumBullets: 5
   UseVeloictyOffset: 1
+  OnHeal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4681009340336501909}
+        m_TargetAssemblyTypeName: Gunner, Scripts
+        m_MethodName: Heal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Followers: []
   FollowerDestinations: []
-  patrolPoints: []
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   TimeBetweenPatrolPoints: 0
   Loop: 0
 --- !u!1 &4681009341652173387
@@ -1327,6 +1344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 10
+  MeleeDamage: 40
   OnHitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1342,8 +1360,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  anim: {fileID: 4681009340553176950}
-  agent: {fileID: 4681009341110104048}
+  Anim: {fileID: 4681009340553176950}
+  Agent: {fileID: 4681009341110104048}
   HP_Slider: {fileID: 4681009339860604070}
   HandleAnim:
     m_PersistentCalls:

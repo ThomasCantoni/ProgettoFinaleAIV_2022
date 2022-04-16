@@ -10,6 +10,7 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
     private int count = -1;
     private bool turnBack = false;
     private float timer;
+    private float healTimer;
     private bool firstFrame = true;
 
     protected GunnerBigSM sm;
@@ -27,6 +28,7 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
         CalculateCount();
         sm.agent.speed = speed;
         sm.agent.destination = sm.patrolPoints[count].position;
+        healTimer = 0f;
     }
 
     public override void UpdateLogic()
@@ -47,6 +49,13 @@ public class Gunner_PatrolBig : Enemy_PatrolBig
         {
             sm.agent.destination = sm.patrolPoints[count].position;
             firstFrame = false;
+        }
+
+        healTimer += Time.deltaTime;
+        if (healTimer >= 1f)
+        {
+            healTimer = 0f;
+            sm.OnHeal?.Invoke(1);
         }
     }
 

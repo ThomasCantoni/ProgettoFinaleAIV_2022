@@ -10,10 +10,30 @@ public class Bullet : MonoBehaviour
 
     void OnEnable()
     {
-        LifeTime = 4f;
+        OnStartLife();
     }
 
     void Update()
+    {
+        UpdateLogic();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        OnCollision(other);
+    }
+
+    protected virtual void OnStartLife()
+    {
+        LifeTime = 4f;
+    }
+
+    protected virtual void OnEndLife()
+    {
+        gameObject.SetActive(false);
+    }
+
+    protected virtual void UpdateLogic()
     {
         transform.Translate(0, 0, Velocity * Time.deltaTime);
         LifeTime -= Time.deltaTime;
@@ -23,18 +43,13 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    protected virtual void OnCollision(Collider other)
     {
         EllenHealthScript hs = other.GetComponent<EllenHealthScript>();
         if (hs != null)
         {
-            hs.DamagePlayer(25f);
+            hs.DamagePlayer(Damage);
         }
         OnEndLife();
-    }
-
-    void OnEndLife()
-    {
-        gameObject.SetActive(false);
     }
 }
