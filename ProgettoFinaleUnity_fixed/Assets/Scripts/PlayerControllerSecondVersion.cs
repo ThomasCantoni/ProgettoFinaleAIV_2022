@@ -66,6 +66,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
     }
+
     public bool UseLatestData = false;
     public PlayerData PlayerData;
     public bool isGamePaused = false;
@@ -87,6 +88,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public float SpeedInAir = 2.5f;
     public float SpeedWhileAiming = 2f;
     public Canvas PauseCanvas;
+    public Canvas KeyCanvas;
     public LayerMask SphereCastLayers;
     Vector3 playerVel;
     Vector2 cameraRotationVec2FromMouse;
@@ -193,18 +195,21 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
     }
+    public void AddKey(int ID)
+    {
+        KeyCanvas.GetComponent<KeyScript>();
+
+    }
     void Start()
     {
+        
         Cursor.visible = false;
         Anim.SetLayerWeight(1, 1);
-
         characterController = Player.GetComponent<CharacterController>();
         AnimatorVelocityHash = Animator.StringToHash("Velocity");
         AnimatorSpeedHash = Animator.StringToHash("SpeedMultiplier");
         //AnimatorVelocityHash = Animator.StringToHash("MoveX");
         //AnimatorVelocityHash = Animator.StringToHash("MoveZ");
-
-
 
         //setting up the events for the input
         Controls.Player.Enable();
@@ -268,7 +273,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         Controls.Enable();
         Destroy(GetComponent<CameraOut>());
         SetPrefs();
-
     }
     void OnZoom(InputAction.CallbackContext context)
     {
