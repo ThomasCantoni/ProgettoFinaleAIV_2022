@@ -196,6 +196,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void Start()
     {
+        
         Cursor.visible = false;
         Anim.SetLayerWeight(1, 1);
         characterController = Player.GetComponent<CharacterController>();
@@ -266,7 +267,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         Controls.Enable();
         Destroy(GetComponent<CameraOut>());
         SetPrefs();
-
     }
     void OnZoom(InputAction.CallbackContext context)
     {

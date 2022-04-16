@@ -21,7 +21,7 @@ public class KeyScript : MonoBehaviour
         {
             canvasKey.gameObject.SetActive(true);
         }
-        else
+        else 
         {
             canvasKey.gameObject.SetActive(false);
         }
