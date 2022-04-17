@@ -128,7 +128,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         {
             for (int j =1; j < PlayerData.keysTaken.Count;j++)
             {
-                if (PlayerData.keysTaken[i] == PlayerData.keysTaken[j]) 
+                if (i!= j && PlayerData.keysTaken[i] == PlayerData.keysTaken[j]) 
                 {
                     RemoveKey(j);
                 }
@@ -165,8 +165,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public void RemoveKey(int ID)
     {
         this.KeyCanvas.GetComponent<KeyCanvasScript>().RemoveKey(ID);
-
-        PlayerData.keysTaken[ID] = -1;
+        int index = PlayerData.keysTaken.IndexOf(ID);
+        PlayerData.keysTaken[index] = -1;
 
     }
     private void SelectAmbient()
