@@ -20,7 +20,7 @@ public class EnemySM : StateMachine
     public Enemy_Attack attackState;
     [HideInInspector]
     public Enemy_Death deathState;
-    [HideInInspector]
+   [HideInInspector]
     public Transform ObjToChase;
 
     public Animator anim;
