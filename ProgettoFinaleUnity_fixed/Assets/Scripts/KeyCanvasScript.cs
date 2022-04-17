@@ -22,7 +22,8 @@ public class KeyCanvasScript : MonoBehaviour
     {
         if (KeysTaken.Contains(ID))
         {
-            KeysTaken[ID] = -1;
+           int index=  KeysTaken.IndexOf(ID);
+            KeysTaken[index] = -1;
             transform.GetChild(ID).gameObject.SetActive(false);
         }
     }
