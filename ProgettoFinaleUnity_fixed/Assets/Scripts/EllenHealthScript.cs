@@ -14,7 +14,7 @@ public class EllenHealthScript : MonoBehaviour
     private float maxHp = 100f;
     public Canvas canvasDeath;
     public Canvas UiCanvas;
-    
+    public CameraShakeScript Shake;
 
     public float HP_Value
     {
@@ -48,6 +48,7 @@ public class EllenHealthScript : MonoBehaviour
         HP_Value -= amount;
         anim.SetTrigger("Hit");
         anim.SetLayerWeight(2, 0.5f);
+        Shake.ApplyShake(amount*0.05f, amount * 0.2f, amount * 0.2f);
         if (hp_Value <= 0)
         {
             anim.SetLayerWeight(2, 0);

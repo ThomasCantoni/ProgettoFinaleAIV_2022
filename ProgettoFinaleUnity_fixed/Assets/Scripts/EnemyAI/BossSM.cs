@@ -112,6 +112,7 @@ public class BossSM : StateMachine
             GameObject go = Instantiate(SpitterPrefab);
             go.SetActive(false);
             go.transform.parent = SpitterTransform;
+            go.transform.position = SpitterTransform.position;
             if (SpitterTransform.GetComponent<BossSpitterPoolMgr>() == null)
             {
                 SpitterTransform.gameObject.AddComponent<BossSpitterPoolMgr>();
