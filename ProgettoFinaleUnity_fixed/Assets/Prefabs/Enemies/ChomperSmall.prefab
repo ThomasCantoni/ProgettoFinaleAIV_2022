@@ -1985,13 +1985,13 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.2
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 10
   Pan2D: 0
@@ -2104,6 +2104,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &325730226702650737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4782137032001656335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbeb09fb9e39a164bbacfc7f954181e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AS: {fileID: 3960699638245658846}
+  Clip: {fileID: 8300000, guid: 7d0afb4083ad64053bdeb009ee5f557f, type: 3}
+  Clip4: {fileID: 0}
+  Clip3: {fileID: 0}
+--- !u!114 &3845314960310866018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4782137032001656335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf3e1d19484fb447ad40dd63fb32dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AS: {fileID: 3960699638245658846}
+  Clip: {fileID: 8300000, guid: 20b5f8cd003d14fca9e07f3eb4ed6018, type: 3}
+  Clip2: {fileID: 0}
 --- !u!114 &4607822824951474982
 MonoBehaviour:
   m_ObjectHideFlags: 0

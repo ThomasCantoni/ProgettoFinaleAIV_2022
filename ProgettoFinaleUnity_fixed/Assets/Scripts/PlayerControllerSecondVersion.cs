@@ -263,6 +263,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         //setting up the events for the input
         InputSystem.onDeviceChange += HandleDeviceChange;
         Controls.Player.Enable();
+       
         //Controls.Player.RotateCamera.performed += OnCameraRotate;
         Controls.Player.Zoom.performed += OnZoom;
         Controls.Player.Zoom.canceled += OnZoomCancel;
