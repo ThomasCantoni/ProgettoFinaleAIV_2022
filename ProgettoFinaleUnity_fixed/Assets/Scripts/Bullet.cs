@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IHittable
 {
     public float LifeTime = 4f;
     public float Damage = 25f;
@@ -50,6 +50,11 @@ public class Bullet : MonoBehaviour
         {
             hs.DamagePlayer(Damage);
         }
+        OnEndLife();
+    }
+
+    public void OnHit(Collider sender)
+    {
         OnEndLife();
     }
 }

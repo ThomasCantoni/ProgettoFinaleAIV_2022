@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004999189753780131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.478}
+  m_LocalPosition: {x: 0, y: 0, z: 0.426}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 4609301347933295820}
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 71da9fb810a224c46bc249a8378e9953, type: 2}
+  - {fileID: 2100000, guid: a9bec445b198dd7458fcd489957a26b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8386021842920365192}
   - component: {fileID: 7107279639515866305}
   - component: {fileID: 7330329546449392833}
-  - component: {fileID: 8383488038889584033}
+  - component: {fileID: -996565974318692815}
   m_Layer: 9
   m_Name: BulletTest
   m_TagString: Untagged
@@ -157,7 +157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c205df3fd8a90554794ea4c239c33562, type: 2}
+  - {fileID: 2100000, guid: 48c4ba26d842cdb4786ed2bb55ab481c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -192,7 +192,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8383488038889584033
+--- !u!114 &-996565974318692815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -201,8 +201,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4399311173531986816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a4047e4a871d4841a1eead9608d07f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 08356d1bebceeaf46b6f61d2fb4a1f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LifeTime: 4
-  Velocity: 20
+  LifeTime: 2
+  Damage: 25
+  Velocity: 9
+  TargetToSearch: {fileID: 0}

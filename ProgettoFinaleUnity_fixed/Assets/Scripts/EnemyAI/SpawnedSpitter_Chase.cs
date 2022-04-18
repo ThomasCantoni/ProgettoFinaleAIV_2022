@@ -29,8 +29,6 @@ public class SpawnedSpitter_Chase : Enemy_Chase
         }
         sm.anim.SetBool("Run", true);
         sm.agent.speed = speed * acceleration;
-
-        sm.WriteStateOnCanvas("Chase");
     }
 
     public override void UpdateLogic()
