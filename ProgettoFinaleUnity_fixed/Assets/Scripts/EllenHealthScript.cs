@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Animations.Rigging;
 using Cinemachine;
@@ -13,6 +14,7 @@ public class EllenHealthScript : MonoBehaviour
     private float hp_Value = 100f;
     private float maxHp = 100f;
     public Canvas canvasDeath;
+    public GameObject DeathMenuFirstSelected;
     public Canvas UiCanvas;
     public CameraShakeScript Shake;
 
@@ -34,6 +36,10 @@ public class EllenHealthScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         canvasDeath.gameObject.SetActive(true);
         UiCanvas.gameObject.SetActive(false);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(DeathMenuFirstSelected);
+
         Cursor.visible = true;
     }
 
