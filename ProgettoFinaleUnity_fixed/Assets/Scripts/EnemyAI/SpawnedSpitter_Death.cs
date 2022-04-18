@@ -23,8 +23,6 @@ public class SpawnedSpitter_Death : Enemy_Death
         sm.BodyCollider.enabled = false;
         sm.AttackCollider.enabled = false;
         sm.animAct += OnEndDeathAnimation;
-
-        sm.WriteStateOnCanvas("Death");
     }
 
     public override void UpdateLogic()

@@ -10,7 +10,6 @@ public class SpawnedSpitterSM : EnemySM
     public float IdleTime;
     [HideInInspector]
     public Enemy_Idle idleState;
-    public TextMeshProUGUI Text;
 
     protected override BaseState GetInitialState()
     {
@@ -23,10 +22,5 @@ public class SpawnedSpitterSM : EnemySM
         chaseState = new SpawnedSpitter_Chase(this);
         attackState = new SpawnedSpitter_Attack(this);
         deathState = new SpawnedSpitter_Death(this);
-    }
-
-    public virtual void WriteStateOnCanvas(string text)
-    {
-        Text.text = text;
     }
 }

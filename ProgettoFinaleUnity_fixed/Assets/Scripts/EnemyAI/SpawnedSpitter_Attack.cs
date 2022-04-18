@@ -25,8 +25,6 @@ public class SpawnedSpitter_Attack : Enemy_Attack
         hasAttacked = false;
         sm.animAct += SetAttackCollider;
         sm.anim.SetBool("Idle", true);
-
-        sm.WriteStateOnCanvas("Attack");
     }
 
     public override void UpdateLogic()
