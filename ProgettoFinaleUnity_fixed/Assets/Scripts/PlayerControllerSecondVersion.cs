@@ -113,6 +113,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
     public GroundedCollider GroundedCollider;
 
+    private bool isAGamepadConnected = false;
   
     private void OnEnable()
     {
@@ -257,8 +258,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         //AnimatorVelocityHash = Animator.StringToHash("MoveZ");
 
         //setting up the events for the input
+        InputSystem.onDeviceChange += HandleDeviceChange;
         Controls.Player.Enable();
-        Controls.Player.RotateCamera.performed += OnCameraRotate;
+        //Controls.Player.RotateCamera.performed += OnCameraRotate;
         Controls.Player.Zoom.performed += OnZoom;
         Controls.Player.Zoom.canceled += OnZoomCancel;
         Controls.Player.Movement.performed += cntxt => OnMovement(cntxt.ReadValue<Vector2>());
@@ -270,12 +272,39 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         Controls.Player.Pause.performed += PauseGame;
         //controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
         Controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;
-
-
-
-
-
     }
+
+    public void OnGamepadConnected()
+    {
+        isAGamepadConnected = true;
+        //Controls.Player.RotateCamera.performed -= OnCameraRotate;
+    }
+
+    public void OnGamepadDisconnected()
+    {
+        isAGamepadConnected = false;
+        //Controls.Player.RotateCamera.performed += OnCameraRotate;
+    }
+    
+    void HandleDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        Debug.Log("Triggered something");
+        Debug.Log(device);
+        Debug.Log(change);
+        if (device is Gamepad)
+        {
+            switch (change)
+            {
+                case InputDeviceChange.Added:
+                    OnGamepadConnected();
+                    break;
+                case InputDeviceChange.Removed:
+                    OnGamepadDisconnected();
+                    break;
+            }
+        }
+    }
+
     public void PlayerActivateBT(InputAction.CallbackContext ctxt)
     {
 
@@ -305,7 +334,6 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         else
         {
             TimeManager.DisablePause();
-            Debug.Log(Anim);
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
             if (TimeManager.IsBulletTimeActive)
             {
@@ -363,8 +391,24 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             return;
         Vector2 lookValue = context.ReadValue<Vector2>();
 
+        cameraRotationVec2FromMouse.x -= lookValue.y * AimSensitivity * Time.deltaTime;
+        cameraRotationVec2FromMouse.y += lookValue.x * AimSensitivity * Time.deltaTime;
+        cameraRotationVec2FromMouse.x = Mathf.Clamp(cameraRotationVec2FromMouse.x, -50f, 70f);
+        CameraReference.transform.rotation = Quaternion.Euler(cameraRotationVec2FromMouse.x, cameraRotationVec2FromMouse.y, 0);
+        Vector3 camForward = CameraReference.forward;
+        cameraQuatForMovement = Quaternion.LookRotation(
+            new Vector3(camForward.x, 0, camForward.z),
+            Vector3.up);
+    }
 
-        // lookValue.y = Mathf.Clamp(lookValue.y, -70f,70f);
+    void GetCameraRotation()
+    {
+        if (TimeManager.IsGamePaused)
+            return;
+        Vector2 lookValue = Controls.Player.RotateCamera.ReadValue<Vector2>();
+
+        if (lookValue.x <= 0.1f && lookValue.x >= -0.1f && lookValue.y <= 0.1f && lookValue.y >= -0.1f)
+            return;
 
         cameraRotationVec2FromMouse.x -= lookValue.y * AimSensitivity * Time.deltaTime;
         cameraRotationVec2FromMouse.y += lookValue.x * AimSensitivity * Time.deltaTime;
@@ -406,8 +450,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     }
     void Update()
     {
-
-
+        Debug.Log(isAGamepadConnected);
 
         if (TimeManager.IsGamePaused)
         {
@@ -427,7 +470,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             BulletTimeAudioSource.pitch = 1.5f - (GetComponent<EllenActionPoints>().AP_Value / GetComponent<EllenActionPoints>().MaxAp) * 0.8f;
         }
 
-
+        GetCameraRotation();
         MoveRelativeToCameraRotation();
         //isGrounded = IsGroundedTest();
         GravityAndJumpUpdate();
