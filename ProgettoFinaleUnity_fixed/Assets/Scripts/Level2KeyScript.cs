@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class Level2KeyScript : MonoBehaviour
 {
     public int ID_KeyToRemove;
@@ -10,6 +10,7 @@ public class Level2KeyScript : MonoBehaviour
     public AudioClip Loop, Insert;
     public AudioSource AS;
     public bool IsKeyInserted = false;
+    public UnityEvent Actions;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -22,6 +23,7 @@ public class Level2KeyScript : MonoBehaviour
             KeyToActivate.SetActive(true);
             AS.clip = Insert;
             AS.Play();
+            Actions.Invoke();
             StartCoroutine(ChangeClip());
         }
         else
