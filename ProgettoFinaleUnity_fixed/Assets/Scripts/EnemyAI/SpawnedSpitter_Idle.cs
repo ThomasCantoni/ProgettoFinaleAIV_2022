@@ -20,8 +20,6 @@ public class SpawnedSpitter_Idle : Enemy_Idle
         sm.BodyCollider.enabled = true;
         sm.agent.speed = 0;
         timer = 0f;
-
-        sm.WriteStateOnCanvas("Idle");
     }
 
     public override void UpdateLogic()
