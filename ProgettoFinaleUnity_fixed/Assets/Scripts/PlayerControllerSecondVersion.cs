@@ -131,20 +131,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
                 if (i!= j && PlayerData.keysTaken[i] == PlayerData.keysTaken[j]) 
                 {
                     RemoveKey(j);
-                    //PlayerData.keysTaken.RemoveAt(j);
-                    i = 0;
-                    j = 1;
                 }
             }
         }
-        //for (int i = 0; i < PlayerData.keysTaken.Count; i++)
-        //{
-        //    if (PlayerData.keysTaken[i] < 0)
-        //    {
-        //        PlayerData.keysTaken.RemoveAt(i);
-        //        i = 0;
-        //    }
-        //}
+        for (int i = 0; i < PlayerData.keysTaken.Count; i++)
+        {
+            if(PlayerData.keysTaken[i] <0)
+            {
+                PlayerData.keysTaken.RemoveAt(i);
+                i = 0;
+            }
+        }
         for (int i = 0; i < PlayerData.keysTaken.Count; i++)
        
         {
@@ -169,7 +166,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         this.KeyCanvas.GetComponent<KeyCanvasScript>().RemoveKey(ID);
         int index = PlayerData.keysTaken.IndexOf(ID);
-        PlayerData.keysTaken.RemoveAt(index);
+        PlayerData.keysTaken[index] = -1;
 
     }
     private void SelectAmbient()
