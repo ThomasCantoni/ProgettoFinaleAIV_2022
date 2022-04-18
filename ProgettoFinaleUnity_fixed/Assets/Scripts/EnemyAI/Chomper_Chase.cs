@@ -36,7 +36,6 @@ public class Chomper_Chase : Enemy_Chase
 
     public override void UpdateLogic()
     {
-        Debug.Log("CHASE");
         timer += Time.deltaTime;
         chaseTimer += Time.deltaTime;
         if (timer >= sm.AttackCooldown && Vector3.Distance(sm.transform.position, sm.ObjToChase.position) <= sm.AttackDistance)

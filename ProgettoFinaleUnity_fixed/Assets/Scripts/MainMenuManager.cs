@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MainMenuManager : MonoBehaviour
 {
     public GameObject MainCanvas, OptionsCanvas, LoadingImage;
     public Button ContinueButton;
+
+    public GameObject MainMenuFirstSelected, OptionsMenuFirstSelected, MainMenuOptionsClosedSelected;
+
     private void Start()
     {
         Cursor.visible = true;
@@ -50,11 +54,14 @@ public class MainMenuManager : MonoBehaviour
     {
         OptionsCanvas.SetActive(true);
         MainCanvas.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(OptionsMenuFirstSelected);
     }
     public void EnableMainCanvas()
     {
         OptionsCanvas.SetActive(false);
         MainCanvas.SetActive(true);
-
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(MainMenuOptionsClosedSelected);
     }
 }
