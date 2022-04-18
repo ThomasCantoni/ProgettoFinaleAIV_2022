@@ -7,6 +7,7 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using System;
 
 public class PlayerControllerSecondVersion : MonoBehaviour
@@ -88,6 +89,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public float SpeedInAir = 2.5f;
     public float SpeedWhileAiming = 2f;
     public Canvas PauseCanvas;
+    public GameObject PauseCanvasFirstSelected;
     public Canvas KeyCanvas;
     public LayerMask SphereCastLayers;
     Vector3 playerVel;
@@ -296,6 +298,9 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
 
             PauseCanvas.gameObject.SetActive(true);
+
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(PauseCanvasFirstSelected);
         }
         else
         {
@@ -307,6 +312,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
                 BulletTimeAudioSource.UnPause();
             }
             PauseCanvas.gameObject.SetActive(false);
+
+            EventSystem.current.SetSelectedGameObject(null);
         }
 
     }
