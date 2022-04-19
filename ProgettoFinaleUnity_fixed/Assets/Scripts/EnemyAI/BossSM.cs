@@ -48,8 +48,6 @@ public class BossSM : StateMachine
     public AnimatorTransitionInfo TransInfo;
 
     public GameObject MeleeAttackEffect;
-    public GameObject SpawnAttackEffect;
-    public Transform FootSpawnAttackPosition;
 
     void Awake()
     {
