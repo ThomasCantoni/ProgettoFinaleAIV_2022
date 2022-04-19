@@ -73,7 +73,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public bool isGamePaused = false;
     public AudioSource BulletTimeAudioSource, AmbientAudioSource;
     public AudioClip Lvl1_Ambient, Lvl2_ambient;
-    public AudioMixerGroup Mixer;
+    //public AudioMixerGroup Mixer;
+    public AudioMixer Mixer;
     public EllenActionPoints EllenAp;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
     public Camera Camera;
@@ -247,8 +248,17 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
+        float a=0;
+        
+
+        a = PlayerPrefs.GetFloat("Volume");
+
+        Mixer.SetFloat("Volume",a);
+        
+       
+
     }
-    
+
     void Start()
     {
         
@@ -260,6 +270,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         //AnimatorVelocityHash = Animator.StringToHash("MoveX");
         //AnimatorVelocityHash = Animator.StringToHash("MoveZ");
 
+        
         //setting up the events for the input
         InputSystem.onDeviceChange += HandleDeviceChange;
         Controls.Player.Enable();
@@ -276,6 +287,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         Controls.Player.Pause.performed += PauseGame;
         //controls.Player.BulletTimeInput.performed += TimeManager.EnableBulletTime;
         Controls.Player.BulletTimeInput.performed += ManageBulletTimePlayerSide;
+        SetPrefs();
     }
 
     public void OnGamepadConnected()
@@ -466,7 +478,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             TimeManager.DisableBulletTime();
             EllenAp.Disable();
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
-            Mixer.audioMixer.SetFloat("Pitch", 1f);
+            Mixer.SetFloat("Pitch", 1f);
             BulletTimeAudioSource.Stop();
         }
         if (BulletTimeAudioSource.isPlaying)
@@ -564,12 +576,12 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         {
             EllenAp.Activate();
             BulletTimeAudioSource.Play();
-            Mixer.audioMixer.SetFloat("Pitch", 0.3f);
+            Mixer.SetFloat("Pitch", 0.3f);
         }
         else
         {
             EllenAp.Disable();
-            Mixer.audioMixer.SetFloat("Pitch", 1f);
+            Mixer.SetFloat("Pitch", 1f);
             BulletTimeAudioSource.Stop();
         }
 
