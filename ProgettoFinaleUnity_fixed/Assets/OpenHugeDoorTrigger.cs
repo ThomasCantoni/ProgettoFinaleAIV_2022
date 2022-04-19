@@ -7,7 +7,7 @@ public class OpenHugeDoorTrigger : MonoBehaviour
     public Animator Anim;
     public bool RequiresKey;
     public int KeyRequired;
-   
+  
     private void OnTriggerStay(Collider collision)
     {
         
