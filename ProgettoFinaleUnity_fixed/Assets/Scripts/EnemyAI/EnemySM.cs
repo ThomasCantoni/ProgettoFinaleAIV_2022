@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class EnemySM : StateMachine
 {
@@ -22,6 +23,8 @@ public class EnemySM : StateMachine
     public Enemy_Death deathState;
    [HideInInspector]
     public Transform ObjToChase;
+
+    public TextMeshProUGUI Text;
 
     public GameObject DeathSmokeEffect;
     public Animator anim;
@@ -64,6 +67,16 @@ public class EnemySM : StateMachine
     {
         GameObject impactGO = Instantiate(DeathSmokeEffect, transform.position + new Vector3(0, yOffset, 0), Quaternion.LookRotation(Vector3.up));
         Destroy(impactGO, 4f);
+    }
+    public void ChangeStateText(string text)
+    {
+        Text.text = text;
+    }
+    public override void ChangeState(BaseState newState)
+    {
+        if (CurrentState == deathState)
+            return;
+        base.ChangeState(newState);
     }
 
     protected virtual void OnAwake()

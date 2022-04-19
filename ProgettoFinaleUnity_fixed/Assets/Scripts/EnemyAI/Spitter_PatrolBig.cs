@@ -20,6 +20,8 @@ public class Spitter_PatrolBig : Enemy_PatrolBig
 
     public override void OnEnter()
     {
+        sm.ChangeStateText("PATROL");
+
         firstFrame = true;
 
         sm.DetectCollider.enabled = true;

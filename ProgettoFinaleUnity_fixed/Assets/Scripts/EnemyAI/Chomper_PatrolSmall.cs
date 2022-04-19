@@ -15,6 +15,8 @@ public class Chomper_PatrolSmall : Enemy_PatrolSmall
 
     public override void OnEnter()
     {
+        sm.ChangeStateText("PATROL");
+
         sm.DetectCollider.enabled = true;
         sm.OnShpereTriggerStay += OnDetection;
         sm.AttackCollider.enabled = false;

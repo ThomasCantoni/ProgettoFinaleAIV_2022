@@ -21,6 +21,8 @@ public class SpawnedSpitter_Attack : Enemy_Attack
 
     public override void OnEnter()
     {
+        sm.ChangeStateText("ATTACK");
+
         timer = 0f;
         hasAttacked = false;
         sm.animAct += SetAttackCollider;

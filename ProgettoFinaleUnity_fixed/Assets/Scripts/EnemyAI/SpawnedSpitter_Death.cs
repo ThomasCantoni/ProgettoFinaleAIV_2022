@@ -16,6 +16,8 @@ public class SpawnedSpitter_Death : Enemy_Death
 
     public override void OnEnter()
     {
+        sm.ChangeStateText("DEATH");
+
         timer = 0f;
         startTimer = false;
 
