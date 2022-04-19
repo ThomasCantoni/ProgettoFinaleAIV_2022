@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5354902727505580784}
   - component: {fileID: 6571332855287138561}
   m_Layer: 9
-  m_Name: SearchBullet
+  m_Name: BlueBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   LifeTime: 6
   Damage: 20
   Velocity: 17
+  ExplosionEffect: {fileID: 5532306964405100981, guid: ee4f9918c4e940544ac7bff26a5b6181, type: 3}
   TargetToSearch: {fileID: 0}
 --- !u!1 &2456882075308085650
 GameObject:
