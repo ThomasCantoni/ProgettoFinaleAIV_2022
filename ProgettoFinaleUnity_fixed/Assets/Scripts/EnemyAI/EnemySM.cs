@@ -23,6 +23,7 @@ public class EnemySM : StateMachine
    [HideInInspector]
     public Transform ObjToChase;
 
+    public GameObject DeathSmokeEffect;
     public Animator anim;
     public NavMeshAgent agent;
     public float AttackDistance = 3f;
@@ -58,6 +59,11 @@ public class EnemySM : StateMachine
     public void OnEnemyDeath()
     {
         ChangeState(deathState);
+    }
+    public void OnEndDeath(float yOffset = 0.5f)
+    {
+        GameObject impactGO = Instantiate(DeathSmokeEffect, transform.position + new Vector3(0, yOffset, 0), Quaternion.LookRotation(Vector3.up));
+        Destroy(impactGO, 4f);
     }
 
     protected virtual void OnAwake()

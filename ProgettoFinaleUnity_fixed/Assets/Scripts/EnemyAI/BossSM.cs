@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class BossSM : StateMachine
 {
     public delegate void ActionAnim(bool start);
     public event ActionAnim animAct;
+
+    public UnityEvent<float, float, float> EllenCameraShake;
 
     [HideInInspector]
     public Boss_Cooldown cooldownState;
@@ -43,6 +46,10 @@ public class BossSM : StateMachine
     public AnimatorStateInfo AnimStateInfo;
     [HideInInspector]
     public AnimatorTransitionInfo TransInfo;
+
+    public GameObject MeleeAttackEffect;
+    public GameObject SpawnAttackEffect;
+    public Transform FootSpawnAttackPosition;
 
     void Awake()
     {
@@ -120,5 +127,16 @@ public class BossSM : StateMachine
             }
             SpitterTransform.GetComponent<BossSpitterPoolMgr>().AddSpitter(go);
         }
+    }
+
+    public virtual void OnMeleeAttackStart()
+    {
+        GameObject effect = Instantiate(MeleeAttackEffect, transform.position + new Vector3(0, 1f, 0), Quaternion.LookRotation(Vector3.up));
+        Destroy(effect, 1.5f);
+    }
+
+    public virtual void OnSpawnAttackStart()
+    {
+        EllenCameraShake?.Invoke(1.5f, 2f, 2f);
     }
 }

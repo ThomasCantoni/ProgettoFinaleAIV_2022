@@ -11,6 +11,8 @@ public class SpawnedSpitterSM : EnemySM
     [HideInInspector]
     public Enemy_Idle idleState;
 
+    public GameObject SpawnSmokeEffect;
+
     protected override BaseState GetInitialState()
     {
         return idleState;
@@ -22,5 +24,11 @@ public class SpawnedSpitterSM : EnemySM
         chaseState = new SpawnedSpitter_Chase(this);
         attackState = new SpawnedSpitter_Attack(this);
         deathState = new SpawnedSpitter_Death(this);
+    }
+
+    public virtual void OnSpawn()
+    {
+        GameObject impactGO = Instantiate(SpawnSmokeEffect, transform.position, Quaternion.LookRotation(Vector3.up));
+        Destroy(impactGO, 1f);
     }
 }

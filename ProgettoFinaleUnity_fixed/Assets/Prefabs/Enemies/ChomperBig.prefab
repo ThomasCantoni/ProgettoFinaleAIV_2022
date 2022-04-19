@@ -507,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToChase: {fileID: 0}
+  DeathSmokeEffect: {fileID: 1852712514065924416, guid: 1a3e8971c63da7b4da57dc1ae59fd27d, type: 3}
   anim: {fileID: 28934987946868697}
   agent: {fileID: 28934987932077256}
   AttackDistance: 4
@@ -2236,6 +2237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e06ba5fa7ff1d34cbf68ce249b338fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
   Health: 3
   MeleeDamage: 20
   OnHitEvent:
@@ -2256,6 +2258,7 @@ MonoBehaviour:
   Anim: {fileID: 28934987946868697}
   Agent: {fileID: 28934987932077256}
   HP_Slider: {fileID: 28934987593744242}
+  HP_Bar: {fileID: 28934986749695672}
   HandleAnim:
     m_PersistentCalls:
       m_Calls:
@@ -2286,6 +2289,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5334820931711945564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28934987956243483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf3e1d19484fb447ad40dd63fb32dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AS: {fileID: 4334894999750858894}
+  Clip: {fileID: 8300000, guid: 20b5f8cd003d14fca9e07f3eb4ed6018, type: 3}
+  Clip2: {fileID: 0}
 --- !u!114 &6243672725955059268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2326,18 +2344,3 @@ MonoBehaviour:
   Clip: {fileID: 8300000, guid: 7d0afb4083ad64053bdeb009ee5f557f, type: 3}
   Clip4: {fileID: 0}
   Clip3: {fileID: 0}
---- !u!114 &5334820931711945564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28934987956243483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf3e1d19484fb447ad40dd63fb32dd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AS: {fileID: 4334894999750858894}
-  Clip: {fileID: 8300000, guid: 20b5f8cd003d14fca9e07f3eb4ed6018, type: 3}
-  Clip2: {fileID: 0}

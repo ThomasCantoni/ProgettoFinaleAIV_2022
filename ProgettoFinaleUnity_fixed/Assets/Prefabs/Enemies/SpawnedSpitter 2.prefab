@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToChase: {fileID: 0}
+  DeathSmokeEffect: {fileID: 1852712514065924416, guid: b4a7e18e473cd2a44af37c193c7fe846, type: 3}
   anim: {fileID: 2044366069264345767}
   agent: {fileID: 921096741418854107}
   AttackDistance: 4
@@ -76,7 +77,8 @@ MonoBehaviour:
   DetectCollider: {fileID: 0}
   AttackCollider: {fileID: 949987894351788057}
   BodyCollider: {fileID: 5687573446302258735}
-  IdleTime: 0.25
+  IdleTime: 0.7
+  SpawnSmokeEffect: {fileID: 1852712514065924416, guid: 6d31f8f67aa5f7c4c8e072dc63141187, type: 3}
 --- !u!1 &3320156335047899039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,6 +1923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2b7da32b6bbdf4d8e2eca61685eaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
   Health: 2
   MeleeDamage: 34
   OnHitEvent:
@@ -1929,6 +1932,7 @@ MonoBehaviour:
   Anim: {fileID: 2044366069264345767}
   Agent: {fileID: 921096741418854107}
   HP_Slider: {fileID: 1822010638641574176}
+  HP_Bar: {fileID: 4173563416304903362}
   HandleAnim:
     m_PersistentCalls:
       m_Calls:

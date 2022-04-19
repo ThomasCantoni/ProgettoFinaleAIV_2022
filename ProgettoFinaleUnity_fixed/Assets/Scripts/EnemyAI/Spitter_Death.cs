@@ -17,7 +17,7 @@ public class Spitter_Death : Enemy_Death
     public override void OnEnter()
     {
         timer = 0f;
-        startTimer = true;
+        startTimer = false;
 
 
         sm.agent.speed = 0f;
@@ -35,6 +35,7 @@ public class Spitter_Death : Enemy_Death
             timer += Time.deltaTime;
             if (timer >= 1f)
             {
+                sm.OnEndDeath();
                 sm.transform.gameObject.SetActive(false);
                 sm.animAct -= OnEndDeathAnimation;
             }

@@ -9,7 +9,7 @@ public class FireFly : MonoBehaviour, IHittable
     public GameObject TriggerToActivate;
     public int Health;
     public UnityEvent<Collider> OnHitEvent;
-    public virtual void OnHit(Collider sender)
+    public virtual HittableType OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
         Health--;
@@ -26,5 +26,7 @@ public class FireFly : MonoBehaviour, IHittable
                 TriggerToActivate.GetComponent<BoxCollider>().enabled = true;
             }
         }
+
+        return HittableType.Other;
     }
 }

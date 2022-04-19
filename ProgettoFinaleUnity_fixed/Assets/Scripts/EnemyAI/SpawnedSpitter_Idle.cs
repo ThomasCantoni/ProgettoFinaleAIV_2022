@@ -19,6 +19,7 @@ public class SpawnedSpitter_Idle : Enemy_Idle
         sm.anim.SetBool("Idle", false);
         sm.BodyCollider.enabled = true;
         sm.agent.speed = 0;
+        sm.OnSpawn();
         timer = 0f;
     }
 

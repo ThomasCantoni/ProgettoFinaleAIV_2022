@@ -36,6 +36,7 @@ public class Boss_SpawnAttack : BaseState
 
     public virtual void Spawn(bool value)
     {
+        sm.OnSpawnAttackStart();
         GameObject go = sm.SpitterTransform.GetComponent<BossSpitterPoolMgr>().SpawnObj(sm.SpitterSpawnPosition.position, sm.SpitterSpawnPosition.forward);
         if (go != null)
         {

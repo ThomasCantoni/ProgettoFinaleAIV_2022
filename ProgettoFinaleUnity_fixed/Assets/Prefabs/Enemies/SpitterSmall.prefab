@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToChase: {fileID: 0}
+  DeathSmokeEffect: {fileID: 1852712514065924416, guid: b4a7e18e473cd2a44af37c193c7fe846, type: 3}
   anim: {fileID: 5654179162061967238}
   agent: {fileID: 519866529479279525}
   AttackDistance: 4
@@ -1112,6 +1113,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &487820204608062889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5654179162069400642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbeb09fb9e39a164bbacfc7f954181e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AS: {fileID: 7185855492009104717}
+  Clip: {fileID: 8300000, guid: 7d0afb4083ad64053bdeb009ee5f557f, type: 3}
+  Clip4: {fileID: 0}
+  Clip3: {fileID: 0}
 --- !u!114 &2911408279482755294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,6 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd2dc977c9169a4c967751bdb274735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
   Health: 3
   MeleeDamage: 30
   OnHitEvent:
@@ -1144,6 +1162,7 @@ MonoBehaviour:
   Anim: {fileID: 5654179162061967238}
   Agent: {fileID: 519866529479279525}
   HP_Slider: {fileID: 7945639752372426532}
+  HP_Bar: {fileID: 2918035173546043454}
   HandleAnim:
     m_PersistentCalls:
       m_Calls:
@@ -1174,6 +1193,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5120328227597607708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5654179162069400642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf3e1d19484fb447ad40dd63fb32dd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AS: {fileID: 7185855492009104717}
+  Clip: {fileID: 8300000, guid: 20b5f8cd003d14fca9e07f3eb4ed6018, type: 3}
+  Clip2: {fileID: 0}
 --- !u!114 &6013454705336616571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1198,34 +1232,3 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1457448d5c37f4e24ae836e5fa686605, type: 3}
   - {fileID: 8300000, guid: abc08e2cdbd1f47dba39e7c1adfccca9, type: 3}
   - {fileID: 8300000, guid: 8c6d38eb0db494ebd8fa106fc76b032d, type: 3}
---- !u!114 &5120328227597607708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654179162069400642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf3e1d19484fb447ad40dd63fb32dd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AS: {fileID: 7185855492009104717}
-  Clip: {fileID: 8300000, guid: 20b5f8cd003d14fca9e07f3eb4ed6018, type: 3}
-  Clip2: {fileID: 0}
---- !u!114 &487820204608062889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654179162069400642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbeb09fb9e39a164bbacfc7f954181e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AS: {fileID: 7185855492009104717}
-  Clip: {fileID: 8300000, guid: 7d0afb4083ad64053bdeb009ee5f557f, type: 3}
-  Clip4: {fileID: 0}
-  Clip3: {fileID: 0}

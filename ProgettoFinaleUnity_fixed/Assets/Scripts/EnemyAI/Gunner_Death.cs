@@ -34,6 +34,7 @@ public class Gunner_Death : Enemy_Death
             timer += Time.deltaTime;
             if (timer >= 2f)
             {
+                sm.OnEndDeath(1.25f);
                 sm.transform.gameObject.SetActive(false);
                 sm.animAct -= OnEndDeathAnimation;
             }

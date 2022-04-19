@@ -7,18 +7,18 @@ public class GunScript : MonoBehaviour
 {
     public PlayerControllerSecondVersion PCSV;
     public ParticleSystem Ps;
-    public GameObject BulletImpact;
+    public GameObject[] BulletImpacts;
     public Transform gunMuzzle;
     public AudioSource AudioSource;
     private void Start()
     {
         this.AudioSource = GetComponent<AudioSource>();
     }
-    public void ReceiveShotImpactPos(Vector3 impactPos, Vector3 dir)
+    public void ReceiveShotImpactPos(Vector3 impactPos, Vector3 dir, HittableType type)
     {
         Vector3 towardsImpactPoint = impactPos - gunMuzzle.position;
         
-        GameObject impactGO = Instantiate(BulletImpact, impactPos, Quaternion.LookRotation(dir));
+        GameObject impactGO = Instantiate(BulletImpacts[(int)type], impactPos, Quaternion.LookRotation(dir));
         Destroy(impactGO, 2f);
         
     }
