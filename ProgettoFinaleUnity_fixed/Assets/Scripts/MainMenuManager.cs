@@ -4,16 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
+using System;
 
 public class MainMenuManager : MonoBehaviour
 {
     public GameObject MainCanvas, OptionsCanvas, LoadingImage;
     public Button ContinueButton;
-
+    public AudioMixer DefaultMixer, UI_Mixer;
     public GameObject MainMenuFirstSelected, OptionsMenuFirstSelected, MainMenuOptionsClosedSelected;
 
     private void Start()
     {
+        SetVolume();
         Cursor.visible = true;
         if(SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat") == null)
         {
@@ -24,6 +27,14 @@ public class MainMenuManager : MonoBehaviour
             ContinueButton.enabled = true;
         }
     }
+
+    private void SetVolume()
+    {
+        float v = PlayerPrefs.GetFloat(SaveManager.Volume);
+        DefaultMixer.SetFloat("Volume", v);
+        UI_Mixer.SetFloat("UI Volume", v);
+    }
+
     public void StartNewGame()
     {
         SaveManager.LastSave = new PlayerData();
