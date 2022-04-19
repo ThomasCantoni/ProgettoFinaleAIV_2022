@@ -10,6 +10,7 @@ public class GunnerSM : EnemySM
     public GameObject BulletPrefab;
     public int NumBullets = 3;
     public bool UseVeloictyOffset = true;
+    public GameObject PunchTrailEffect;
 
     public UnityEvent<int> OnHeal;
 
@@ -36,5 +37,10 @@ public class GunnerSM : EnemySM
             }
             BulletTransform.GetComponent<GunnerBulletPoolMgr>().AddBullet(go);
         }
+    }
+
+    public virtual void OnMeleeAttack(bool start)
+    {
+        PunchTrailEffect.SetActive(start);
     }
 }
