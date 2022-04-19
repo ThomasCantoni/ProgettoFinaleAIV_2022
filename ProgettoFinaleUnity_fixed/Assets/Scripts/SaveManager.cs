@@ -26,6 +26,23 @@ public static class SaveManager
         PlayerPrefs.SetInt("VsyncCount", Vsync);
         PlayerPrefs.Save();
     }
+    public static void SaveOptions(UISaveOptions s)
+    {
+        PlayerPrefs.SetFloat(AimSensitivity, s.AimSens);
+        PlayerPrefs.SetFloat(FOV, s.Fov);
+        PlayerPrefs.SetFloat(Volume, s.Volume);
+        if(s.Resolutions.Count>0)
+        {
+            PlayerPrefs.SetInt("ResWidth", s.Resolutions[s.SelectedResolutionDropdown].width);
+            PlayerPrefs.SetInt("ResHeight", s.Resolutions[s.SelectedResolutionDropdown].height);
+            PlayerPrefs.SetInt("Resolution", s.SelectedResolutionDropdown);
+        }
+        if (s.VsyncToggle != null)
+        {
+            PlayerPrefs.SetInt("VsyncCount", s.Vsync);
+        }
+        PlayerPrefs.Save();
+    }
     public static void SavePlayer(PlayerData toSave)
     {
         BinaryFormatter bf = new BinaryFormatter();

@@ -57,23 +57,33 @@ public class UISaveOptions : MonoBehaviour
     public void OnEnable()
     {
         vol = GetComponent<UI_MasterVolumeScript>();
-        Dropdown.ClearOptions();
-        for (int i = 0; i < Resolutions.Count; i++)
+        if (Dropdown != null)
         {
-            Dropdown.options.Add(new TMP_Dropdown.OptionData(Resolutions[i].width.ToString() + "x" + Resolutions[i].height.ToString()));
-           // Dropdown.options[i].text = Resolutions[i].width.ToString() + "x" + Resolutions[i].height.ToString();
+            Dropdown.ClearOptions();
+            for (int i = 0; i < Resolutions.Count; i++)
+            {
+                Dropdown.options.Add(new TMP_Dropdown.OptionData(Resolutions[i].width.ToString() + "x" + Resolutions[i].height.ToString()));
+                // Dropdown.options[i].text = Resolutions[i].width.ToString() + "x" + Resolutions[i].height.ToString();
+            }
+            SelectedResolutionDropdown = PlayerPrefs.GetInt("Resolution");
         }
         AimSensiSlider.value = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
         FOVSlider.value = PlayerPrefs.GetFloat(SaveManager.FOV);
         VolumeSlider.value = PlayerPrefs.GetFloat(SaveManager.Volume);
-        Vsync = PlayerPrefs.GetInt("VsyncCount");
-        SelectedResolutionDropdown = PlayerPrefs.GetInt("Resolution");
+        if(VsyncToggle != null)
+        {
+         Vsync = PlayerPrefs.GetInt("VsyncCount");
+        }
+        
 
     }
     public void SaveOptions()
     {
-        SaveManager.SaveOptions(AimSens, Fov,Volume,Resolutions[SelectedResolutionDropdown],SelectedResolutionDropdown,Vsync);
-        ApplyGraphics();
+        SaveManager.SaveOptions(this);
+        if(Resolutions.Count >0)
+        { 
+            ApplyGraphics();
+        }
     }
     void ApplyGraphics()
     {
