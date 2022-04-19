@@ -250,13 +250,11 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
         float a=0;
         
-        Mixer.GetFloat("Volume",out a);
-        Debug.LogError(a);
 
         a = PlayerPrefs.GetFloat("Volume");
 
         Mixer.SetFloat("Volume",a);
-        Debug.LogError(a);
+        
        
 
     }
