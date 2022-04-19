@@ -14,6 +14,7 @@ public class UISaveOptions : MonoBehaviour
     UI_MasterVolumeScript vol;
     public Slider AimSensiSlider, FOVSlider,VolumeSlider;
     public TMP_Dropdown Dropdown;
+   
     public Toggle VsyncToggle;
     public int SelectedResolutionDropdown
     {
