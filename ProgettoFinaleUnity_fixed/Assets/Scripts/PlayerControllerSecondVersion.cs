@@ -74,7 +74,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     public AudioSource BulletTimeAudioSource, AmbientAudioSource;
     public AudioClip Lvl1_Ambient, Lvl2_ambient;
     //public AudioMixerGroup Mixer;
-    public AudioMixer Mixer;
+    public AudioMixer DefaultMixer,UI_Mixer;
     public EllenActionPoints EllenAp;
     public CinemachineVirtualCamera AimCamera, ThirdPersonCamera;
     public Camera Camera;
@@ -253,8 +253,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
         a = PlayerPrefs.GetFloat("Volume");
 
-        Mixer.SetFloat("Volume",a);
-        
+        DefaultMixer.SetFloat("Volume",a);
+        UI_Mixer.SetFloat("UI Volume", a);
        
 
     }
@@ -478,7 +478,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             TimeManager.DisableBulletTime();
             EllenAp.Disable();
             Anim.SetFloat(AnimatorSpeedHash, TimeManager.PlayerCurrentSpeed);
-            Mixer.SetFloat("Pitch", 1f);
+            DefaultMixer.SetFloat("Pitch", 1f);
             BulletTimeAudioSource.Stop();
         }
         if (BulletTimeAudioSource.isPlaying)
@@ -576,12 +576,12 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         {
             EllenAp.Activate();
             BulletTimeAudioSource.Play();
-            Mixer.SetFloat("Pitch", 0.3f);
+            DefaultMixer.SetFloat("Pitch", 0.3f);
         }
         else
         {
             EllenAp.Disable();
-            Mixer.SetFloat("Pitch", 1f);
+            DefaultMixer.SetFloat("Pitch", 1f);
             BulletTimeAudioSource.Stop();
         }
 
