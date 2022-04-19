@@ -1163,7 +1163,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 441833125}
         m_TargetAssemblyTypeName: FloatToString, Assembly-CSharp
-        m_MethodName: FloatToStr
+        m_MethodName: VolumeToString
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1176,18 +1176,6 @@ MonoBehaviour:
       - m_Target: {fileID: 883904519}
         m_TargetAssemblyTypeName: UISaveOptions, Scripts
         m_MethodName: set_Volume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 24100000, guid: fc0ff840d2de9d54ca1a9e29c7324f01, type: 2}
-        m_TargetAssemblyTypeName: PlayerControllerSecondVersion, Scripts
-        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5887,6 +5875,10 @@ PrefabInstance:
       value: -123.14999
       objectReference: {fileID: 0}
     - target: {fileID: 3664539946894271331, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
+      propertyPath: Mixer
+      value: 
+      objectReference: {fileID: 24100000, guid: fc0ff840d2de9d54ca1a9e29c7324f01, type: 2}
+    - target: {fileID: 3664539946894271331, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
       propertyPath: UseLatestData
       value: 0
       objectReference: {fileID: 0}
@@ -6037,6 +6029,10 @@ PrefabInstance:
     - target: {fileID: 5366066891513955163, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -7.9999695
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160370936952445803, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
+      propertyPath: BypassEffects
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6721952410620991319, guid: 270cacf59b6f9b24b8fab682437398ef, type: 3}
       propertyPath: m_LocalPosition.x
