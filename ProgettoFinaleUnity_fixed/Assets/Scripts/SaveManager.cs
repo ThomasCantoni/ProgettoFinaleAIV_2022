@@ -9,14 +9,21 @@ public static class SaveManager
 {
     public static string AimSensitivity = "AimSens";
     public static string FOV = "FOV";
+    public static string Volume = "Volume";
+
 
     public static PlayerData LastSave;
 
 
-    public static void SaveOptions(float sens, float fov)
+    public static void SaveOptions(float sens, float fov,float volume,ResItem res,int indexResItem,int Vsync)
     {
         PlayerPrefs.SetFloat(AimSensitivity, sens);
         PlayerPrefs.SetFloat(FOV, fov);
+        PlayerPrefs.SetFloat(Volume, volume);
+        PlayerPrefs.SetInt("ResWidth", res.width);
+        PlayerPrefs.SetInt("ResHeight", res.height);
+        PlayerPrefs.SetInt("Resolution", indexResItem);
+        PlayerPrefs.SetInt("VsyncCount", Vsync);
         PlayerPrefs.Save();
     }
     public static void SavePlayer(PlayerData toSave)
