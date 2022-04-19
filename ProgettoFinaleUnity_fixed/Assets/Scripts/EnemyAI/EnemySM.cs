@@ -70,7 +70,8 @@ public class EnemySM : StateMachine
     }
     public void ChangeStateText(string text)
     {
-        Text.text = text;
+        if (Text != null)
+            Text.text = text;
     }
     public override void ChangeState(BaseState newState)
     {
