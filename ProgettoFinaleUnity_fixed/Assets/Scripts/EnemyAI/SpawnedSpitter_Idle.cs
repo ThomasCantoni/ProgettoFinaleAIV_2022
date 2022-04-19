@@ -15,6 +15,8 @@ public class SpawnedSpitter_Idle : Enemy_Idle
 
     public override void OnEnter()
     {
+        sm.ChangeStateText("IDLE");
+
         sm.anim.SetTrigger("SuperIdle");
         sm.anim.SetBool("Idle", false);
         sm.BodyCollider.enabled = true;

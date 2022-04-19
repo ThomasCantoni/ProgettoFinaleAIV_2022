@@ -30,7 +30,7 @@ public class StateMachine : MonoBehaviour
             currentState.UpdatePhysics();
     }
 
-    public void ChangeState(BaseState newState)
+    public virtual void ChangeState(BaseState newState)
     {
         currentState.OnExit();
 

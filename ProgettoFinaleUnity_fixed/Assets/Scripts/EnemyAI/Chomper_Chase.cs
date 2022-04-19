@@ -19,6 +19,8 @@ public class Chomper_Chase : Enemy_Chase
 
     public override void OnEnter()
     {
+        sm.ChangeStateText("CHASE");
+
         if (firstEnter)
         {
             firstEnter = false;
