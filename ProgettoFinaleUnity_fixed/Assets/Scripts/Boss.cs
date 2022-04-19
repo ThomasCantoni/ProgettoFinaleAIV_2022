@@ -13,6 +13,7 @@ public class Boss : MonoBehaviour, IHittable
     public Animator Anim;
     public NavMeshAgent Agent;
     public Slider HP_Slider;
+    public Image HP_Bar;
     public UnityEvent<bool> HandleAnim;
     public UnityEvent OnDeath;
     protected EllenHealthScript ellenHealthScript;
@@ -27,6 +28,7 @@ public class Boss : MonoBehaviour, IHittable
         GetEllen();
         HP_Slider.maxValue = Health;
         HP_Slider.value = Health;
+        HP_Bar.color = Color.green;
     }
 
     public void GetEllen()
@@ -35,11 +37,12 @@ public class Boss : MonoBehaviour, IHittable
         ellenHealthScript = ellen.GetComponent<EllenHealthScript>();
     }
 
-    public virtual void OnHit(Collider sender)
+    public virtual HittableType OnHit(Collider sender)
     {
         OnHitEvent?.Invoke(sender);
         Health--;
         HP_Slider.value = Health;
+        HP_Bar.color = Color.Lerp(Color.red, Color.green, HP_Slider.value / HP_Slider.maxValue);
         if (Health <= 0)
         {
             Agent.speed = 0;
@@ -47,6 +50,7 @@ public class Boss : MonoBehaviour, IHittable
             HP_Slider.transform.parent.gameObject.SetActive(false);
             OnDeath?.Invoke();
         }
+        return HittableType.Boss;
     }
 
     public virtual void OnAttackStart()

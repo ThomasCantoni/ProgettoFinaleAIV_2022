@@ -218,6 +218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f45a7da81f9a604f9ed5614dc549a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EllenCameraShake:
+    m_PersistentCalls:
+      m_Calls: []
   Player: {fileID: 0}
   anim: {fileID: 782915641774765135}
   agent: {fileID: 782915641283116233}
@@ -239,6 +242,9 @@ MonoBehaviour:
   - {r: 0.0011425156, g: 0, b: 3.7321322, a: 1}
   - {r: 3.7321322, g: 0, b: 0, a: 1}
   - {r: 3.7014656, g: 3.7321322, b: 0, a: 1}
+  MeleeAttackEffect: {fileID: 2793846507150028197, guid: dc5e967f4a06b9a4db496f7bb6a73c14, type: 3}
+  SpawnAttackEffect: {fileID: 0}
+  FootSpawnAttackPosition: {fileID: 0}
 --- !u!1 &782915642432718744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,7 +1171,7 @@ AudioSource:
   m_GameObject: {fileID: 782915641782142861}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: fc0ff840d2de9d54ca1a9e29c7324f01, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1333,6 +1339,7 @@ MonoBehaviour:
   Anim: {fileID: 782915641774765135}
   Agent: {fileID: 782915641283116233}
   HP_Slider: {fileID: 782915642432718751}
+  HP_Bar: {fileID: 0}
   HandleAnim:
     m_PersistentCalls:
       m_Calls:

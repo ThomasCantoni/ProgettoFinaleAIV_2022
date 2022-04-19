@@ -53,8 +53,9 @@ public class Bullet : MonoBehaviour, IHittable
         OnEndLife();
     }
 
-    public void OnHit(Collider sender)
+    public HittableType OnHit(Collider sender)
     {
         OnEndLife();
+        return HittableType.Other;
     }
 }

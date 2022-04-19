@@ -32,6 +32,7 @@ public class SpawnedSpitter_Death : Enemy_Death
             timer += Time.deltaTime;
             if (timer >= 1f)
             {
+                sm.OnEndDeath();
                 sm.transform.gameObject.SetActive(false);
                 sm.animAct -= OnEndDeathAnimation;
                 sm.ChangeState(sm.chaseState);

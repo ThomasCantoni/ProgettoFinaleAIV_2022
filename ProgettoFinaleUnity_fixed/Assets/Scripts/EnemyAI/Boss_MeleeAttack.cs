@@ -18,6 +18,7 @@ public class Boss_MeleeAttack : BaseState
     {
         sm.animAct += SetMeleeAttackCollider;
         sm.anim.SetTrigger("MeleeAttack");
+        sm.ChangeColor(1);
     }
 
     public override void UpdateLogic()
@@ -30,6 +31,7 @@ public class Boss_MeleeAttack : BaseState
     public override void OnExit()
     {
         sm.animAct -= SetMeleeAttackCollider;
+        sm.ChangeColor(0);
     }
 
     protected virtual void SetMeleeAttackCollider(bool value)
@@ -37,11 +39,7 @@ public class Boss_MeleeAttack : BaseState
         sm.MeleeAttackCollider.enabled = value;
         if (value)
         {
-            sm.ChangeColor(1);
-        }
-        else
-        {
-            sm.ChangeColor(0);
+            sm.OnMeleeAttackStart();
         }
     }
 }

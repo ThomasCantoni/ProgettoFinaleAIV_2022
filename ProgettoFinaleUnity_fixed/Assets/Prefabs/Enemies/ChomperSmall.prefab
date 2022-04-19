@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToChase: {fileID: 0}
+  DeathSmokeEffect: {fileID: 1852712514065924416, guid: 1a3e8971c63da7b4da57dc1ae59fd27d, type: 3}
   anim: {fileID: 4782137031992174029}
   agent: {fileID: 4782137032674174790}
   AttackDistance: 4
@@ -2171,6 +2172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e06ba5fa7ff1d34cbf68ce249b338fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
   Health: 2
   MeleeDamage: 20
   OnHitEvent:
@@ -2191,6 +2193,7 @@ MonoBehaviour:
   Anim: {fileID: 4782137031992174029}
   Agent: {fileID: 4782137032674174790}
   HP_Slider: {fileID: 4782137033182360117}
+  HP_Bar: {fileID: 4782137032171694659}
   HandleAnim:
     m_PersistentCalls:
       m_Calls:
