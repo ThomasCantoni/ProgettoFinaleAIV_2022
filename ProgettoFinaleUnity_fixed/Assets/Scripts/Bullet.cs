@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour, IHittable
     public float LifeTime = 4f;
     public float Damage = 25f;
     public float Velocity = 5f;
+    public GameObject ExplosionEffect;
 
     void OnEnable()
     {
@@ -30,6 +31,8 @@ public class Bullet : MonoBehaviour, IHittable
 
     protected virtual void OnEndLife()
     {
+        GameObject explosion = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
+        Destroy(explosion, 2f);
         gameObject.SetActive(false);
     }
 
