@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjToChase: {fileID: 0}
+  Text: {fileID: 0}
   DeathSmokeEffect: {fileID: 1852712514065924416, guid: 6f8802373ae838f4f9c9a16156a21d39, type: 3}
   anim: {fileID: 5849116579025502990}
   agent: {fileID: 5849116577464960743}
@@ -170,6 +171,7 @@ MonoBehaviour:
   BulletPrefab: {fileID: 4399311173531986816, guid: 82765a7d91b30c74288d0155c0a611d9, type: 3}
   NumBullets: 5
   UseVeloictyOffset: 1
+  PunchTrailEffect: {fileID: 587378825568297579}
   OnHeal:
     m_PersistentCalls:
       m_Calls: []
@@ -996,14 +998,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
   m_PrefabInstance: {fileID: 5849116579018126958}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5849116579018517740 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
+  m_PrefabInstance: {fileID: 5849116579018126958}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &5849116579025502990 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
   m_PrefabInstance: {fileID: 5849116579018126958}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5849116579018517740 stripped
+--- !u!4 &5849116579018517636 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400002, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400106, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
   m_PrefabInstance: {fileID: 5849116579018126958}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &5849116578094899729
@@ -1259,3 +1266,69 @@ MonoBehaviour:
   Clip: {fileID: 8300000, guid: a535d393d6e689541895f59c0e1146d8, type: 3}
   Clip4: {fileID: 8300000, guid: 2362c805266014a18bf40ae1cc97e241, type: 3}
   Clip3: {fileID: 0}
+--- !u!1001 &7842446929419011156
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5849116579018517636}
+    m_Modifications:
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472074200704662316, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274225994520208959, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_Name
+      value: PunchTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 7274225994520208959, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+--- !u!1 &587378825568297579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7274225994520208959, guid: 722bba3c81982d3409ab854914b4f9b5, type: 3}
+  m_PrefabInstance: {fileID: 7842446929419011156}
+  m_PrefabAsset: {fileID: 0}

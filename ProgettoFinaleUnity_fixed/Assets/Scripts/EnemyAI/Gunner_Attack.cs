@@ -86,6 +86,7 @@ public class Gunner_Attack : Enemy_Attack
             return;
         }
         sm.AttackCollider.enabled = value;
+        sm.OnMeleeAttack(value);
     }
 
     protected virtual void RangeAttack()
