@@ -2198,6 +2198,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
   m_PrefabInstance: {fileID: 28934987956341433}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &28934987955950065 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400200, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
+  m_PrefabInstance: {fileID: 28934987956341433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &28934987956243483 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
@@ -2425,6 +2430,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  BiteEffect: {fileID: 3075139662787440543, guid: ca46514ddfe5c3e4a8055d3785817281, type: 3}
+  TonguePosition: {fileID: 28934987955950065}
 --- !u!114 &5334820931711945564
 MonoBehaviour:
   m_ObjectHideFlags: 0

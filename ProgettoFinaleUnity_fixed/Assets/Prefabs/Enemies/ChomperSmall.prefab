@@ -2085,6 +2085,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
   m_PrefabInstance: {fileID: 4782137032001622189}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &4782137032001752037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400200, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
+  m_PrefabInstance: {fileID: 4782137032001622189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!135 &4782137032652243944
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2362,3 +2367,5 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  BiteEffect: {fileID: 3075139662787440543, guid: ca46514ddfe5c3e4a8055d3785817281, type: 3}
+  TonguePosition: {fileID: 4782137032001752037}

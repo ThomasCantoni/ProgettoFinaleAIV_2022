@@ -1078,6 +1078,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a3cea986292c2445a02c973a48c7e8b, type: 3}
+--- !u!4 &5654179162068903478 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400592, guid: 3a3cea986292c2445a02c973a48c7e8b, type: 3}
+  m_PrefabInstance: {fileID: 5654179162069301990}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &5654179162061967238 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 3a3cea986292c2445a02c973a48c7e8b, type: 3}
@@ -1331,6 +1336,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  BiteEffect: {fileID: 3075139662787440543, guid: c4a1e08e9e1dcb147b6825d86bcc7778, type: 3}
+  TonguePosition: {fileID: 5654179162068903478}
 --- !u!114 &5120328227597607708
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,4 +7,12 @@ using UnityEngine.UI;
 
 public class Chomper : Enemy
 {
+    public GameObject BiteEffect;
+    public Transform TonguePosition;
+
+    public void OnBite()
+    {
+        GameObject biteSpit = Instantiate(BiteEffect, TonguePosition);
+        Destroy(biteSpit, 0.5f);
+    }
 }
