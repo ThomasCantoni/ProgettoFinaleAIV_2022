@@ -16150,7 +16150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &520171380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32232,27 +32232,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9006408464815530513, guid: 0065e1e6c2f24484a8148f43caee03c4, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9006408464815530513, guid: 0065e1e6c2f24484a8148f43caee03c4, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 520171379}
     - target: {fileID: 9006408464815530513, guid: 0065e1e6c2f24484a8148f43caee03c4, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9006408464815530513, guid: 0065e1e6c2f24484a8148f43caee03c4, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 9006408464815530513, guid: 0065e1e6c2f24484a8148f43caee03c4, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: BossSM, AI
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9006408464815530513, guid: 0065e1e6c2f24484a8148f43caee03c4, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9006408464815530513, guid: 0065e1e6c2f24484a8148f43caee03c4, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0065e1e6c2f24484a8148f43caee03c4, type: 3}
