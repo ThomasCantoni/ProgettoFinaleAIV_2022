@@ -253,7 +253,12 @@ public class PlayerControllerSecondVersion : MonoBehaviour
             AimSensitivity = 1f;
             PlayerPrefs.SetFloat(SaveManager.AimSensitivity,1);
         }
-        FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
+            FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
+        if(FOV <60)
+        {
+            FOV = 60;
+            PlayerPrefs.SetFloat(SaveManager.FOV, 60);
+        }
         float a=0;
         
 
