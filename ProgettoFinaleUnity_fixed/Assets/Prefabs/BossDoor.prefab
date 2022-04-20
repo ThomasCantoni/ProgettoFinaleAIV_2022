@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3836889306464955755}
+  - component: {fileID: 1715877070}
+  - component: {fileID: 1715877071}
   m_Layer: 0
   m_Name: BossDoor
   m_TagString: Untagged
@@ -25,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4188744555466081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.43929, y: 0.43929, z: 0.43929}
   m_Children:
   - {fileID: 1470614853088124581}
   - {fileID: 8668577398591377364}
@@ -33,6 +35,121 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1715877070
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188744555466081}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: fc0ff840d2de9d54ca1a9e29c7324f01, type: 2}
+  m_audioClip: {fileID: 8300000, guid: e87ab6e881a78493b9f38f57055de921, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.6
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1715877071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188744555466081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6275d21bca5dcd244ac744c0189de63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AS: {fileID: 1715877070}
+  LeftRock: {fileID: 0}
+  RightRock: {fileID: 0}
+  CenterRock: {fileID: 0}
+  ActivatedKeys: 0
+  KeysID: 
+  StopAudioTimer: 3
 --- !u!1001 &1366302017556347841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40,9 +157,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3836889306464955755}
     m_Modifications:
+    - target: {fileID: 2682233510397299696, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2682233510397299698, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
       propertyPath: m_Name
       value: RockSwamp01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682233510397299698, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682233510397299700, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682233510397299702, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2682233510397663186, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
       propertyPath: m_RootOrder
@@ -100,6 +233,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 95.066
       objectReference: {fileID: 0}
+    - target: {fileID: 4979489445598596476, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_Shape
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979489445598596476, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979489445598596476, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979489445598596476, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_Extents.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979489445598596476, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_Extents.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979489445598596476, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
+      propertyPath: m_Extents.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7139cf2dd1bc684ca0a4684b5cda01e, type: 3}
 --- !u!1 &4021469656450150451 stripped
@@ -138,9 +295,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3836889306464955755}
     m_Modifications:
+    - target: {fileID: 3312979584986806136, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312979584986806138, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3312979584986806140, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_Name
       value: RockLedge02 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312979584986806140, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312979584986806142, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_RootOrder
@@ -148,15 +321,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.1530001
+      value: 1.3883275
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.3060005
+      value: 2.7766552
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.41819
+      value: 1.7076426
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -164,11 +337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 80.93
+      value: 81
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 207.44
+      value: 207
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -200,6 +373,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5609680903611801233, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5609680903611801233, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -240,9 +417,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3836889306464955755}
     m_Modifications:
+    - target: {fileID: 3312979584986806136, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312979584986806138, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3312979584986806140, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_Name
       value: RockLedge02 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312979584986806140, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312979584986806142, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3312979584987032412, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_RootOrder
@@ -302,6 +495,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5609680903611801233, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5609680903611801233, guid: 0786fcfccc20d6543a8cafe11f1683c8, type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
