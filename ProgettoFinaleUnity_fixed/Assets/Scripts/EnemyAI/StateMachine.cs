@@ -32,7 +32,8 @@ public class StateMachine : MonoBehaviour
 
     public virtual void ChangeState(BaseState newState)
     {
-        currentState.OnExit();
+        if (currentState != null)
+            currentState.OnExit();
 
         currentState = newState;
         currentState.OnEnter();

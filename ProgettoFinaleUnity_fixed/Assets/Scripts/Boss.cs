@@ -16,7 +16,12 @@ public class Boss : MonoBehaviour, IHittable
     public Image HP_Bar;
     public UnityEvent<bool> HandleAnim;
     public UnityEvent OnDeath;
+    public UnityEvent<bool> OnReachHealthThreshold;
     protected EllenHealthScript ellenHealthScript;
+
+    private bool reached75Percent = false;
+    private bool reached50Percent = false;
+    private bool reached25Percent = false;
 
     void Start()
     {
@@ -42,6 +47,7 @@ public class Boss : MonoBehaviour, IHittable
         OnHitEvent?.Invoke(sender);
         Health--;
         HP_Slider.value = Health;
+        CheckHealthThresholds();
         HP_Bar.color = Color.Lerp(Color.red, Color.green, HP_Slider.value / HP_Slider.maxValue);
         if (Health <= 0)
         {
@@ -65,7 +71,7 @@ public class Boss : MonoBehaviour, IHittable
 
     public virtual void OnDeathEndAnim()
     {
-        HandleAnim?.Invoke(false);
+        HandleAnim?.Invoke(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,5 +81,39 @@ public class Boss : MonoBehaviour, IHittable
             GetEllen();
         }
         ellenHealthScript.DamagePlayer(MeleeDamage);
+    }
+
+    public void OnPlayerDeath()
+    {
+        HP_Slider.value = HP_Slider.maxValue;
+        Health = (int)HP_Slider.maxValue;
+        HP_Bar.color = Color.green;
+        reached75Percent = false;
+        reached50Percent = false;
+        reached25Percent = false;
+        HP_Slider.transform.parent.GetComponent<Canvas>().enabled = false;
+    }
+
+    protected void CheckHealthThresholds()
+    {
+        float ratio = HP_Slider.value / HP_Slider.maxValue;
+        if (!reached75Percent && ratio <= 0.75f)
+        {
+            reached75Percent = true;
+            OnReachHealthThreshold?.Invoke(false);
+            return;
+        }
+        if (!reached50Percent && ratio <= 0.5f)
+        {
+            reached50Percent = true;
+            OnReachHealthThreshold?.Invoke(true);
+            return;
+        }
+        if (!reached25Percent && ratio <= 0.25f)
+        {
+            reached25Percent = true;
+            OnReachHealthThreshold?.Invoke(false);
+            return;
+        }
     }
 }

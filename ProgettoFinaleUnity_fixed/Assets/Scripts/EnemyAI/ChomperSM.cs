@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public abstract class ChomperSM : EnemySM
 {
-    protected override void OnAwake()
+    public override void OnAwake()
     {
         base.OnAwake();
         chaseState = new Chomper_Chase(this);

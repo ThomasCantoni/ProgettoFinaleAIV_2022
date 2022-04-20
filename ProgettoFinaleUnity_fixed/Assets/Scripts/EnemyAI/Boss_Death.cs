@@ -39,7 +39,8 @@ public class Boss_Death : Enemy_Death
 
     public override void OnEndDeathAnimation(bool value)
     {
-        startTimer = true;
+        if (value)
+            startTimer = true;
     }
 
     public override void OnExit()
