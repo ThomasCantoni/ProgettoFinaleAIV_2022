@@ -12,7 +12,7 @@ public class SpitterSmallSM : SpitterSM
         return patrolState;
     }
 
-    protected override void OnAwake()
+    public override void OnAwake()
     {
         base.OnAwake();
         patrolState = new Spitter_PatrolSmall(this);

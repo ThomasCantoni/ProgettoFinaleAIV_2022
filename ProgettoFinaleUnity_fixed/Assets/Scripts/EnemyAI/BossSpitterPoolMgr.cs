@@ -18,7 +18,7 @@ public class BossSpitterPoolMgr : MonoBehaviour
         }
     }
 
-    Queue<GameObject> Spitters;
+    public Queue<GameObject> Spitters;
 
     public void AddSpitter(GameObject bullet)
     {
@@ -40,5 +40,15 @@ public class BossSpitterPoolMgr : MonoBehaviour
         spitter.transform.forward = forward;
         Spitters.Enqueue(spitter);
         return spitter;
+    }
+
+    public void KillAllSpitters()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            GameObject spitter = transform.GetChild(i).gameObject;
+            Destroy(spitter);
+        }
+        Spitters.Clear();
     }
 }

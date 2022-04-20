@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &97353351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 97353352}
+  m_Layer: 0
+  m_Name: SpawnTestPoint (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &97353352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97353351}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 4.43, y: -0.04, z: -2.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6768682108679986187}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1820310578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1820310579}
+  m_Layer: 0
+  m_Name: SpawnTestPoint (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1820310579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820310578}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -8.88, y: -0.04, z: -1.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6768682108679986187}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &782915640743121266
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +240,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 782915641781918637}
-  - {fileID: 9006408465171574318}
   m_Father: {fileID: 6768682108679986187}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -213,7 +272,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782915641283116276}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f45a7da81f9a604f9ed5614dc549a33, type: 3}
   m_Name: 
@@ -241,8 +300,11 @@ MonoBehaviour:
   NumBullets: 10
   SpitterTransform: {fileID: 9006408463893260481}
   SpitterPrefab: {fileID: 1550430110105674040, guid: 8c8e34476af29b84697bbd3b2bf6457f, type: 3}
-  NumSpitters: 5
-  SpitterSpawnPosition: {fileID: 9006408465171574318}
+  NumSpitters: 9
+  SpitterSpawnPositions:
+  - {fileID: 9006408465171574318}
+  - {fileID: 97353352}
+  - {fileID: 1820310579}
   AttackDistance: 5
   AttackCooldown: 1
   MeleeAttackCollider: {fileID: 2178342785900762072}
@@ -255,6 +317,7 @@ MonoBehaviour:
   - {r: 3.7321322, g: 0, b: 0, a: 1}
   - {r: 3.7014656, g: 3.7321322, b: 0, a: 1}
   MeleeAttackEffect: {fileID: 2793846507150028197, guid: dc5e967f4a06b9a4db496f7bb6a73c14, type: 3}
+  ReachedHealthThreshold: 0
 --- !u!1 &782915642432718744
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +429,7 @@ GameObject:
   - component: {fileID: 782915642601136847}
   - component: {fileID: 782915642601136844}
   m_Layer: 7
-  m_Name: Canvas
+  m_Name: Boss UI Element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,7 +464,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782915642601136841}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -498,6 +561,9 @@ Transform:
   - {fileID: 782915641283116232}
   - {fileID: 9006408463893260481}
   - {fileID: 9006408463856488570}
+  - {fileID: 9006408465171574318}
+  - {fileID: 97353352}
+  - {fileID: 1820310579}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -718,13 +784,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9006408465171574317}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -0.287, z: 8.12}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 10.5, y: -0.04, z: 1.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 782915641283116232}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 6768682108679986187}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &782915641782042927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1271,14 +1337,14 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
   m_PrefabInstance: {fileID: 782915641782042927}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &782915641781918637 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400002, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
-  m_PrefabInstance: {fileID: 782915641782042927}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &782915641782142861 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
+  m_PrefabInstance: {fileID: 782915641782042927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &782915641781918637 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 887cc9cbcc10e8c45b6262198cc15ee6, type: 3}
   m_PrefabInstance: {fileID: 782915641782042927}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &782915641855911854
@@ -1319,7 +1385,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: fc0ff840d2de9d54ca1a9e29c7324f01, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.506
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1507,6 +1573,33 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: BossSM, AI
         m_MethodName: OnEnemyDeath
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnReachHealthThreshold:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 782915641283116277}
+        m_TargetAssemblyTypeName: BossSM, AI
+        m_MethodName: OnHealthThreshold
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

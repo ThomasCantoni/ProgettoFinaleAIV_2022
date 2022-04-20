@@ -18,8 +18,9 @@ public class SpawnedSpitterSM : EnemySM
         return idleState;
     }
 
-    protected override void OnAwake()
+    public override void OnAwake()
     {
+        base.OnAwake();
         idleState = new SpawnedSpitter_Idle(this);
         chaseState = new SpawnedSpitter_Chase(this);
         attackState = new SpawnedSpitter_Attack(this);

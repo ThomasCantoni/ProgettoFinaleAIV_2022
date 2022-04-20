@@ -34,7 +34,6 @@ public class Chomper_PatrolBig : Enemy_PatrolBig
 
     public override void UpdateLogic()
     {
-        Debug.Log("PATROL");
         if (!sm.agent.hasPath)
         {
             timer += Time.deltaTime;

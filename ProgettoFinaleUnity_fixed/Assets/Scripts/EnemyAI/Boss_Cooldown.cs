@@ -33,8 +33,9 @@ public class Boss_Cooldown : BaseState
         {
             cooldownTimer = 0f;
 
-            if (sm.SpitterTransform.GetComponent<BossSpitterPoolMgr>().ActiveSpitter < sm.NumSpitters && (int)Random.Range(0, 100) < 30)
+            if (sm.SpitterTransform.GetComponent<BossSpitterPoolMgr>().ActiveSpitter < sm.NumSpitters && sm.ReachedHealthThreshold)
             {
+                sm.ReachedHealthThreshold = false;
                 sm.ChangeState(sm.spawnAttackState);
                 return;
             }

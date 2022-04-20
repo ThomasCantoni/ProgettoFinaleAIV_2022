@@ -32,7 +32,7 @@ public class BossSM : StateMachine
     public Transform SpitterTransform;
     public GameObject SpitterPrefab;
     public int NumSpitters;
-    public Transform SpitterSpawnPosition;
+    public Transform[] SpitterSpawnPositions;
     public float AttackDistance = 3f;
     public float AttackCooldown = 1f;
     public Collider MeleeAttackCollider;
@@ -48,6 +48,9 @@ public class BossSM : StateMachine
     public AnimatorTransitionInfo TransInfo;
 
     public GameObject MeleeAttackEffect;
+
+    [HideInInspector]
+    public bool ReachedHealthThreshold;
 
     void Awake()
     {
@@ -136,5 +139,24 @@ public class BossSM : StateMachine
     public virtual void OnSpawnAttackStart()
     {
         EllenCameraShake?.Invoke(1.5f, 2f, 2f);
+    }
+
+    public virtual void OnPlayerDeath()
+    {
+        anim.SetTrigger("PlayerDeath");
+        ChangeState(cooldownState);
+        SpitterTransform.GetComponent<BossSpitterPoolMgr>().KillAllSpitters();
+        InstantiateSpitters();
+        AttackCooldown = 1f;
+        this.enabled = false;
+    }
+
+    public virtual void OnHealthThreshold(bool trigger50Percent)
+    {
+        ReachedHealthThreshold = true;
+        if (trigger50Percent)
+        {
+            AttackCooldown = AttackCooldown * 0.5f;
+        }
     }
 }

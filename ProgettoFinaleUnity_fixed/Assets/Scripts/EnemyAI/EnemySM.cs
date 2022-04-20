@@ -80,7 +80,7 @@ public class EnemySM : StateMachine
         base.ChangeState(newState);
     }
 
-    protected virtual void OnAwake()
+    public virtual void OnAwake()
     {
         agent = GetComponent<NavMeshAgent>();
     }

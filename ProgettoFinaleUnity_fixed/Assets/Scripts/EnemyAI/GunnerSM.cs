@@ -14,7 +14,7 @@ public class GunnerSM : EnemySM
 
     public UnityEvent<int> OnHeal;
 
-    protected override void OnAwake()
+    public override void OnAwake()
     {
         chaseState = new Gunner_Chase(this);
         attackState = new Gunner_Attack(this);

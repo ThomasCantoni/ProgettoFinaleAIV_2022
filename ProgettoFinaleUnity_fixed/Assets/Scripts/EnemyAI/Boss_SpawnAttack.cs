@@ -37,12 +37,15 @@ public class Boss_SpawnAttack : BaseState
     public virtual void Spawn(bool value)
     {
         sm.OnSpawnAttackStart();
-        GameObject go = sm.SpitterTransform.GetComponent<BossSpitterPoolMgr>().SpawnObj(sm.SpitterSpawnPosition.position, sm.SpitterSpawnPosition.forward);
-        if (go != null)
+        for (int i = 0; i < sm.SpitterSpawnPositions.Length; i++)
         {
-            SpawnedSpitterSM spitter = go.GetComponent<SpawnedSpitterSM>();
-            spitter.ObjToChase = sm.Player;
-            spitter.ChangeState(spitter.idleState);
+            GameObject go = sm.SpitterTransform.GetComponent<BossSpitterPoolMgr>().SpawnObj(sm.SpitterSpawnPositions[i].position, sm.SpitterSpawnPositions[i].forward);
+            if (go != null)
+            {
+                SpawnedSpitterSM spitter = go.GetComponent<SpawnedSpitterSM>();
+                spitter.ObjToChase = sm.Player;
+                spitter.ChangeState(spitter.idleState);
+            }
         }
     }
 }

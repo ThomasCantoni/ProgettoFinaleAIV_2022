@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class DropOnDeathScript : MonoBehaviour
 {
-
     [SerializeField]
     public List<GameObject> ObjectsToDrop;
     public IHittable hittable;
@@ -29,8 +28,8 @@ public class DropOnDeathScript : MonoBehaviour
             Gunner c = GetComponent<Gunner>();
             c.OnDeath.AddListener(onDeath);
         }
-
     }
+
     public IEnumerator Drop()
     {
         yield return new WaitForSeconds(Timer);

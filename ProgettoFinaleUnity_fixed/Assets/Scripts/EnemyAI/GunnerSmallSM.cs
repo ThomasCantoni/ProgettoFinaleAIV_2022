@@ -12,7 +12,7 @@ public class GunnerSmallSM : GunnerSM
         return patrolState;
     }
 
-    protected override void OnAwake()
+    public override void OnAwake()
     {
         base.OnAwake();
         patrolState = new Gunner_PatrolSmall(this);
