@@ -85,7 +85,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
 
 
     public Transform CameraReference;
-    private float aimSensitivity = 1f;
+    private float aimSensitivity = 5f;
     public float jumpHeight = 5f;
     public float SpeedInAir = 2.5f;
     public float SpeedWhileAiming = 2f;
@@ -122,7 +122,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         Anim = GetComponent<Animator>();
         EllenAp = GetComponent<EllenActionPoints>();
         LoadData();
-        SetPrefs();
+    //    SetPrefs();
         SelectAmbient();
         CheckKeys();
     }
@@ -195,6 +195,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
         if (!UseLatestData)
         {
+            
             Debug.Log("Data not loaded. Uncheck the boolean 'UseLatestData' in PCSV \n if you wish to load the latest savefile");
             return;
         }
@@ -221,8 +222,8 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         this.PlayerData = SaveManager.LastSave;
         if (PlayerData.IsNewGame)
         {
-            PlayerPrefs.SetFloat(SaveManager.FOV, 50f);
-            PlayerPrefs.SetFloat(SaveManager.AimSensitivity, 5f);
+            //PlayerPrefs.SetFloat(SaveManager.FOV, 50f);
+           // PlayerPrefs.SetFloat(SaveManager.AimSensitivity, 5f);
 
             //overwrite data with current data
             PlayerData = new PlayerData(this);
@@ -247,6 +248,11 @@ public class PlayerControllerSecondVersion : MonoBehaviour
     {
 
         AimSensitivity = PlayerPrefs.GetFloat(SaveManager.AimSensitivity);
+        if(AimSensitivity < 1)
+        {
+            AimSensitivity = 1f;
+            PlayerPrefs.SetFloat(SaveManager.AimSensitivity,1);
+        }
         FOV = PlayerPrefs.GetFloat(SaveManager.FOV);
         float a=0;
         

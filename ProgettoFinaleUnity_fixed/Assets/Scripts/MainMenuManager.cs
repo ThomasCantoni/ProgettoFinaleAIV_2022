@@ -20,11 +20,11 @@ public class MainMenuManager : MonoBehaviour
         Cursor.visible = true;
         if(SaveManager.LoadPlayer(Application.persistentDataPath + "/playerData.dat") == null)
         {
-            ContinueButton.enabled = false;
+            ContinueButton.interactable = false;
         }
         else
         {
-            ContinueButton.enabled = true;
+            ContinueButton.interactable = true;
         }
     }
 
