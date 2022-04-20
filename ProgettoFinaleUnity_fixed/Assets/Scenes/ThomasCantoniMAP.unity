@@ -9543,6 +9543,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 143145565, guid: 2bf64444177116d49986e8d6fa93e227, type: 3}
+      propertyPath: SceneToLoad
+      value: Level 2 TEST TC GOOD
+      objectReference: {fileID: 0}
     - target: {fileID: 1637638921698131850, guid: 2bf64444177116d49986e8d6fa93e227, type: 3}
       propertyPath: m_Name
       value: Mattia's room 2 GOOD
@@ -16573,7 +16577,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!154 &1818061504
 TerrainCollider:
@@ -17823,7 +17827,7 @@ Transform:
   - {fileID: 1607469441}
   - {fileID: 1082380690}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &2012008158
 MeshCollider:
