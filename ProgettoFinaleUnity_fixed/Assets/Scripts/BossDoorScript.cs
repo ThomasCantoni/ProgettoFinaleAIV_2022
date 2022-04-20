@@ -27,6 +27,7 @@ public class BossDoorScript : MonoBehaviour
             CenterRock.GetComponent<Animator>().SetTrigger("Open");
 
             AS.Play();
+            Destroy(AS, StopAudioTimer);
         }
     }
   
