@@ -526,7 +526,7 @@ public class PlayerControllerSecondVersion : MonoBehaviour
         if (isGrounded)
         {
             playerVel = Vector3.zero;
-            playerVel.y = -1f;
+            playerVel.y = -2.2f;
             jumpCooldown -= Time.deltaTime;
             jumpCooldown = Mathf.Clamp(jumpCooldown, 0f, 1f);
             GroundedCollider.SwitchToBig();
