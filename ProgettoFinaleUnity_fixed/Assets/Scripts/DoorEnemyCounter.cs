@@ -27,9 +27,9 @@ public class DoorEnemyCounter : MonoBehaviour
         AmountDead++;
         if(AmountDead >= Enemies.Length)
         {
-            this.GetComponent<Animator>().SetBool("isDoorOpen",true);
 
-            this.GetComponent<Animator>().SetTrigger("OpenDoor");
+            this.GetComponent<Animator>().SetBool("KeyDown",true);
+            this.GetComponent<Animator>().SetTrigger("KeyDown1");
         }
     }
     
